@@ -42,6 +42,11 @@
         $(".queries").children().remove();
     }
 
+    function postRestaurants(o) {
+    	console.log(o);
+    }
+
+
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -80,31 +85,31 @@
             !(/^(\/\/|http:|https:).*/.test(url));
     }
 
-    // function sendRequest(query){
-    //     $('#loading_modal').openModal();
-    //     $.ajax({
-    //         url: "/sysrev/review/"+$("#reviewValue").text()+"/stage1",
-    //         //url: "localhost:8000/sysrev/review/1/stage1",
-    //         type: "POST",
-    //         data: {query: query},
-    //         beforeSend: function(xhr, settings) {
-    //             if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-    //                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
-    //             }
-    //         },
-    //         success: function(){
-    //             window.location.href = "/sysrev/review/"+$("#reviewValue").text()+"/stage2/1";
-    //         },
-    //         error: function(){
-    //             $('#loading_modal').closeModal();
-    //             $('#error').html("There was an error with your query, please try again.");
-    //         }
-    //     });
-    // }
+    function sendRequest(query){
+        $('#modal1').modal('open');
+        $.ajax({
+            url: "https://www.resdiary.com/api/Restaurant/LocationSearch?lat=55.8802935&lon=-4.3027657&page=1&distance=10&visitDate=null&visitTime=null&covers=null&includeAllPages=false&selectedCuisines=&selectedSortOrder=4",
+            //url: "localhost:8000/sysrev/review/1/stage1",
+            type: "GET",
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            },
+            success: function(o){
+            	$('#modal1').modal('close');
+                postRestaurants(o);
+            },
+            error: function(){
+                $('#modal1').modal('close');
+                $('#error').html("There was an error with your query, please try again.");
+            }
+        });
+    }
 
 
     $( document ).ready(function(){
-
+    	$('.modal').modal();
         $("#query").css("margin-left","10px"); 
 
         $(document).keypress(function(e) {
@@ -163,6 +168,7 @@
                 }
 
                 console.log(queryJson);
+                sendRequest(queryJson);
                 console.log("_________________\n");
 
 
