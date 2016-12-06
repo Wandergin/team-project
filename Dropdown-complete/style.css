@@ -1,0 +1,67 @@
+.title {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 30px;
+	color: #00b6f1;
+}
+
+.subtitle {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 26px;
+	color: #00b6f1;
+}
+
+.body {
+
+}
+
+.suggest-holder {
+	width: 250px;
+}
+
+.suggest-holder input {
+	font-size: 20px;
+	width: 250px;
+	border: 1px solid #222222;
+}
+
+.suggest-holder ul {
+	display: none;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border: 1px solid #222222;
+	margin-top: -6px;
+}
+
+.suggest-holder li {
+	padding: 7px;
+	color: #000000;
+}
+
+.suggest-holder li.hover {
+	
+}
+
+.suggest-holder li.active {
+	background: #00b6f1;
+	color: #FFFFFF; 
+}
+
+.suggest-holder li.hover, li.active {
+	cursor: pointer;
+	background: #00b6f1;
+}
+
+.suggest-name {
+	font-weight: bold;
+	font-size: 20px;
+	display: block;
+}
+
+.query-count {
+	font-size: 16px;
+	font-weight: bold;
+
+}
+
+	

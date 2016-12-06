@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<title>Team L - Dropdown autocomplete suggestions</title>
+<p class="title"> Autocomplete suggestions</p>
+<p class="subtitle"> Dropdown format</p>
+<body>
+
+	<!-- Dropdown suggestions box
+		NOTE: This is highly unrefined, could definitely do with some revisions
+			Emily Band, 2038561b
+				06/12/16 -->
+
+<link rel="stylesheet" href="style.css" />
+<script src="resscript.js"></script> 
+
+<div class="suggest-holder">  
+	<input type="text" class="suggest-prompt">
+	<ul style="display: none;"></ul>
+</div>
+
+
+<ul id="selected-suggestions"></ul>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+
+<script>
+
+	var suggestList = [];	
+
+	var data = [
+		{
+			name: 'Indian',
+			count: 44
+		},
+		{
+			name: 'Indian restaurants near me',
+			count: 43
+		},
+		{
+			name: 'Sushi restaurants for 2',
+			count: 22
+		},
+		{
+			name: 'Sushi',
+			count: 21
+		},
+		{
+			name: 'Thai food',
+			count: 30
+		},
+		{
+			name: 'Restaurants in city centre',
+			count: 9
+		},
+		{
+			name: 'Chinese restaurants',
+			count: 55
+		}
+			];
+
+		// Suggest section holder
+		var $suggestedHL = $('.suggest-holder');
+		// Suggestions UL
+		var $suggestedUL = $('ul', $suggestedHL);
+		// Suggestions LI
+		var $suggestedLI = $('li', $suggestedHL);
+		// Selected Items UL
+		var $selectedUL = $('#selected-suggestions');
+		// Keyboard Nav Index
+		var index = -1;
+
+		//Keep track of how many entries are being shown
+		var size = 0;
+
+		// Add a suggestion to the selected holder
+		function addSuggestion(el){
+			//Increase the query count by 1 when selected
+			for(var i in data){
+				//Element was clicked or highlighted
+				if(data[i].name == (el.find('.suggest-name').html())){
+					console.log("data[i].name = " + data[i].name);
+					console.log("data[i].count = " + data[i].count);
+					
+					data[i].count = (data[i].count) + 1;
+					console.log("New = " + data[i].count);
+					$selectedUL.append($('<li>' + data[i].name + ", search count: " + data[i].count + '</li>'));
+				//Query was made using enter key with no highlighting
+				} else if (data[i].name == $('.suggest-holder input').val()){
+					data[i].count = (data[i].count) + 1;
+					$selectedUL.append($('<li>' + data[i].name + ", search count: " + data[i].count + '</li>'));
+				}
+			}
+
+		}
+		
+		
+		
+		$('input', $suggestedHL).on({
+			keyup: function(e){
+			var m = false;
+			if (e.which == 40){
+				// Down arrow
+				// If at last item, loop back around to first item
+				console.log("e.which = " + e.which);
+				
+			//Remove highlighting from previous item
+			$( "li:eq( "+index+" )" ).removeClass("active");	
+			
+				if (index >= (size - 1)){
+					index = 0;
+				} else {
+					index++;
+				}
+			//Add highlighting to current item
+			$( "li:eq( "+index+" )" ).addClass("active");
+
+			// Set a variable to show that we've done some keyboard navigation
+			m = true;
+
+			} else if (e.which == 38){
+				// Up arrow
+				// If at first item, loop to last suggestion
+				
+				$( "li:eq( "+index+" )" ).removeClass("active");
+				if (index <= 0){
+					index = size-1;
+				} else {
+					index--;
+				}
+
+				$( "li:eq( "+index+" )" ).addClass("active");
+
+				// Set a variable to show that we've done some keyboard navigation
+				m = true;
+				console.log("e.which = " + e.which);
+				
+			}
+
+			// Check we've done keyboard navigation
+			if (m){
+				// Remove the active class
+				//$('li.active', $suggestedHL).removeClass('active');
+				//$suggestedLI.eq(index).addClass('active');
+			} else if (e.which == 27){
+				console.log("e.which = " + e.which);
+				index = -1;
+				// Esc key
+				// Hide the autocomplete suggestions
+				$suggestedUL.hide();
+			} else if (e.which == 13){
+				// Enter key
+				// Add selected item to the searched list, hide dropdown, erase input
+				console.log("e.which = " + e.which);
+				if(index > -1){
+					addSuggestion($('li.active', $suggestedHL));
+					index = -1;
+					$('li.active', $suggestedHL).removeClass('active');
+					$suggestedUL.empty();
+					$(this).val('');
+				} else if ((index == -1) && !data.includes($(this).val())){
+					//Check if entered text is already in data
+					var flag = false;
+					for(var i in data){
+						if(data[i].name == $(this).val()){
+							//Flag changed if duplicate found
+							flag = true;
+					}
+				console.log("size = " + size);
+				}
+					
+					if (flag == false){
+					//If this query is new, add it to data array
+						data.push( { 
+							name: $(this).val(),
+							count: 0
+						});
+					}
+					addSuggestion($(this));
+					$suggestedUL.empty();
+					$(this).val('');
+				}
+
+			} else {
+				index = -1;
+				// Clear the ul
+				$suggestedUL.empty();
+
+				// Cache the search term
+				$search = $(this).val();
+
+				// Search regular expression
+				$search = new RegExp($search.replace(/[^0-9a-z_]/i), 'i');
+				// Reset suggestList array whenever search input changes
+				suggestList = [];
+				// Loop through the array
+				// Need to check the string isn't empty or size just increases to the size of the dataset
+				size = 0
+
+				//Sort suggestList into descending query count order
+				for(var i in data){
+					if(data[i].name.match($search) && ($(this).val() != '')){
+						if(suggestList.length == 0){
+							suggestList.push(data[i]);
+							size++;
+						} else {	
+							//suggestList is checked for data[i] to prevent duplicate values being added in each iteration
+							for(var j in suggestList){
+								if(data[i].count > suggestList[j].count && !suggestList.includes(data[i])){
+									suggestList.splice(j, 0, data[i]);
+									size++;
+								} else if (!suggestList.includes(data[i])){
+									suggestList.push(data[i]);
+									size++;
+								}
+							}
+						}
+					}
+				}
+				
+
+				//Present suggestList in descending query count order
+				for(var k in suggestList){
+					$suggestedUL.append($("<li><span class='suggest-name'>" + suggestList[k].name + "</span><span class='query-count'>" + suggestList[k].count + "</span></li>"));
+				}
+					
+				console.log("size = " + size);
+				
+
+				// Show the ul
+				$suggestedUL.show();
+			}
+
+			if ($(this).val() == ''){
+				$suggestedUL.hide();
+				suggestList = [];
+			}
+		},
+		keydown: function(e){
+			if(e.which == 38 || e.which == 40 || e.which == 13){
+				e.preventDefault();
+			}
+		},
+		focus: function(e){
+			if($(this).val() != ''){
+				$suggestedUL.show();
+				
+			}
+		}
+	});
+	
+	//Add clicked value to list
+	$suggestedHL.on('click', 'li', function(e){
+		addSuggestion($(this));
+		index = -1;
+		$('li.active', $suggestedHL).removeClass('active');
+		$suggestedUL.empty();
+		$('.suggest-holder input').val('');
+	});
+
+	//Hide suggestions box if anywhere else on the page is clicked
+	$('body').on('click', function(e) {
+		if (!$(e.target).closest('.suggest-holder li, .suggest-holder input').length) {
+			$suggestedUL.hide();
+		};
+
+	});
+</script>
+</body>
