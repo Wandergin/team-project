@@ -1,0 +1,3 @@
+This is my personal google api key, used for these examples. We will need a new one for the project (and ResDiary will use their own premium one most likely)
+
+AIzaSyC4eIT7iPFBZED56v9HQ7CLBzHrqa9b1uc
