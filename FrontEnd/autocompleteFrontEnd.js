@@ -70,13 +70,11 @@ function sendDataToServer(data) {
 
             //See which nodes are marked as incomplete
             //Set first incomplete node found as next in-box suggestion category
-            for (var i = 0; i <= linkedList._length; i++){
+            //Node 'endpoint' should always be marked as incomplete - blank placeholder so nothing else is displayed
+            //Setting an end node avoids problems with null/undefine items
+            for (var i = 0; i <linkedList._length; i++){
                 if (suggestCat.completed == true){
                     suggestCat = suggestCat.next;
-                //i == linkedList._length only if all nodes are marked complete
-                //Set suggestCat as null, nothing more to suggest
-                } else if (i == linkedList._length){
-                    suggestCat = null;
                 }
             }
 
@@ -105,6 +103,7 @@ $( document ).ready(function() {
     linkedList.add(3, 'rating');
     linkedList.add(4, 'people');
     linkedList.add(5, 'time');
+    linkedList.add(6, 'endpoint');
 
     //First suggested category will be cuisine
     var suggestCat = (linkedList.head);
