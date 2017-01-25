@@ -13,9 +13,9 @@ var terms = [
 
 function sendDataToServer(data) {
     $.ajax({
-        url:"localhost:8080/search",
+        url:"http://localhost:5000/search",
         method:"GET",
-        data:{data:data},
+        data:{"q":data},
         success:function(res) {
             console.log("Successfully sent data.");
             console.log(res);
@@ -26,6 +26,7 @@ function sendDataToServer(data) {
 $( document ).ready(function() {
     //Construct the linkedList for suggested categories to appear in query bar
     var linkedList = new LinkedList();
+
 
     linkedList.add(1, 'cuisine');
     linkedList.add(2, 'location');
@@ -58,9 +59,11 @@ $( document ).ready(function() {
     // listening to keypress
     $(document).keyup(function(e) {
         console.log(e);
+
         queryText = $("#input").val();
         console.log("queryText = " + queryText);
         sendDataToServer(queryText);
+
         switch(e.which){
             case 8:
                 console.log("backspace");
