@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html>
-  	<head>
-	
-    	<meta charset="UTF-8">
-  		<meta name="viewport" content="width=device-width,initial-scale=1">
-    	<title>Awesome Query Box</title>
-  		<link rel="stylesheet" href="style.css" type="text/css">
-  		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-  		<script type="text/javascript" src="query.js"></script>
-		<!-- Compiled and minified CSS -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+<head>
+  <meta charset="utf-8" />
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.css">
+  <script type="text/javascript">
 
-		<!-- Compiled and minified JavaScript -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
-		<link rel="stylesheet" href="awesomplete.css" />
-		<script type="text/javascript" src="awesomplete.js" async></script>
-		<script type="text/javascript" src="dropdown.js"></script>   
-  	</head>
+  </script>
+
+</head>
 <body>
+  <div id="query">
+    <input type='text' id='input'>
+  </div>   
+<script>
+    var terms = [ 
+        "table",
+        "table for 2 people", 
+        "table for 2 people in Glasgow",
+        "table for 2 people in Edinburgh",
+        "2 people Glasgow 7pm",
+        "Scottish cousine",
+        "Scottish cousine Glasgow",
+        "Scottish cousine Glasgow 2 people",
+        "Scottish cousine Glasgow 2 people 8pm"
+    ];
+    $(function() {
 
-  	<input id="query" type="text" placeholder="Cuisine time etc.">
+        $("#input")
+            .autocomplete({
+                source:[terms]
+            });
+    });
+</script>
+<link rel="stylesheet" href="jquery.autocomplete.css">
+<script src="jquery.autocomplete.js" type="text/javascript"></script>
+</body>
 
-    <!-- Modal Structure -->
-    <div id="modal1" class="modal">
-      <div class="modal-content">
-        <h4>Modal Header</h4>
-        <p>A bunch of text</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-      </div>
-    </div>
-
-<!--   	<button id="clear_button" class="btn">Clear</button> -->
-<!--   	<button id="submit_button" class="btn">Submit</button> -->
+</html>
 </body>
 </html>
