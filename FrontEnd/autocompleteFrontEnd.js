@@ -74,6 +74,7 @@ function sendDataToServer(data, linkedList, suggestCat) {
         (linkedList.searchNodeType('time')).markNotComplete();
     }
 
+
     //See which nodes are marked as incomplete
     //Set first incomplete node found as next in-box suggestion category
     for (var i = 0; i <= linkedList._length; i++){
@@ -115,6 +116,7 @@ $( document ).ready(function() {
     linkedList.add(3, 'rating');
     linkedList.add(4, 'people');
     linkedList.add(5, 'time');
+    linkedList.add(6, 'endpoint');
 
 
     var queryText = $("#input").val();
