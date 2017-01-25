@@ -75,7 +75,8 @@ def query_to_token(s):
     #chunked_sentences = nltk.ne_chunk_sents(tagged_sentences)
 
     terms_locations = ["near", "in", "next to", "around"]
-
+    remove_terms = terms_locations
+    remove_terms.append("at")
     found_cuisines = []
 
     unmatched = []
@@ -85,7 +86,7 @@ def query_to_token(s):
     searching = False
 
     search_terms = []
-    context_words = ["for", "at", "near"]
+    context_words = ["for", "at", "near", "in"]
 
     found_tokens = {"date": "", "time": "",
                     "location": "", "cuisine": [], "covers": ""}
@@ -98,6 +99,8 @@ def query_to_token(s):
     for i in [s]:
         context_words.append(i)
 
+    print context_words
+
 
     #for sent in tokenized_sentences:
 
@@ -105,10 +108,9 @@ def query_to_token(s):
 
     for i in range(0, len(sent)):
         if i not in skip and sent[i] not in skip_words:
-            if searching:
-                search_terms.append(sent[i])
+            if sent[i] == "for":
+                searching = False
             if i != len(sent):
-
                 # Look for a date like tomorrow night, this evening
                 if i+1 < len(sent):
                     if sent[i] in days_context and sent[i + 1] in days_connection:
@@ -117,6 +119,7 @@ def query_to_token(s):
                         missing_tokens.remove("date")
                         skip.append(i + 1)
                         found_tokens["date"] = thedate
+                        searching = False
                         continue
 
                     # Look for a date like next friday or this tuesday
@@ -127,11 +130,14 @@ def query_to_token(s):
                         #TODO: fix the String to date function, return formatted date
                         found_tokens["date"] = thedate #StringToDate(thedate)
                         skip.append(i + 1)
+                        searching = False
                         continue
                 else:
                     if sent[i] == "tomorrow":
                         missing_tokens.remove("date")
+                        searching = False
                         found_tokens["date"] = "tomorrow" #StringToDate(thedate)
+                        continue
                     #    skip.append(i + 1)
                 #    else if
 
@@ -150,23 +156,31 @@ def query_to_token(s):
 
                                 if sent[i - 1] == "for":
                                     skip.append(i - 1)
+                            searching = False
                             continue
 
             if sent[i] in cuisine:
                 found_cuisines.append(sent[i])
+                searching = False
                 continue
 
             if sent[i].endswith("pm") or sent[i].endswith("am"):
                 #print "FOUND A TIME: {}".format(sent[i])
                 missing_tokens.remove("time")
                 found_tokens['time'] = sent[i]
+                searching = False
                 continue
 
             if sent[i] in terms_locations:
                 searching = True
 
             if sent[i] not in context_words and not searching:
+                searching = False
                 unmatched.append(sent[i])
+
+            if searching:
+                if sent[i] not in remove_terms:
+                    search_terms.append(sent[i])
 
 
     if len(found_cuisines) != 0:
