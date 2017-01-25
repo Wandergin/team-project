@@ -1,9 +1,11 @@
-var locations = [
-        "Glasgow",
-        "Edinburgh",
-        "Aberdeen",
-        "Dundee"
-    ];
+var relevantList =
+    {
+        "cuisine":["Chinese","Scottish","Japanese","Indian"],
+        "location":["Glasgow","Edinburgh","Aberdeen","Dundee"],
+        "covers":["January 26th","January 27th","January 28th","January 29th"],
+        "time":["7pm","7:30pm","8pm","9pm"],
+        "date":["January 26th","January 27th","January 28th","January 29th"]
+    };
 
 //First suggested category will be cuisine
 
@@ -22,8 +24,7 @@ function sendDataToServer(data, suggestCat, linkedList) {
         method:"GET",
         data:{"q":data},
         success:function(res) {
-            console.log(suggestCat);
-            console.log(linkedList);
+            var changed = false;
             console.log("Successfully sent data.");
             console.log(res);
             
@@ -34,43 +35,48 @@ function sendDataToServer(data, suggestCat, linkedList) {
             //If no, remove data, mark as incomplete
             //Will be incomplete by default but change is necessary when terms are deleted
 
-            if (response.cuisine.length > 0){
+            if ((linkedList.searchNodeType('cuisine')).data != response.cuisine){
                 console.log("cuisine???");
                 (linkedList.searchNodeType('cuisine')).setData(response.cuisine);
                 (linkedList.searchNodeType('cuisine')).markComplete();
+                changed = true;
             } else {
                 (linkedList.searchNodeType('cuisine')).setData("");
                 (linkedList.searchNodeType('cuisine')).markNotComplete();
             }
 
-            if (response.location.length > 0){
+            if ((linkedList.searchNodeType('location')).data != response.location){
                 console.log("location???");
                 (linkedList.searchNodeType('location')).setData(response.location);
                 (linkedList.searchNodeType('location')).markComplete();
+                changed = true;
             } else {
                 (linkedList.searchNodeType('location')).setData("");
                 (linkedList.searchNodeType('location')).markNotComplete();
             }
 
-            if (response.rating != ""){
-                (linkedList.searchNodeType('rating')).setData(response.rating);
-                (linkedList.searchNodeType('rating')).markComplete();
+            if ((linkedList.searchNodeType('covers')).data != response.covers){
+                (linkedList.searchNodeType('covers')).setData(response.covers);
+                (linkedList.searchNodeType('covers')).markComplete();
+                changed = true;
             } else {
-                (linkedList.searchNodeType('rating')).setData("");
-                (linkedList.searchNodeType('rating')).markNotComplete();
+                (linkedList.searchNodeType('covers')).setData("");
+                (linkedList.searchNodeType('covers')).markNotComplete();
             }
 
-            if (response.people != ""){
-                (linkedList.searchNodeType('people')).setData(response.people);
-                (linkedList.searchNodeType('people')).markComplete();
+            if ((linkedList.searchNodeType('date')).data != response.date){
+                (linkedList.searchNodeType('date')).setData(response.date);
+                (linkedList.searchNodeType('date')).markComplete();
+                changed = true;
             } else {
-                (linkedList.searchNodeType('people')).setData("");
-                (linkedList.searchNodeType('people')).markNotComplete();
+                (linkedList.searchNodeType('date')).setData("");
+                (linkedList.searchNodeType('date')).markNotComplete();
             }
 
-            if (response.time != ""){
+            if ((linkedList.searchNodeType('time')).data != response.time){
                 (linkedList.searchNodeType('time')).setData(response.time);
                 (linkedList.searchNodeType('time')).markComplete();
+                changed = true;
             } else {
                 (linkedList.searchNodeType('time')).setData("");
                 (linkedList.searchNodeType('time')).markNotComplete();
@@ -85,23 +91,24 @@ function sendDataToServer(data, suggestCat, linkedList) {
                 //Set suggestCat as null, nothing more to suggest
                 } 
             }
-            updateSuggestionList(suggestCat, data);
-
+            if (changed) updateSuggestionList(suggestCat, data);
         }
     });
     return suggestCat;
 }
 
 function updateSuggestionList(suggestedCategory, previousQuery) {
-    console.log(suggestedCategory);
-    // var suggestionList = [];
-    // for (key in relevantList) {
-    //     suggestionList.push(previousQuery + " " + locations[key]);
-    // }
-    // jQuery('#input').autocomplete('destroy');
-    // $("#input").autocomplete({
-    //     source:[suggestionList]
-    // });
+    var type = suggestedCategory.type;
+    console.log(type);
+    var suggestionList = [];
+    console.log(relevantList[type]);
+    for (item in relevantList[type]) {
+        suggestionList.push(previousQuery + " " + relevantList[type][item]);
+    }
+    jQuery('#input').autocomplete('destroy');
+    $("#input").autocomplete({
+        source:[suggestionList]
+    });
 }
 
 $( document ).ready(function() {
@@ -111,8 +118,8 @@ $( document ).ready(function() {
 
     linkedList.add(1, 'cuisine');
     linkedList.add(2, 'location');
-    linkedList.add(3, 'rating');
-    linkedList.add(4, 'people');
+    linkedList.add(3, 'covers');
+    linkedList.add(4, 'date');
     linkedList.add(5, 'time');
     linkedList.add(6, 'endpoint');
 
