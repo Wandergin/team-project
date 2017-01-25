@@ -15,17 +15,14 @@ var times = [];
 
 var terms = [];
 
-var response = '{"date": "", "cuisine": [], "location": [], "covers": "", "time": ""}';
 
 function sendDataToServer(data, suggestCat, linkedList) {
-    console.log(linkedList);
     $.ajax({
         url:"http://localhost:5000/search",
         method:"GET",
-        data:{"q":data},
+        data:{"q":data}, // Lowercase
         success:function(res) {
             var changed = false;
-            console.log("Successfully sent data.");
             console.log(res);
             
             var response = JSON.parse(res);
@@ -34,50 +31,62 @@ function sendDataToServer(data, suggestCat, linkedList) {
             //If yes, set data, mark current node as complete
             //If no, remove data, mark as incomplete
             //Will be incomplete by default but change is necessary when terms are deleted
+            console.log("This is the node in the linked list");
+            console.log(linkedList.searchNodeType('covers').data);
+            console.log("");
+            console.log("This is the response from the server.");
+            console.log(response.covers);
+            console.log("");
+            console.log("This is the comparison between the two.");
+            console.log((linkedList.searchNodeType('covers')).data[0] != response.covers[0]);
+            
 
-            if (response.cuisine.length > 0){
+            if ((response.cuisine != "") && ((linkedList.searchNodeType('cuisine')).data[0] != response.cuisine[0])){
                 console.log("cuisine???");
                 (linkedList.searchNodeType('cuisine')).setData(response.cuisine);
                 (linkedList.searchNodeType('cuisine')).markComplete();
                 changed = true;
-            } else {
+            } else if (response.cuisine == "" && (linkedList.searchNodeType('cuisine')).data != "") {
                 (linkedList.searchNodeType('cuisine')).setData("");
                 (linkedList.searchNodeType('cuisine')).markNotComplete();
             }
 
-            if (response.location.length > 0){
+            if (response.location != "" && ((linkedList.searchNodeType('location')).data[0] != response.location[0])){
                 console.log("location???");
                 (linkedList.searchNodeType('location')).setData(response.location);
                 (linkedList.searchNodeType('location')).markComplete();
                 changed = true;
-            } else {
+            } else if (response.cuisine == "" && (linkedList.searchNodeType('location')).data != "") {
                 (linkedList.searchNodeType('location')).setData("");
                 (linkedList.searchNodeType('location')).markNotComplete();
             }
 
-            if (response.covers != ""){
+            if (response.covers != "" && ((linkedList.searchNodeType('covers')).data[0] != response.covers[0])){
+                console.log("covers???");
                 (linkedList.searchNodeType('covers')).setData(response.covers);
                 (linkedList.searchNodeType('covers')).markComplete();
                 changed = true;
-            } else {
+            } else if (response.cuisine == "" && (linkedList.searchNodeType('covers')).data != "") {
                 (linkedList.searchNodeType('covers')).setData("");
                 (linkedList.searchNodeType('covers')).markNotComplete();
             }
 
-            if (response.date != ""){
+            if (response.date != "" && ((linkedList.searchNodeType('date')).data[0] != response.date[0])){
+                console.log("date???");
                 (linkedList.searchNodeType('date')).setData(response.date);
                 (linkedList.searchNodeType('date')).markComplete();
                 changed = true;
-            } else {
+            } else if (response.cuisine == "" && (linkedList.searchNodeType('date')).data != "") {
                 (linkedList.searchNodeType('date')).setData("");
                 (linkedList.searchNodeType('date')).markNotComplete();
             }
 
-            if (response.time != ""){
+            if (response.time != "" && ((linkedList.searchNodeType('time')).data[0] != response.time[0])){
+                console.log("time???");
                 (linkedList.searchNodeType('time')).setData(response.time);
                 (linkedList.searchNodeType('time')).markComplete();
                 changed = true;
-            } else {
+            } else if (response.cuisine == "" && (linkedList.searchNodeType('time')).data != "") {
                 (linkedList.searchNodeType('time')).setData("");
                 (linkedList.searchNodeType('time')).markNotComplete();
             }
@@ -91,6 +100,7 @@ function sendDataToServer(data, suggestCat, linkedList) {
                 //Set suggestCat as null, nothing more to suggest
                 } 
             }
+            
             if (changed) updateSuggestionList(suggestCat, data);
         }
     });
@@ -98,6 +108,7 @@ function sendDataToServer(data, suggestCat, linkedList) {
 }
 
 function updateSuggestionList(suggestedCategory, previousQuery) {
+    console.log("Updating...");
     var type = suggestedCategory.type;
     console.log(type);
     var suggestionList = [];
@@ -106,12 +117,15 @@ function updateSuggestionList(suggestedCategory, previousQuery) {
         suggestionList.push(previousQuery + " " + relevantList[type][item]);
     }
     jQuery('#input').autocomplete('destroy');
+    
     $("#input").autocomplete({
         source:[suggestionList]
     });
+    $('#input').focus();
 }
 
 $( document ).ready(function() {
+    $('#input').focus();
     //Construct the linkedList for suggested categories to appear in query bar
     var linkedList = new LinkedList();  
 
@@ -135,10 +149,10 @@ $( document ).ready(function() {
 
     linkedList.show();
 
-    //Send entered data to backend to check if the typed term matches any of the terms in server's lists
+
     // listening to keypress
     $(document).keyup(function(e) {
-        if ((e.which > 47) && (e.which < 111)){
+        if (((e.which > 47) && (e.which < 111)) || (e.which == 32)){
             sendDataToServer($("#input").val(), suggestCat, linkedList);
         }
         else if (e.which == 8) {
@@ -150,6 +164,8 @@ $( document ).ready(function() {
 
     });
 
-    // Initialize autocomplete
+    $(".xdsoft_autocomplete").click(function(){
+        sendDataToServer($("#input").val(), suggestCat, linkedList);
+    })
 
 });

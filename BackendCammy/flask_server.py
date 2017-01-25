@@ -90,7 +90,7 @@ def query_to_token(s):
     found_tokens = {"date": "", "time": "",
                     "location": "", "cuisine": [], "covers": ""}
 
-    months = ["january", "feburary", "march", "april", "may", "june",
+    months = ["january", "february", "march", "april", "may", "june",
               "july", "august", "september", "october", "november", "december"]
 
 
