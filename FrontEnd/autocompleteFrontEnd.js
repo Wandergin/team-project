@@ -16,80 +16,77 @@ var terms = [];
 var response = '{"date": "", "cuisine": [], "location": [], "covers": "", "time": ""}';
 
 function sendDataToServer(data, linkedList, suggestCat) {
-    console.log(suggestCat);
-    var response = $.ajax({
+    $.ajax({
         url:"http://localhost:5000/search",
         method:"GET",
         data:{"q":data},
         success:function(res) {
-                    }
-    });
+            console.log(suggestCat);
+            console.log("Successfully sent data.");
+            console.log(res);
 
-    console.log("Successfully sent data.");
-    console.log(response)
-    //response = JSON.parse(response);
+            var response = JSON.parse(res);
 
-    //Check if all categories (keys) have associated data
-    //If yes, set data, mark current node as complete
-    //If no, remove data, mark as incomplete
-    //Will be incomplete by default but change is necessary when terms are deleted
+            //Check if all categories (keys) have associated data
+            //If yes, set data, mark current node as complete
+            //If no, remove data, mark as incomplete
+            //Will be incomplete by default but change is necessary when terms are deleted
 
-    if (response.cuisine != ""){
-        (linkedList.searchNodeType('cuisine')).setData(response.cuisine);
-        (linkedList.searchNodeType('cuisine')).markComplete();
-    } else {
-        (linkedList.searchNodeType('cuisine')).setData("");
-        (linkedList.searchNodeType('cuisine')).markNotComplete();
-    }
+            if (res.cuisine != ""){
+                (linkedList.searchNodeType('cuisine')).setData(response.cuisine);
+                (linkedList.searchNodeType('cuisine')).markComplete();
+            } else {
+                (linkedList.searchNodeType('cuisine')).setData("");
+                (linkedList.searchNodeType('cuisine')).markNotComplete();
+            }
 
-    if (response.location != ""){
-        (linkedList.searchNodeType('location')).setData(response.location);
-        (linkedList.searchNodeType('location')).markComplete();
-    } else {
-        (linkedList.searchNodeType('location')).setData("");
-        (linkedList.searchNodeType('location')).markNotComplete();
-    }
+            if (res.location != ""){
+                (linkedList.searchNodeType('location')).setData(response.location);
+                (linkedList.searchNodeType('location')).markComplete();
+            } else {
+                (linkedList.searchNodeType('location')).setData("");
+                (linkedList.searchNodeType('location')).markNotComplete();
+            }
 
-    if (response.rating != ""){
-        (linkedList.searchNodeType('rating')).setData(response.rating);
-        (linkedList.searchNodeType('rating')).markComplete();
-    } else {
-        (linkedList.searchNodeType('rating')).setData("");
-        (linkedList.searchNodeType('rating')).markNotComplete();
-    }
+            if (res.rating != ""){
+                (linkedList.searchNodeType('rating')).setData(response.rating);
+                (linkedList.searchNodeType('rating')).markComplete();
+            } else {
+                (linkedList.searchNodeType('rating')).setData("");
+                (linkedList.searchNodeType('rating')).markNotComplete();
+            }
 
-    if (response.people != ""){
-        (linkedList.searchNodeType('people')).setData(response.people);
-        (linkedList.searchNodeType('people')).markComplete();
-    } else {
-        (linkedList.searchNodeType('people')).setData("");
-        (linkedList.searchNodeType('people')).markNotComplete();
-    }
+            if (res.people != ""){
+                (linkedList.searchNodeType('people')).setData(response.people);
+                (linkedList.searchNodeType('people')).markComplete();
+            } else {
+                (linkedList.searchNodeType('people')).setData("");
+                (linkedList.searchNodeType('people')).markNotComplete();
+            }
 
-    if (response.time != ""){
-        (linkedList.searchNodeType('time')).setData(response.time);
-        (linkedList.searchNodeType('time')).markComplete();
-    } else {
-        (linkedList.searchNodeType('time')).setData("");
-        (linkedList.searchNodeType('time')).markNotComplete();
-    }
+            if (res.time != ""){
+                (linkedList.searchNodeType('time')).setData(response.time);
+                (linkedList.searchNodeType('time')).markComplete();
+            } else {
+                (linkedList.searchNodeType('time')).setData("");
+                (linkedList.searchNodeType('time')).markNotComplete();
+            }
 
+            //See which nodes are marked as incomplete
+            //Set first incomplete node found as next in-box suggestion category
+            for (var i = 0; i <= linkedList._length; i++){
+                if (suggestCat.completed == true){
+                    suggestCat = suggestCat.next;
+                //i == linkedList._length only if all nodes are marked complete
+                //Set suggestCat as null, nothing more to suggest
+                } else if (i == linkedList._length){
+                    suggestCat = null;
+                }
+            }
+            updateSuggestionList(suggestCat, data);
 
-    //See which nodes are marked as incomplete
-    //Set first incomplete node found as next in-box suggestion category
-    for (var i = 0; i <= linkedList._length; i++){
-        if (suggestCat.completed == true){
-            suggestCat = suggestCat.next;
-        //i == linkedList._length only if all nodes are marked complete
-        //Set suggestCat as null, nothing more to suggest
-        } else if (i == linkedList._length){
-            suggestCat = null;
         }
-    }
-    updateSuggestionList(suggestCat, data);
-
-
-    console.log(suggestCat);
+    });
     return suggestCat;
 }
 
@@ -116,7 +113,6 @@ $( document ).ready(function() {
     linkedList.add(3, 'rating');
     linkedList.add(4, 'people');
     linkedList.add(5, 'time');
-    linkedList.add(6, 'endpoint');
 
 
     var queryText = $("#input").val();
