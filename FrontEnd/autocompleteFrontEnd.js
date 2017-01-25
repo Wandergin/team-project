@@ -15,16 +15,18 @@ var terms = [];
 
 var response = '{"date": "", "cuisine": [], "location": [], "covers": "", "time": ""}';
 
-function sendDataToServer(data, linkedList, suggestCat) {
+function sendDataToServer(data, suggestCat, linkedList) {
+    console.log(linkedList);
     $.ajax({
         url:"http://localhost:5000/search",
         method:"GET",
         data:{"q":data},
         success:function(res) {
             console.log(suggestCat);
+            console.log(linkedList);
             console.log("Successfully sent data.");
             console.log(res);
-
+            
             var response = JSON.parse(res);
 
             //Check if all categories (keys) have associated data
@@ -32,7 +34,8 @@ function sendDataToServer(data, linkedList, suggestCat) {
             //If no, remove data, mark as incomplete
             //Will be incomplete by default but change is necessary when terms are deleted
 
-            if (res.cuisine != ""){
+            if (response.cuisine.length > 0){
+                console.log("cuisine???");
                 (linkedList.searchNodeType('cuisine')).setData(response.cuisine);
                 (linkedList.searchNodeType('cuisine')).markComplete();
             } else {
@@ -40,7 +43,8 @@ function sendDataToServer(data, linkedList, suggestCat) {
                 (linkedList.searchNodeType('cuisine')).markNotComplete();
             }
 
-            if (res.location != ""){
+            if (response.location.length > 0){
+                console.log("location???");
                 (linkedList.searchNodeType('location')).setData(response.location);
                 (linkedList.searchNodeType('location')).markComplete();
             } else {
@@ -48,7 +52,7 @@ function sendDataToServer(data, linkedList, suggestCat) {
                 (linkedList.searchNodeType('location')).markNotComplete();
             }
 
-            if (res.rating != ""){
+            if (response.rating != ""){
                 (linkedList.searchNodeType('rating')).setData(response.rating);
                 (linkedList.searchNodeType('rating')).markComplete();
             } else {
@@ -56,7 +60,7 @@ function sendDataToServer(data, linkedList, suggestCat) {
                 (linkedList.searchNodeType('rating')).markNotComplete();
             }
 
-            if (res.people != ""){
+            if (response.people != ""){
                 (linkedList.searchNodeType('people')).setData(response.people);
                 (linkedList.searchNodeType('people')).markComplete();
             } else {
@@ -64,7 +68,7 @@ function sendDataToServer(data, linkedList, suggestCat) {
                 (linkedList.searchNodeType('people')).markNotComplete();
             }
 
-            if (res.time != ""){
+            if (response.time != ""){
                 (linkedList.searchNodeType('time')).setData(response.time);
                 (linkedList.searchNodeType('time')).markComplete();
             } else {
@@ -79,9 +83,7 @@ function sendDataToServer(data, linkedList, suggestCat) {
                     suggestCat = suggestCat.next;
                 //i == linkedList._length only if all nodes are marked complete
                 //Set suggestCat as null, nothing more to suggest
-                } else if (i == linkedList._length){
-                    suggestCat = null;
-                }
+                } 
             }
             updateSuggestionList(suggestCat, data);
 
@@ -104,8 +106,7 @@ function updateSuggestionList(suggestedCategory, previousQuery) {
 
 $( document ).ready(function() {
     //Construct the linkedList for suggested categories to appear in query bar
-    var linkedList = new LinkedList();
-    var suggestCat = linkedList.head;    
+    var linkedList = new LinkedList();  
 
 
     linkedList.add(1, 'cuisine');
@@ -113,6 +114,13 @@ $( document ).ready(function() {
     linkedList.add(3, 'rating');
     linkedList.add(4, 'people');
     linkedList.add(5, 'time');
+    linkedList.add(6, 'endpoint');
+
+    console.log(linkedList);
+
+    var suggestCat = linkedList.head;
+
+    //linkedList.add(6, 'endpoint');
 
 
     var queryText = $("#input").val();
@@ -123,9 +131,7 @@ $( document ).ready(function() {
     //Send entered data to backend to check if the typed term matches any of the terms in server's lists
     // listening to keypress
     $(document).keyup(function(e) {
-        console.log(e.which);
         if ((e.which > 47) && (e.which < 111)){
-            console.log("Yay")
             sendDataToServer($("#input").val(), suggestCat, linkedList);
         }
         else if (e.which == 8) {
