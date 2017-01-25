@@ -24,13 +24,43 @@ function sendDataToServer(data) {
 }
 
 $( document ).ready(function() {
-    var linkedList = new LinkedList;
-    linkedList.add(terms[0]);
-    console.log(linkedList);
+    //Construct the linkedList for suggested categories to appear in query bar
+    var linkedList = new LinkedList();
 
+    linkedList.add(1, 'cuisine');
+    linkedList.add(2, 'location');
+    linkedList.add(3, 'rating');
+    linkedList.add(4, 'people');
+    linkedList.add(5, 'time');
+
+    //First suggested category will be cuisine
+    var suggestCat = (linkedList.head);
+
+    var queryText = $("#input").val();
+
+
+
+    console.log("suggestedNode: " + suggestCat.type);
+    suggestCat.setType("NEW");
+    console.log("suggestedNode type: " + suggestCat.type);
+    suggestCat.markComplete();
+    console.log("suggestedNode complete: " + suggestCat.completed);
+    suggestCat.markNotComplete();
+    console.log("suggestedNode not complete: " + suggestCat.completed);
+    suggestCat.setData("ALTERED DATA");
+    console.log("suggestedNode: " + suggestCat.data);
+    console.log((linkedList.searchNodeType('rating')).next);
+
+
+    linkedList.show();
+
+    //Send entered data to backend to check if the typed term matches any of the terms in server's lists
     // listening to keypress
     $(document).keyup(function(e) {
         console.log(e);
+        queryText = $("#input").val();
+        console.log("queryText = " + queryText);
+        sendDataToServer(queryText);
         switch(e.which){
             case 8:
                 console.log("backspace");
@@ -43,7 +73,7 @@ $( document ).ready(function() {
             case 39:
                 console.log("User autocompleted the term.");
                 break;
-            
+
             default:
                 console.log($("#input").val());
                 break;
