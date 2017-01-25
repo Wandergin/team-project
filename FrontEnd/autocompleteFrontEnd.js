@@ -35,7 +35,7 @@ function sendDataToServer(data, suggestCat, linkedList) {
             //If no, remove data, mark as incomplete
             //Will be incomplete by default but change is necessary when terms are deleted
 
-            if ((linkedList.searchNodeType('cuisine')).data != response.cuisine){
+            if (response.cuisine.length > 0){
                 console.log("cuisine???");
                 (linkedList.searchNodeType('cuisine')).setData(response.cuisine);
                 (linkedList.searchNodeType('cuisine')).markComplete();
@@ -45,7 +45,7 @@ function sendDataToServer(data, suggestCat, linkedList) {
                 (linkedList.searchNodeType('cuisine')).markNotComplete();
             }
 
-            if ((linkedList.searchNodeType('location')).data != response.location){
+            if (response.location.length > 0){
                 console.log("location???");
                 (linkedList.searchNodeType('location')).setData(response.location);
                 (linkedList.searchNodeType('location')).markComplete();
@@ -55,7 +55,7 @@ function sendDataToServer(data, suggestCat, linkedList) {
                 (linkedList.searchNodeType('location')).markNotComplete();
             }
 
-            if ((linkedList.searchNodeType('covers')).data != response.covers){
+            if (response.covers != ""){
                 (linkedList.searchNodeType('covers')).setData(response.covers);
                 (linkedList.searchNodeType('covers')).markComplete();
                 changed = true;
@@ -64,7 +64,7 @@ function sendDataToServer(data, suggestCat, linkedList) {
                 (linkedList.searchNodeType('covers')).markNotComplete();
             }
 
-            if ((linkedList.searchNodeType('date')).data != response.date){
+            if (response.date != ""){
                 (linkedList.searchNodeType('date')).setData(response.date);
                 (linkedList.searchNodeType('date')).markComplete();
                 changed = true;
@@ -73,7 +73,7 @@ function sendDataToServer(data, suggestCat, linkedList) {
                 (linkedList.searchNodeType('date')).markNotComplete();
             }
 
-            if ((linkedList.searchNodeType('time')).data != response.time){
+            if (response.time != ""){
                 (linkedList.searchNodeType('time')).setData(response.time);
                 (linkedList.searchNodeType('time')).markComplete();
                 changed = true;
