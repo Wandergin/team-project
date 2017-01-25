@@ -19,9 +19,69 @@ function sendDataToServer(data) {
         success:function(res) {
             console.log("Successfully sent data.");
             console.log(res);
+
+            //Check if all categories (keys) have associated data
+            //If yes, set data, mark current node as complete
+            //If no, remove data, mark as incomplete
+            //Will be incomplete by default but change is necessary when terms are deleted
+
+            if (res.cuisine != ""){
+                (linkedList.searchNodeType('cuisine')).setData(res.cuisine);
+                (linkedList.searchNodeType('cuisine')).markComplete();
+            } else {
+                (linkedList.searchNodeType('cuisine')).setData("");
+                (linkedList.searchNodeType('cuisine')).markNotComplete();
+            }
+
+            if (res.location != ""){
+                (linkedList.searchNodeType('location')).setData(res.location);
+                (linkedList.searchNodeType('location')).markComplete();
+            } else {
+                (linkedList.searchNodeType('location')).setData("");
+                (linkedList.searchNodeType('location')).markNotComplete();
+            }
+
+            if (res.rating != ""){
+                (linkedList.searchNodeType('rating')).setData(res.rating);
+                (linkedList.searchNodeType('rating')).markComplete();
+            } else {
+                (linkedList.searchNodeType('rating')).setData("");
+                (linkedList.searchNodeType('rating')).markNotComplete();
+            }
+
+            if (res.people != ""){
+                (linkedList.searchNodeType('people')).setData(res.people);
+                (linkedList.searchNodeType('people')).markComplete();
+            } else {
+                (linkedList.searchNodeType('people')).setData("");
+                (linkedList.searchNodeType('people')).markNotComplete();
+            }
+
+            if (res.time != ""){
+                (linkedList.searchNodeType('time')).setData(res.time);
+                (linkedList.searchNodeType('time')).markComplete();
+            } else {
+                (linkedList.searchNodeType('time')).setData("");
+                (linkedList.searchNodeType('time')).markNotComplete();
+            }
+
+            //See which nodes are marked as incomplete
+            //Set first incomplete node found as next in-box suggestion category
+            for (var i = 0; i <= linkedList._length; i++){
+                if (suggestCat.completed == true){
+                    suggestCat = suggestCat.next;
+                //i == linkedList._length only if all nodes are marked complete
+                //Set suggestCat as null, nothing more to suggest
+                } else if (i == linkedList._length){
+                    suggestCat = null;
+                }
+            }
+
         }
     });
 }
+
+function
 
 $( document ).ready(function() {
     //Construct the linkedList for suggested categories to appear in query bar
@@ -40,26 +100,12 @@ $( document ).ready(function() {
     var queryText = $("#input").val();
 
 
-
-    console.log("suggestedNode: " + suggestCat.type);
-    suggestCat.setType("NEW");
-    console.log("suggestedNode type: " + suggestCat.type);
-    suggestCat.markComplete();
-    console.log("suggestedNode complete: " + suggestCat.completed);
-    suggestCat.markNotComplete();
-    console.log("suggestedNode not complete: " + suggestCat.completed);
-    suggestCat.setData("ALTERED DATA");
-    console.log("suggestedNode: " + suggestCat.data);
-    console.log((linkedList.searchNodeType('rating')).next);
-
-
     linkedList.show();
 
     //Send entered data to backend to check if the typed term matches any of the terms in server's lists
     // listening to keypress
     $(document).keyup(function(e) {
         console.log(e);
-
         queryText = $("#input").val();
         console.log("queryText = " + queryText);
         sendDataToServer(queryText);
@@ -81,6 +127,7 @@ $( document ).ready(function() {
                 console.log($("#input").val());
                 break;
         }
+
     });
 
     // Initialize autocomplete
