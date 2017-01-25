@@ -5,6 +5,7 @@ function Node(data, type){
 	this.type = type;
 	this.data = data;
 	this.next = null;
+	this.completed = false;
 }
 
 function LinkedList(){
@@ -134,9 +135,49 @@ LinkedList.prototype.searchNodeType = function(type){
 LinkedList.prototype.show = function(){
 	var currentNode = this.head;
 	while(currentNode != null){
-		console.log(currentNode.type);
+		console.log("currentNode: " + currentNode.type);
 		currentNode = currentNode.next;
 	}
+}
+
+// Change the type of a node in a LinkedList
+Node.prototype.get = function(value){
+	for(var i = 0; i < this._length; i++){
+
+	};
+	return this.type;
+}
+
+// Change the type of a node in a LinkedList
+Node.prototype.setType = function(value){
+	this.type = value;
+	return this.type;
+}
+
+// Change the data of a node
+Node.prototype.setData = function(value){
+	this.data = value;
+	return this.data;
+}
+
+// Set the next node of a node in a LinkedList
+// Possibly needed in future, not for meeting 3
+Node.prototype.setNext = function(value){
+	this.next = value;
+	return this.next;
+}
+
+
+// Change the completed status of a node to true
+Node.prototype.markComplete = function(){
+	this.completed = true;
+	return this.completed;
+}
+
+// Change the completed status of a node to false
+Node.prototype.markNotComplete = function(){
+	this.completed = false;
+	return this.completed;
 }
 
 
