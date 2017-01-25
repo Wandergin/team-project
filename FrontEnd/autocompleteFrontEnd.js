@@ -2,7 +2,7 @@ var relevantList =
     {
         "cuisine":["Chinese","Scottish","Japanese","Indian"],
         "location":["Glasgow","Edinburgh","Aberdeen","Dundee"],
-        "covers":["January 26th","January 27th","January 28th","January 29th"],
+        "covers":["for 2 people","for 3 people","for 4 people","6 people"],
         "time":["7pm","7:30pm","8pm","9pm"],
         "date":["January 26th","January 27th","January 28th","January 29th"]
     };
@@ -31,14 +31,14 @@ function sendDataToServer(data, suggestCat, linkedList) {
             //If yes, set data, mark current node as complete
             //If no, remove data, mark as incomplete
             //Will be incomplete by default but change is necessary when terms are deleted
-            console.log("This is the node in the linked list");
-            console.log(linkedList.searchNodeType('covers').data);
-            console.log("");
-            console.log("This is the response from the server.");
-            console.log(response.covers);
-            console.log("");
-            console.log("This is the comparison between the two.");
-            console.log((linkedList.searchNodeType('covers')).data[0] != response.covers[0]);
+            // console.log("This is the node in the linked list");
+            // console.log(linkedList.searchNodeType('covers').data);
+            // console.log("");
+            // console.log("This is the response from the server.");
+            // console.log(response.covers);
+            // console.log("");
+            // console.log("This is the comparison between the two.");
+            // console.log((linkedList.searchNodeType('covers')).data[0] != response.covers[0]);
             
 
             if ((response.cuisine != "") && ((linkedList.searchNodeType('cuisine')).data[0] != response.cuisine[0])){
@@ -100,7 +100,7 @@ function sendDataToServer(data, suggestCat, linkedList) {
                 //Set suggestCat as null, nothing more to suggest
                 } 
             }
-            
+
             if (changed) updateSuggestionList(suggestCat, data);
         }
     });
@@ -109,13 +109,15 @@ function sendDataToServer(data, suggestCat, linkedList) {
 
 function updateSuggestionList(suggestedCategory, previousQuery) {
     console.log("Updating...");
+    console.log("suggestedCategory: " + suggestedCategory.type);
+    console.log("previousQuery: " + previousQuery);
     var type = suggestedCategory.type;
-    console.log(type);
     var suggestionList = [];
-    console.log(relevantList[type]);
     for (item in relevantList[type]) {
         suggestionList.push(previousQuery + " " + relevantList[type][item]);
     }
+
+    console.log(suggestionList);
     jQuery('#input').autocomplete('destroy');
     
     $("#input").autocomplete({
@@ -131,10 +133,10 @@ $( document ).ready(function() {
 
 
     linkedList.add(1, 'cuisine');
-    linkedList.add(2, 'location');
-    linkedList.add(3, 'covers');
-    linkedList.add(4, 'date');
-    linkedList.add(5, 'time');
+    linkedList.add(2, 'covers');
+    linkedList.add(3, 'date');
+    linkedList.add(4, 'time');
+    linkedList.add(5, 'location');
     linkedList.add(6, 'endpoint');
 
     console.log(linkedList);
