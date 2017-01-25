@@ -108,24 +108,32 @@ def query_to_token(s):
             if searching:
                 search_terms.append(sent[i])
             if i != len(sent):
-                # Look for a date like tomorrow night, this evening
-                if sent[i] in days_context and sent[i + 1] in days_connection:
-                    thedate = sent[i] + " " + sent[i + 1]
-                    #print "FOUND A DATE: {}".format(thedate)
-                    missing_tokens.remove("date")
-                    skip.append(i + 1)
-                    found_tokens["date"] = thedate
-                    continue
 
-                # Look for a date like next friday or this tuesday
-                elif sent[i] in days_context and sent[i + 1] in days:
-                    thedate = sent[i] + " " + sent[i + 1]
-                    #print "FOUND A CERTAIN DATE ({} week): {} {}".format(sent[i], sent[i], sent[i + 1])
-                    missing_tokens.remove("date")
-                    #TODO: fix the String to date function, return formatted date
-                    found_tokens["date"] = thedate #StringToDate(thedate)
-                    skip.append(i + 1)
-                    continue
+                # Look for a date like tomorrow night, this evening
+                if i+1 < len(sent):
+                    if sent[i] in days_context and sent[i + 1] in days_connection:
+                        thedate = sent[i] + " " + sent[i + 1]
+                        #print "FOUND A DATE: {}".format(thedate)
+                        missing_tokens.remove("date")
+                        skip.append(i + 1)
+                        found_tokens["date"] = thedate
+                        continue
+
+                    # Look for a date like next friday or this tuesday
+                    elif sent[i] in days_context and sent[i + 1] in days:
+                        thedate = sent[i] + " " + sent[i + 1]
+                        #print "FOUND A CERTAIN DATE ({} week): {} {}".format(sent[i], sent[i], sent[i + 1])
+                        missing_tokens.remove("date")
+                        #TODO: fix the String to date function, return formatted date
+                        found_tokens["date"] = thedate #StringToDate(thedate)
+                        skip.append(i + 1)
+                        continue
+                else:
+                    if sent[i] == "tomorrow":
+                        missing_tokens.remove("date")
+                        found_tokens["date"] = "tomorrow" #StringToDate(thedate)
+                    #    skip.append(i + 1)
+                #    else if
 
                 # Look for number of people
                 if (sent[i] in numbers.keys() or RepresentsInt(sent[i])):
@@ -179,6 +187,7 @@ def query_to_token(s):
 
     #print found_tokens
     return found_tokens
+
 
 
 @app.route('/')
