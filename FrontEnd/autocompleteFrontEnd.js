@@ -13,9 +13,9 @@ var terms = [
 
 function sendDataToServer(data) {
     $.ajax({
-        url:"localhost:5000/search",
+        url:"http://localhost:5000/search",
         method:"GET",
-        data:{data:data},
+        data:{"q":data},
         success:function(res) {
             console.log("Successfully sent data.");
             console.log(res);
@@ -39,6 +39,7 @@ $( document ).ready(function() {
     // listening to keypress
     $(document).keyup(function(e) {
         console.log(e);
+        sendDataToServer($("#input").val());
         switch(e.which){
             case 8:
                 console.log("backspace");

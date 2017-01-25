@@ -7,8 +7,8 @@ import sys
 from pprint import pprint
 import datetime
 import json
-
-
+from flask_cors import CORS, cross_origin
+CORS(app)
 
 def query_to_token(s):
 
