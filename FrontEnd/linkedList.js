@@ -139,13 +139,4 @@ LinkedList.prototype.show = function(){
 	}
 }
 
-var test = new LinkedList();
-
-test.add(1, 'cuisine');
-test.add(2, 'location');
-test.add(3, 'rating');
-test.add(4, 'people');
-test.add(5, 'time');
-
-test.show();
 

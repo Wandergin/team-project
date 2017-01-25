@@ -13,7 +13,7 @@ var terms = [
 
 function sendDataToServer(data) {
     $.ajax({
-        url:"localhost:8080/search",
+        url:"localhost:5000/search",
         method:"GET",
         data:{data:data},
         success:function(res) {
@@ -24,9 +24,17 @@ function sendDataToServer(data) {
 }
 
 $( document ).ready(function() {
-    var linkedList = new LinkedList;
-    linkedList.add(terms[0]);
-    console.log(linkedList);
+    
+    var test = new LinkedList();
+
+    test.add(1, 'cuisine');
+    test.add(2, 'location');
+    test.add(3, 'rating');
+    test.add(4, 'people');
+    test.add(5, 'time');
+
+    console.log(test);
+
 
     // listening to keypress
     $(document).keyup(function(e) {
