@@ -1,15 +1,15 @@
-var terms = [ 
-        "table",
-        "table for 2 people", 
-        "table for 2 people in Glasgow",
-        "table for 2 people in Edinburgh",
-        "2 people Glasgow 7pm",
-        "Scottish cousine",
-        "Scottish cousine Glasgow",
-        "Scottish cousine Glasgow 2 people",
-        "Scottish cousine Glasgow 2 people 8pm"
+var locations = [
+        "Glasgow",
+        "Edinburgh",
+        "Aberdeen",
+        "Dundee"
     ];
 
+var times = []
+
+var terms = [];
+
+var response = '{"date": "", "cuisine": ["chinese"], "location": [], "covers": "", "time": ""}';
 
 function sendDataToServer(data) {
     $.ajax({
@@ -17,9 +17,25 @@ function sendDataToServer(data) {
         method:"GET",
         data:{"q":data},
         success:function(res) {
-            console.log("Successfully sent data.");
-            console.log(res);
+            console.log(JSON.parse(res));
+            if (res != response){
+                response = JSON.parse(res);;
+                updateSuggestionList(locations, data);
+            }
+
         }
+    });
+}
+
+
+function updateSuggestionList(relevantList, previousQuery) {
+    var suggestionList = [];
+    for (key in relevantList) {
+        suggestionList.push(previousQuery + " " + locations[key]);
+    }
+    jQuery('#input').autocomplete('destroy');
+    $("#input").autocomplete({
+        source:[suggestionList]
     });
 }
 
@@ -38,30 +54,19 @@ $( document ).ready(function() {
 
     // listening to keypress
     $(document).keyup(function(e) {
-        console.log(e);
-        sendDataToServer($("#input").val());
-        switch(e.which){
-            case 8:
-                console.log("backspace");
-                break; 
-            
-            case 46:
-                console.log("delete");
-                break;
-            
-            case 39:
-                console.log("User autocompleted the term.");
-                break;
-            
-            default:
-                console.log($("#input").val());
-                break;
+        console.log(e.which);
+        if ((e.which > 47) && (e.which < 111)){
+            console.log("Yay")
+            sendDataToServer($("#input").val());
+        }
+        else if (e.which == 8) {
+            console.log("backspace");
+        }
+        else if (e.which == 46) {
+            console.log("delete");
         }
     });
 
     // Initialize autocomplete
-    $("#input").autocomplete({
-            source:[terms]
-        });
 
 });
