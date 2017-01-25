@@ -20,13 +20,15 @@ function sendDataToServer(data) {
             console.log("Successfully sent data.");
             console.log(res);
 
+            var response = $.parseJSON(res);
+
             //Check if all categories (keys) have associated data
             //If yes, set data, mark current node as complete
             //If no, remove data, mark as incomplete
             //Will be incomplete by default but change is necessary when terms are deleted
 
             if (res.cuisine != ""){
-                (linkedList.searchNodeType('cuisine')).setData(res.cuisine);
+                (linkedList.searchNodeType('cuisine')).setData(response.cuisine);
                 (linkedList.searchNodeType('cuisine')).markComplete();
             } else {
                 (linkedList.searchNodeType('cuisine')).setData("");
@@ -34,7 +36,7 @@ function sendDataToServer(data) {
             }
 
             if (res.location != ""){
-                (linkedList.searchNodeType('location')).setData(res.location);
+                (linkedList.searchNodeType('location')).setData(response.location);
                 (linkedList.searchNodeType('location')).markComplete();
             } else {
                 (linkedList.searchNodeType('location')).setData("");
@@ -42,7 +44,7 @@ function sendDataToServer(data) {
             }
 
             if (res.rating != ""){
-                (linkedList.searchNodeType('rating')).setData(res.rating);
+                (linkedList.searchNodeType('rating')).setData(response.rating);
                 (linkedList.searchNodeType('rating')).markComplete();
             } else {
                 (linkedList.searchNodeType('rating')).setData("");
@@ -50,7 +52,7 @@ function sendDataToServer(data) {
             }
 
             if (res.people != ""){
-                (linkedList.searchNodeType('people')).setData(res.people);
+                (linkedList.searchNodeType('people')).setData(response.people);
                 (linkedList.searchNodeType('people')).markComplete();
             } else {
                 (linkedList.searchNodeType('people')).setData("");
@@ -58,7 +60,7 @@ function sendDataToServer(data) {
             }
 
             if (res.time != ""){
-                (linkedList.searchNodeType('time')).setData(res.time);
+                (linkedList.searchNodeType('time')).setData(response.time);
                 (linkedList.searchNodeType('time')).markComplete();
             } else {
                 (linkedList.searchNodeType('time')).setData("");
