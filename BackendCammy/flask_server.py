@@ -2,7 +2,7 @@ from flask import Flask, url_for
 app = Flask(__name__)
 from flask import request
 
-import nltk
+#import nltk
 import sys
 from pprint import pprint
 import datetime
@@ -66,13 +66,13 @@ def query_to_token(s):
 
     missing_tokens = ["date", "time", "covers", "cuisine", "location"]
 
-    sentences = nltk.sent_tokenize(s.lower())
-    tokenized_sentences = [nltk.word_tokenize(sentence) for sentence in sentences]
+    #sentences = nltk.sent_tokenize(s.lower())
+    #tokenized_sentences = [nltk.word_tokenize(sentence) for sentence in sentences]
 
     #print tokenized_sentences
 
-    tagged_sentences = [nltk.pos_tag(sentence) for sentence in tokenized_sentences]
-    chunked_sentences = nltk.ne_chunk_sents(tagged_sentences)
+    #tagged_sentences = [nltk.pos_tag(sentence) for sentence in tokenized_sentences]
+    #chunked_sentences = nltk.ne_chunk_sents(tagged_sentences)
 
     terms_locations = ["near", "in", "next to", "around"]
 
@@ -95,62 +95,70 @@ def query_to_token(s):
 
 
 
-    for i in terms_locations:
+    for i in [s]:
         context_words.append(i)
 
-    for sent in tokenized_sentences:
 
-        for i in range(0, len(sent)):
-            if i not in skip and sent[i] not in skip_words:
-                if searching:
-                    search_terms.append(sent[i])
-                if i != len(sent):
-                    # Look for a date like tomorrow night, this evening
-                    if sent[i] in days_context and sent[i + 1] in days_connection:
-                        thedate = sent[i] + " " + sent[i + 1]
-                        #print "FOUND A DATE: {}".format(thedate)
-                        missing_tokens.remove("date")
-                        skip.append(i + 1)
-                        found_tokens["date"] = thedate
-                        continue
+    #for sent in tokenized_sentences:
 
-                    # Look for a date like next friday or this tuesday
-                    elif sent[i] in days_context and sent[i + 1] in days:
-                        thedate = sent[i] + " " + sent[i + 1]
-                        #print "FOUND A CERTAIN DATE ({} week): {} {}".format(sent[i], sent[i], sent[i + 1])
-                        missing_tokens.remove("date")
-                        #TODO: fix the String to date function, return formatted date
-                        found_tokens["date"] = thedate #StringToDate(thedate)
-                        skip.append(i + 1)
-                        continue
+    sent = s.split(" ")
 
-                    # Look for number of people
-                    if (sent[i] in numbers.keys() or RepresentsInt(sent[i])) and sent[i + 1] == "people":
-                        missing_tokens.remove("covers")
-                        #print "FOUND NUMBER OF COVERS: {}".format(sent[i])
-                        skip.append(i + 1)
-                        found_tokens["covers"] = numbers[sent[i]]
-                        if i > 1:
-
-                            if sent[i - 1] == "for":
-                                skip.append(i - 1)
-                        continue
-
-                if sent[i] in cuisine:
-                    found_cuisines.append(sent[i])
+    for i in range(0, len(sent)):
+        if i not in skip and sent[i] not in skip_words:
+            if searching:
+                search_terms.append(sent[i])
+            if i != len(sent):
+                # Look for a date like tomorrow night, this evening
+                if sent[i] in days_context and sent[i + 1] in days_connection:
+                    thedate = sent[i] + " " + sent[i + 1]
+                    #print "FOUND A DATE: {}".format(thedate)
+                    missing_tokens.remove("date")
+                    skip.append(i + 1)
+                    found_tokens["date"] = thedate
                     continue
 
-                if sent[i].endswith("pm") or sent[i].endswith("am"):
-                    #print "FOUND A TIME: {}".format(sent[i])
-                    missing_tokens.remove("time")
-                    found_tokens['time'] = sent[i]
+                # Look for a date like next friday or this tuesday
+                elif sent[i] in days_context and sent[i + 1] in days:
+                    thedate = sent[i] + " " + sent[i + 1]
+                    #print "FOUND A CERTAIN DATE ({} week): {} {}".format(sent[i], sent[i], sent[i + 1])
+                    missing_tokens.remove("date")
+                    #TODO: fix the String to date function, return formatted date
+                    found_tokens["date"] = thedate #StringToDate(thedate)
+                    skip.append(i + 1)
                     continue
 
-                if sent[i] in terms_locations:
-                    searching = True
+                # Look for number of people
+                if (sent[i] in numbers.keys() or RepresentsInt(sent[i])):
+                    if len(sent) > i+1:
+                        if sent[i + 1] == "people":
+                            missing_tokens.remove("covers")
+                            #print "FOUND NUMBER OF COVERS: {}".format(sent[i])
+                            skip.append(i + 1)
+                            if (RepresentsInt(sent[i])):
+                                found_tokens["covers"] = sent[i]
+                            else:
+                                found_tokens["covers"] = numbers[sent[i]]
+                            if i > 1:
 
-                if sent[i] not in context_words and not searching:
-                    unmatched.append(sent[i])
+                                if sent[i - 1] == "for":
+                                    skip.append(i - 1)
+                            continue
+
+            if sent[i] in cuisine:
+                found_cuisines.append(sent[i])
+                continue
+
+            if sent[i].endswith("pm") or sent[i].endswith("am"):
+                #print "FOUND A TIME: {}".format(sent[i])
+                missing_tokens.remove("time")
+                found_tokens['time'] = sent[i]
+                continue
+
+            if sent[i] in terms_locations:
+                searching = True
+
+            if sent[i] not in context_words and not searching:
+                unmatched.append(sent[i])
 
 
     if len(found_cuisines) != 0:
