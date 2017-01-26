@@ -107,9 +107,6 @@ function sendDataToServer(data, suggestCat, linkedList) {
 }
 
 function updateSuggestionList(suggestedCategory, previousQuery) {
-    console.log("Updating...");
-    console.log("suggestedCategory: " + suggestedCategory.type);
-    console.log("previousQuery: " + previousQuery);
     var type = suggestedCategory.type;
     var suggestionList = [];
     for (item in relevantList[type]) {
@@ -152,10 +149,10 @@ $( document ).ready(function() {
             sendDataToServer($("#input").val(), suggestCat, linkedList);
         }
         else if (e.which == 8) {
-            console.log("backspace");
+            //console.log("backspace");
         }
         else if (e.which == 46) {
-            console.log("delete");
+            //console.log("delete");
         }
 
     });
