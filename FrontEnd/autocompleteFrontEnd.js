@@ -2,7 +2,7 @@ var relevantList =
     {
         "cuisine":["Chinese","Scottish","Japanese","Indian"],
         "location":["Glasgow","Edinburgh","Aberdeen","Dundee"],
-        "covers":["for 2 people","for 3 people","for 4 people","6 people"],
+        "covers":["for 2 people","for 3 people","for 4 people","for 6 people"],
         "time":["7pm","7:30pm","8pm","9pm"],
         "date":["January 26th","January 27th","January 28th","January 29th"]
     };
@@ -23,10 +23,9 @@ function sendDataToServer(data, suggestCat, linkedList) {
         data:{"q":data}, // Lowercase
         success:function(res) {
             var changed = false;
-            console.log(res);
             
             var response = JSON.parse(res);
-
+            console.log(res);
             //Check if all categories (keys) have associated data
             //If yes, set data, mark current node as complete
             //If no, remove data, mark as incomplete
@@ -119,7 +118,7 @@ function updateSuggestionList(suggestedCategory, previousQuery) {
 
     console.log(suggestionList);
     jQuery('#input').autocomplete('destroy');
-    
+
     $("#input").autocomplete({
         source:[suggestionList]
     });
@@ -146,11 +145,6 @@ $( document ).ready(function() {
     //linkedList.add(6, 'endpoint');
 
 
-    var queryText = $("#input").val();
-
-
-    linkedList.show();
-
 
     // listening to keypress
     $(document).keyup(function(e) {
@@ -169,5 +163,11 @@ $( document ).ready(function() {
     $(".xdsoft_autocomplete").click(function(){
         sendDataToServer($("#input").val(), suggestCat, linkedList);
     })
+
+    // $("#input").autocomplete({
+    //     source:[relevantList["cuisine"]]
+    // });
+    $('#input').focus();
+        
 
 });
