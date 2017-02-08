@@ -26,7 +26,7 @@ Cusines_belief =	["kosher", "halal", "organic", "vegen", "vegetarian"]
 		Months:		Dictoinary mapping each month a a number (place in the year)
 		
 
-Date_prefixes = 	["this", "next", "on", "for"]
+Dates_prefixes = 	["this", "next", "on", "for"]
 
 Dates_suffixes = 	["st", "nd", "rd", "th"]
 
@@ -48,7 +48,7 @@ Dates_months = 		["january": 1, "february": 2, "march": 3, "april": 4, "may": 5,
 
 Times_specific_prefixes	= 	["at", "around","for", "in"]
 
-Time_specific_actual =		["noon"]
+Times_specific_actual =		["noon"]
 
 Times_specific_suffixes	= 	["am","hours", "minutes", "oclock", "pm"]
 
