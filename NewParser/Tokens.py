@@ -20,10 +20,10 @@ Cusines_belief =	["kosher", "halal", "organic", "vegen", "vegetarian"]
 
 ##############################
 ##Dates	-	Prefixes:	Defines words that may come before a date
-		Suffixes:	Defines words that may come after a date
-		Common:		Defines commonly used dates
-		Days:		Dictionary mapping each day to a number (place in the week)
-		Months:		Dictoinary mapping each month a a number (place in the year)
+##		Suffixes:	Defines words that may come after a date
+##		Common:		Defines commonly used dates
+##		Days:		Dictionary mapping each day to a number (place in the week)
+##		Months:		Dictoinary mapping each month a a number (place in the year)
 		
 
 Dates_prefixes = 	["this", "next", "on", "for"]
@@ -61,9 +61,9 @@ Times_numbers = 		{"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 
 
 ##############################
 ##People	Specific prefixes:	Defines words that may come before an amount of people e.g table for 5 people
-#		Specific suffixes:	Defines words that may come after an amount of people e.g 5 people
-		Approx actual:		Defines words used that may approximate the party size
-		Approx suffix:		Defines suffixes that may come after an approximation of size
+##		Specific suffixes:	Defines words that may come after an amount of people e.g 5 people
+##		Approx actual:		Defines words used that may approximate the party size
+##		Approx suffix:		Defines suffixes that may come after an approximation of size
 
 People_specific_prefixes = 	["for", "table for"]
 
