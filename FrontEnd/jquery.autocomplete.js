@@ -286,6 +286,7 @@
 		 },sourceObject.ajax))
 		 
 		 .done(function( data ){
+		 	console.log(data)
 			done&&done.apply(this,$.makeArray(arguments));
 		 })
 		 

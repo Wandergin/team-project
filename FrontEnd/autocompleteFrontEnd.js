@@ -1,7 +1,7 @@
 var relevantList =
     {
-        "cuisine":["Chinese","Scottish","Japanese","Indian"],
-        "location":["Glasgow","Edinburgh","Aberdeen","Dundee"],
+        "cuisine":["chinese","italian","japanese","indian"],
+        "location":["near", "in", "next to", "around"],
         "covers":["for 2 people","for 3 people","for 4 people","for 6 people"],
         "time":["7pm","7:30pm","8pm","9pm"],
         "date":["January 26th","January 27th","January 28th","January 29th"]
@@ -117,10 +117,12 @@ function updateSuggestionList(suggestedCategory, previousQuery) {
     }
 
     console.log(suggestionList);
-    jQuery('#input').autocomplete('destroy');
 
     $("#input").autocomplete({
-        source:[suggestionList]
+        source:[{
+            url:'http://localhost:5000/autocomplete?q='+JSON.stringify(suggestionList),
+            type:'remote',
+        }]
     });
     $('#input').focus();
 }
