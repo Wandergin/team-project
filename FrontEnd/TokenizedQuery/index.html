@@ -41,6 +41,20 @@
         </div>  
     </div>
 </body>
+<script>
+    $('.input-tags').selectize({
+        plugins: ['remove_button'],
+        persist: false,
+        create: true,
+        render: {
+            item: function(data, escape) {
+                return '<div>"' + escape(data.text) + '"</div>';
+            }
+        }
+    });
+</script>
+
+
 </html>
 </body>
 </html>
