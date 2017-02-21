@@ -66,7 +66,47 @@
             console.log(this);
             
         });
+        
+        $("#input-tags").selectize({
+            options: [
+                {id: 'chinese', token: 'cuisine', text: 'Chinese'},
+                {id: 'indian', token: 'cuisine', text: 'Indian'},
+                {id: 'thai', token: 'cuisine', text: 'Thai'},
+                {id: 'italian', token: 'cuisine', text: 'Italian'},
+                {id: 'japanese', token: 'cuisine', text: 'Japanese'},
+                {id: 'hungarian', token: 'cuisine', text: 'Hungarian'},
+                {id: 'finnish', token: 'cuisine', text: 'Finnish'},
+                {id: 'american', token: 'cuisine', text: 'American'},
+                
+                {id: 'glasgow', token: 'location', text: 'Glasgow'},
+                {id: 'edinburgh', token: 'location', text: 'Edinburgh'},
+                {id: 'within 10km', token: 'location', text: 'Within 10km'},
+                {id: 'nearby', token: 'location', text: 'Nearby'},
+                {id: 'george square', token: 'location', text: 'George Square'},
+                
+                {id: 'tonight', token: 'time', text: 'Tonight'},
+                {id: '8pm', token: 'time', text: '8pm'},
+                {id: 'friday', token: 'time', text: 'Friday'},
+                {id: 'this Saturday', token: 'time', text: 'This Saturday'},
+                {id: 'next week', token: 'time', text: 'Next week'},
+            ],
+            optgroups: [
+                {$order: 3, id: 'time', name: 'Time'},
+                {$order: 2, id: 'location', name: 'Location'},
+                {$order: 1, id: 'cuisine', name: 'Cuisine'}
+            ],
+            labelField: 'text',
+            valueField: 'id',
+            optgroupField: 'token',
+            optgroupLabelField: 'name',
+            optgroupValueField: 'id',
+            lockOptgroupOrder: true,
+            searchField: ['text'],
+            plugins: ['optgroup_columns'],
+            openOnFocus: true
+        });
     });
+
 
 </script>
 
