@@ -89,8 +89,22 @@
                 {id: 'friday', token: 'time', text: 'Friday'},
                 {id: 'this Saturday', token: 'time', text: 'This Saturday'},
                 {id: 'next week', token: 'time', text: 'Next week'},
+                
+                {id: 'for 2 people', token: 'covers', text: 'For two'},
+				{id: '5 people', token: 'covers', text: 'For five'},
+				{id: 'party of 10', token: 'covers', text: 'For ten'},
+							
+				{id: 'cheap', token: 'features', text: 'Cheap'},
+				{id: 'fancy', token: 'features', text: 'Fancy'},
+				{id: 'bar', token: 'features', text: 'Bar'},
+				{id: 'disabled access', token: 'features', text: 'Disabled access'},
+				{id: 'family friendly', token: 'features', text: 'Family Friendly'},
+				{id: 'michelin star', token: 'features', text: 'Michelin star-rated'},
             ],
+            
             optgroups: [
+                {$order: 5, id: 'features', name: 'Features'},
+    			{$order: 4, id: 'covers', name: 'People'},
                 {$order: 3, id: 'time', name: 'Time'},
                 {$order: 2, id: 'location', name: 'Location'},
                 {$order: 1, id: 'cuisine', name: 'Cuisine'}
