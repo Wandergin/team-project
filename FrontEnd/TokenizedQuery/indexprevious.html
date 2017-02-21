@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="BasicExample/js/jquery.min.js"></script>
+    <script src="BasicExample/js/jqueryui.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>ResDiary Tokenizable Search</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <link rel="stylesheet" href="BasicExample/css/normalize.css">
+    <link rel="stylesheet" href="BasicExample/css/stylesheet.css">
+
+    <script src="BasicExample/dist/js/standalone/selectize.js"></script>
+    <script src="BasicExample/js/index.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div id="query">
+            <h2>Reserve your next table with ResDiary</h2>
+            <div class="control-group">
+                <input type="text" id="input-tags" class="input-tags demo-default" value="" placeholder="City, postcode or restaurant name">
+            </div>
+            
+            <script>
+					$("#input-tags").selectize({
+						options: [
+							{id: 'chinese', token: 'cuisine', text: 'Chinese'},
+							{id: 'indian', token: 'cuisine', text: 'Indian'},
+							{id: 'thai', token: 'cuisine', text: 'Thai'},
+							{id: 'italian', token: 'cuisine', text: 'Italian'},
+							{id: 'japanese', token: 'cuisine', text: 'Japanese'},
+							{id: 'hungarian', token: 'cuisine', text: 'Hungarian'},
+							{id: 'finnish', token: 'cuisine', text: 'Finnish'},
+							{id: 'american', token: 'cuisine', text: 'American'},
+							
+							{id: 'glasgow', token: 'location', text: 'Glasgow'},
+							{id: 'edinburgh', token: 'location', text: 'Edinburgh'},
+							{id: 'within 10km', token: 'location', text: 'Within 10km'},
+							{id: 'nearby', token: 'location', text: 'Nearby'},
+							{id: 'george square', token: 'location', text: 'George Square'},
+							
+							{id: 'tonight', token: 'time', text: 'Tonight'},
+							{id: '8pm', token: 'time', text: '8pm'},
+							{id: 'friday', token: 'time', text: 'Friday'},
+							{id: 'this Saturday', token: 'time', text: 'This Saturday'},
+							{id: 'next week', token: 'time', text: 'Next week'},
+							
+							{id: 'for 2 people', token: 'covers', text: 'For two'},
+							{id: '5 people', token: 'covers', text: 'For five'},
+							{id: 'party of 10', token: 'covers', text: 'For ten'},
+							{id: 'date', token: 'covers', text: 'Date'},
+							
+							{id: 'cheap', token: 'features', text: 'Cheap'},
+							{id: 'fancy', token: 'features', text: 'Fancy'},
+							{id: 'bar', token: 'features', text: 'Bar'},
+							{id: 'disabled access', token: 'features', text: 'Disabled access'},
+							{id: 'family friendly', token: 'features', text: 'Family Friendly'},
+							{id: 'michelin star', token: 'features', text: 'Michelin star-rated'},
+											
+							
+						],
+						
+						optgroups: [
+    						{$order: 5, id: 'features', name: 'Features'},
+    						{$order: 4, id: 'covers', name: 'People'},
+							{$order: 3, id: 'time', name: 'Time'},
+							{$order: 2, id: 'location', name: 'Location'},
+							{$order: 1, id: 'cuisine', name: 'Cuisine'}
+						],
+						labelField: 'text',
+						valueField: 'id',
+						optgroupField: 'token',
+						optgroupLabelField: 'name',
+						optgroupValueField: 'id',
+						lockOptgroupOrder: true,
+						searchField: ['text'],
+						plugins: ['optgroup_columns'],
+						openOnFocus: true
+					});
+				</script>
+        </div>  
+    </div>
+</body>
+<script type="text/javascript" src="selectize.js"></script>
+</html>
+</body>
+</html>
