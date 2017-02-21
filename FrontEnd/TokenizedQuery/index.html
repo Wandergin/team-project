@@ -44,16 +44,16 @@
 </body>
 <script>
     $(document).ready(function(){
-        $('.input-tags').selectize({
-            // plugins: ['remove_button'],
-            persist: false,
-            create: true,
-            render: {
-                item: function(data, escape) {
-                    return '<div class="dropdown"><button class="clickable btn btn-primary dropdown-toggle" data-toggle="dropdown" id="menu1" type="button" data-toggle="dropdown">"' + escape(data.text) + '"</div></div>';
-                }
-            }
-        });
+        // $('.input-tags').selectize({
+        //     // plugins: ['remove_button'],
+        //     persist: false,
+        //     create: true,
+        //     render: {
+        //         item: function(data, escape) {
+        //             return '<div class="dropdown"><button class="clickable btn btn-primary dropdown-toggle" data-toggle="dropdown" id="menu1" type="button" data-toggle="dropdown">"' + escape(data.text) + '"</div></div>';
+        //         }
+        //     }
+        // });
 
         $(".clickable").click(function(e){ 
             e.preventDefault();
@@ -66,7 +66,7 @@
             console.log(this);
             
         });
-        
+
         $("#input-tags").selectize({
             options: [
                 {id: 'chinese', token: 'cuisine', text: 'Chinese'},
