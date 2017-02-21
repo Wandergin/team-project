@@ -8,9 +8,10 @@
     <!--        end         -->
 
     <!-- jQuery + Bootstrap -->
-    <script src="BasicExample/js/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="BasicExample/js/jqueryui.js"></script>
-<!--     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!--        end         -->
 
     <!-- selectize js files -->
@@ -36,22 +37,37 @@
         <div id="query">
             <h3>Reserve your next table with ResDiary</h3>
             <div class="control-group">
-                <input type="text" id="input-tags" class="input-tags demo-default" placeholder="City, postcode or restaurant name">
+                <input type="text" id="input-tags" value="Chinese,restaurant" class="input-tags demo-default" placeholder="City, postcode or restaurant name">
             </div>
         </div>  
     </div>
 </body>
 <script>
-    $('.input-tags').selectize({
-        plugins: ['remove_button'],
-        persist: false,
-        create: true,
-        render: {
-            item: function(data, escape) {
-                return '<div>"' + escape(data.text) + '"</div>';
+    $(document).ready(function(){
+        $('.input-tags').selectize({
+            // plugins: ['remove_button'],
+            persist: false,
+            create: true,
+            render: {
+                item: function(data, escape) {
+                    return '<div class="dropdown"><button class="clickable btn btn-primary dropdown-toggle" data-toggle="dropdown" id="menu1" type="button" data-toggle="dropdown">"' + escape(data.text) + '"</div></div>';
+                }
             }
-        }
+        });
+
+        $(".clickable").click(function(e){ 
+            e.preventDefault();
+            $('.dropdown').on('show.bs.dropdown', function(){
+                alert('The dropdown is about to be shown.');
+            });
+            $(this).append('<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"></ul>');
+                $(".dropdown-menu").append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>');
+                $(".dropdown-menu").append('<li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>');
+            console.log(this);
+            
+        });
     });
+
 </script>
 
 
