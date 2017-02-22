@@ -95,9 +95,17 @@
             optgroupValueField: 'id',
             lockOptgroupOrder: true,
             searchField: ['text'],
-            plugins: ['optgroup_columns'],
-            openOnFocus: true
+            plugins: ['optgroup_columns', 'remove_button'],
+            openOnFocus: true,
+            render: {
+                item: function(data, escape){
+                    return '<div class="item">' + escape(data.text) + '</div>';
+                }
+            }
         });
+    });
+    $(document).on('click', '.item', function(){
+        alert("Event binded to dynamically generated element!");
     });
 
 
