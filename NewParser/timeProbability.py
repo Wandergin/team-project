@@ -5,16 +5,16 @@ import Tokens
 finalReturn = {}
 
 
-def timeProbability(s): 
+def timeProbability(s):
 
-	#Covert string to lowercase list 
+	#Covert string to lowercase list
 	s = s.lower()
 	s.translate(None, string.punctuation)
-	s = s.split(" ")	
+	s = s.split(" ")
 	i = len(s) -1
 
 	returnDict = {}
-	
+
 	#For each word in string
 	while (i >= 0):
 
@@ -33,26 +33,26 @@ def timeProbability(s):
 
 		#Search for a suffix that guarantees a time
 		for ending in Tokens.Times_specific_suffixes:
-			#If found take ending out and add to the result 
+			#If found take ending out and add to the result
 			if tempWord.endswith(ending):
 				result  = result + ending
-				tempWord = tempWord.replace(ending, '')					
+				tempWord = tempWord.replace(ending, '')
 				present_suf = True
 				break
-		
+
 		#If word is empty move to next word
 		if tempWord ==  "" and i > 0:
 			tempWord = s[i-1]
 			i = i-1
 
-		#Search for a number to match the ending	
+		#Search for a number to match the ending
 		if Tokens.Times_numbers.has_key(tempWord) or tempWord in str(Tokens.Times_numbers.values()):
 			result = tempWord + " " +result
 			present_num = True
-			i = i-1	
-	
+			i = i-1
+
 		#Search for prefixes to append
-		if i >= 0 and result != "":		
+		if i >= 0 and result != "":
 			for prefix in Tokens.Times_specific_prefixes:		#at / for / around
 				if s[i] == prefix:
 					i = i -1
@@ -86,21 +86,10 @@ def timeProbability(s):
 			resultProb = 25
 		elif present_approx:
 			resultProb = 25
-		
+
 		print (result)
 		if result != "":
 			returnDict[result] = resultProb
 
-		i= i-1	
-	return returnDict
-		
-
-
-finalReturn = timeProbability("lunch at 4 oclock")
-print (finalReturn)
-finalReturn = timeProbability("dinner")
-print (finalReturn)
-finalReturn = timeProbability("lunch at 4")
-print (finalReturn)
-finalReturn = timeProbability("for 5")
-print (finalReturn)
+		i= i-1
+	return resultProb

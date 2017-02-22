@@ -2,7 +2,7 @@ import string
 import Tokens
 
 def partyProbability(s):
-	
+
 	returnDict = {}
 	s = s.split(" ")
 	i = 0
@@ -38,4 +38,4 @@ def partyProbability(s):
 					probability = 100
 			returnDict[result] = probability
 		i +=1
-	return returnDict 
+	return probability
