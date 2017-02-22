@@ -8,14 +8,14 @@ Skip_words = 		["i", "want"]
 ##		Dietary:	Defines various dietary restrictions one may have
 ##		Belief:		Defines various belief restrictions one may have
 
-Cusines_ethnic = 	["african", "american", "arabic", "british", "caribbean", "chinese", "european",
+Cuisines_ethnic = 	["african", "american", "arabic", "british", "caribbean", "chinese", "european",
 		 	"english",  "french", "greek", "indian", "irish", "italian", "japanese", "kurdish", 
 		 	"lebanese", "mediterranean", "mexican", "middle eastern", "mongolian", "nordic",
 		 	"oriental", "persian", "portuguese", "south american", "spanish", "thai", "turkish"]
 
-Cusines_dietary =	["gluten-free", "healthy",  "low-Cal", "low-calorie", "soy-free"]
+Cuisines_dietary =	["gluten free", "healthy",  "low cal", "low calorie", "soy free"]
 
-Cusines_belief =	["kosher", "halal", "organic", "vegen", "vegetarian"]
+Cuisines_belief =	["kosher", "halal", "organic", "vegen", "vegetarian"]
 
 
 ##############################
