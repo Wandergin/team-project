@@ -99,14 +99,29 @@
             openOnFocus: true,
             render: {
                 item: function(data, escape){
-                    return '<div class="item">' + escape(data.text) + '</div>';
+                    return '<div class="item" data-token="'+escape(data.token)+ '">' + escape(data.text) + '</div>';
                 }
             }
         });
+        
+        /*$(document).on('click', '.item', function(){
+            var token = $(this).data('token');        
+            alert(token);
+        });*/
+        $(document).on('click', 'button', function(){
+            var dictionary = {"cuisine": "", "location": "", "time": "", "covers": "","features": ""};
+            $(".item").each(function() {
+                var str = $(this).text().replace('×', '');
+                var token = $(this).data('token');
+                dictionary[token] = str;                
+            });
+            console.log(dictionary);
+            
+        
+        });
     });
-    $(document).on('click', '.item', function(){
-        alert("Event binded to dynamically generated element!");
-    });
+    
+    
 
 
 </script>
