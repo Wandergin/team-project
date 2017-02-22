@@ -69,7 +69,7 @@ People_specific_prefixes = 	["for", "table for"]
 
 People_specific_suffixes = 	["people"]
 
-People_approx_actual =		["couple", "small", "medium", "large"]
+People_approx_actual =		{"couple": 2, "small": 4, "medium": 6, "large": 8}
 
 People_approx_suffix = 		["party", "table", "group"]
 
