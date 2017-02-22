@@ -21,7 +21,7 @@ def partyProbability(s):
 			if s[i] .isdigit():
 				result = result + " " + str(s[i])
 			        probability += 50
-				if i < len(s):
+				if i + 1 < len(s):
 					i+=1
 				if s[i] == "people":
 					result = result + " " + "people"
@@ -31,7 +31,7 @@ def partyProbability(s):
 			elif s[i] in Tokens.People_approx_actual:
 				result = result + " " + s[i]
 				probability += 25
-				if i < len(s):
+				if i + 1 < len(s):
 					i+=1
 				if s[i] in Tokens.People_approx_suffix:
 					result = result + " " + s[i]
