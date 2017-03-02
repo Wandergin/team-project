@@ -1,0 +1,40 @@
+h3 {
+    color:white;
+}
+
+.container {
+    background-image: url(../bg.jpg);
+    padding: 2%;
+}
+
+#query {
+    width:50%;
+    margin: 0 auto;
+}
+
+#input {
+    padding: 3%;
+    height: 3%;
+    width:100%;
+    font-size: 1.1em;
+}
+
+.control-group {
+    width: 100%;
+}
+
+#input-tags {
+    line-height: 3em;
+    width: 75%;
+}
+
+.s-button{
+    position: relative;
+    right: 1px;
+    top: -40px;
+    padding: 6px;
+    float: right;
+    display: inline-block;
+    z-index: 1;
+    border-radius: 2px;
+}
