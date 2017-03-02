@@ -18,16 +18,19 @@
     <script src="js/selectize.js"></script>
     <script src="js/index.js"></script>
     <!--        end         -->
-
+    
+    <!--      custom js     -->
+    <script src="js/tokenizer.js"></script>
+    <!--        end         -->
+    
 
     <!-- selectize css files-->
     <link rel="stylesheet" href="css/normalize.css">
-<!--     <link rel="stylesheet" href="BasicExample/css/stylesheet.css"> -->
     <!--        end         -->
 
     <!--     custom css     -->
     <link rel="stylesheet" href="css/style.css">
-    <!--        end         -->       
+    <!--        end         -->    
 
     <title>ResDiary Tokenizable Search</title>
 
@@ -37,7 +40,7 @@
         <div id="query">
             <h3>Reserve your next table with ResDiary</h3>
             <div class="control-group">
-                <input type="text" id="input-tags" value="Chinese,restaurant" class="input-tags demo-default" placeholder="City, postcode or restaurant name">
+                <input type="text" id="input-tags" class="input-tags demo-default" placeholder="City, postcode or restaurant name">
                 <button type="button" href="#" class="btn btn-primary s-button">SEARCH</a>
             </div>
         </div>  
@@ -45,69 +48,7 @@
 </body>
 <script>
     $(document).ready(function(){
-
-        $("#input-tags").selectize({
-            options: [
-                {id: 'chinese', token: 'cuisine', text: 'Chinese'},
-                {id: 'indian', token: 'cuisine', text: 'Indian'},
-                {id: 'thai', token: 'cuisine', text: 'Thai'},
-                {id: 'italian', token: 'cuisine', text: 'Italian'},
-                {id: 'japanese', token: 'cuisine', text: 'Japanese'},
-                {id: 'hungarian', token: 'cuisine', text: 'Hungarian'},
-                {id: 'finnish', token: 'cuisine', text: 'Finnish'},
-                {id: 'american', token: 'cuisine', text: 'American'},
-                
-                {id: 'glasgow', token: 'location', text: 'Glasgow'},
-                {id: 'edinburgh', token: 'location', text: 'Edinburgh'},
-                {id: 'within 10km', token: 'location', text: 'Within 10km'},
-                {id: 'nearby', token: 'location', text: 'Nearby'},
-                {id: 'george square', token: 'location', text: 'George Square'},
-                
-                {id: 'tonight', token: 'time', text: 'Tonight'},
-                {id: '8pm', token: 'time', text: '8pm'},
-                {id: 'friday', token: 'time', text: 'Friday'},
-                {id: 'this Saturday', token: 'time', text: 'This Saturday'},
-                {id: 'next week', token: 'time', text: 'Next week'},
-                
-                {id: 'for 2 people', token: 'covers', text: 'For two'},
-				{id: '5 people', token: 'covers', text: 'For five'},
-				{id: 'party of 10', token: 'covers', text: 'For ten'},
-							
-				{id: 'cheap', token: 'features', text: 'Cheap'},
-				{id: 'fancy', token: 'features', text: 'Fancy'},
-				{id: 'bar', token: 'features', text: 'Bar'},
-				{id: 'disabled access', token: 'features', text: 'Disabled access'},
-				{id: 'family friendly', token: 'features', text: 'Family Friendly'},
-				{id: 'michelin star', token: 'features', text: 'Michelin star-rated'},
-            ],
-            
-            optgroups: [
-                {$order: 5, id: 'features', name: 'Features'},
-    			{$order: 4, id: 'covers', name: 'People'},
-                {$order: 3, id: 'time', name: 'Time'},
-                {$order: 2, id: 'location', name: 'Location'},
-                {$order: 1, id: 'cuisine', name: 'Cuisine'}
-            ],
-            labelField: 'text',
-            valueField: 'id',
-            optgroupField: 'token',
-            optgroupLabelField: 'name',
-            optgroupValueField: 'id',
-            lockOptgroupOrder: true,
-            searchField: ['text'],
-            plugins: ['optgroup_columns', 'remove_button'],
-            openOnFocus: true,
-            render: {
-                item: function(data, escape){
-                    return '<div class="item" data-token="'+escape(data.token)+ '">' + escape(data.text) + '</div>';
-                }
-            }
-        });
         
-        /*$(document).on('click', '.item', function(){
-            var token = $(this).data('token');        
-            alert(token);
-        });*/
         $(document).on('click', 'button', function(){
             var dictionary = {"cuisine": "", "location": "", "time": "", "covers": "","features": ""};
             $(".item").each(function() {
