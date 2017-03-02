@@ -21,20 +21,16 @@ h3 {
 
 .control-group {
     width: 100%;
+    background-color: white;
 }
 
 #input-tags {
-    line-height: 3em;
-    width: 75%;
+    position:relative;
+    line-height: 2.3em;
+    border: none;
 }
 
 .s-button{
     position: relative;
-    right: 1px;
-    top: -40px;
-    padding: 6px;
-    float: right;
-    display: inline-block;
-    z-index: 1;
-    border-radius: 2px;
+    float:right;
 }

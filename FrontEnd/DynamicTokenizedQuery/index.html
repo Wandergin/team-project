@@ -40,8 +40,12 @@
         <div id="query">
             <h3>Reserve your next table with ResDiary</h3>
             <div class="control-group">
-                <input type="text" id="input-tags" class="input-tags demo-default" placeholder="City, postcode or restaurant name">
-                <button type="button" href="#" class="btn btn-primary s-button">SEARCH</a>
+                <input type="text" id="input-default" value="" placeholder="City, postcode or restaurant name" tabindex="-1" style="display: none;">
+                <div class="items">
+                    <input type="text" id="input-tags" class="input-tags demo-default" placeholder="">
+                    <button type="button" href="#" class="btn btn-primary s-button">SEARCH</button>
+                </div>
+                <button type="button" id="testButton" href="#" class="btn btn-primary s-button">SPAWN DIV</button>
             </div>
         </div>  
     </div>
@@ -59,6 +63,9 @@
             console.log(dictionary);
             
         
+        });
+        $("#testButton").click(function(){
+            $(".items").append("<div class='token'></div>");
         });
     });
     
