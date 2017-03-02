@@ -1,0 +1,16 @@
+before_script:
+    # Initialize any necessary dependencies before the scripts are
+    # executed.
+rspec:
+    script:
+        # Do job 1
+
+rubocop:
+    script:
+        #Do job 2
+
+# rspec and rubocop are two different jobs (with arbitary names),
+# they always have to contain a script to do work. -> Jobs are used to
+# create builds, which are then picked by the Runners and executed within
+# the environment of the Runner.
+# Note: Validity of this file can be chacked on the gitlab page under CI Lint
