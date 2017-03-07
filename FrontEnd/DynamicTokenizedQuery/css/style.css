@@ -25,12 +25,17 @@ h3 {
     border-radius: 3px;
 }
 
-#input-tags {
+#input0 {
+
+    width: 40%;
+}
+
+.input-tags {
     position:relative;
     line-height: 2.3em;
     border: none;
     outline: none;
-    width: 40%;
+/*    width: 30%;*/
 }
 
 .s-button {
@@ -97,4 +102,5 @@ h3 {
 .items {
     padding-left: 5px;
     cursor: text;
+    height: 34px;
 }
