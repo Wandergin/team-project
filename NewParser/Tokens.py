@@ -8,7 +8,7 @@ Skip_words = 		["i", "want"]
 ##		Dietary:	Defines various dietary restrictions one may have
 ##		Belief:		Defines various belief restrictions one may have
 
-Cuisines_ethnic = 	["african", "american", "arabic", "british", "caribbean", "chinese", "european",
+Cuisines_ethnic = 	["african", "american", "arabic", "british", "caribbean", "chineese", "european",
 		 	"english",  "french", "greek", "indian", "irish", "italian", "japanese", "kurdish", 
 		 	"lebanese", "mediterranean", "mexican", "middle eastern", "mongolian", "nordic",
 		 	"oriental", "persian", "portuguese", "south american", "spanish", "thai", "turkish"]
@@ -30,7 +30,7 @@ Dates_prefixes = 	["this", "next", "on", "for"]
 
 Dates_suffixes = 	["st", "nd", "rd", "th"]
 
-Dates_common = 		["today", "tomorrow"]
+Dates_common = ["today", "tomorrow", "tonight"]
 
 Dates_days =		{"monday": 1, "tuesday": 2, "wednesday": 3, "thursday": 4, "friday": 5, "saturday": 6, "sunday": 7}
 
@@ -52,9 +52,9 @@ Times_specific_actual =		["noon"]
 
 Times_specific_suffixes	= 	["am","hours", "minutes", "oclock", "pm"]
 
-Times_approx =			["early", "morning", "afternoon", "evening", "late", "night"]
+Times_approx =			{"early": "10:00", "morning": "10:00", "afternoon": "13:00", "evening": "17:00", "late": "21:00", "night": "21:00"}
 
-Times_approx_meal = 		["breakfast", "brunch", "lunch", "lunchtime", "dinner", "dinnertime"]
+Times_approx_meal = 		{"breakfast":"10:00", "brunch":"12:00", "lunch":"14:00", "lunchtime":"14:00", "dinner":"17:00", "dinnertime":"17:00"}
 
 Times_numbers = 		{"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve":12}
 
@@ -91,5 +91,3 @@ Location_radius_suff_distance =	["block", "steet", "mile", "metres" "kilometer",
 Location_radius_suff_time = 	["hours", "minutes"]
 	
 Location_radius_suff_travel=	["cycle","drive", "walk"]
-
-
