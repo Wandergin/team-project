@@ -1,4 +1,3 @@
-
 import string
 import Tokens
 
@@ -7,7 +6,7 @@ finalReturn = {}
 
 def timeProbability(s):
 
-	#Covert string to lowercase list
+	#Covert string to lowercase list	
 	s = s.lower()
 	s.translate(None, string.punctuation)
 	s = s.split(" ")
@@ -43,13 +42,16 @@ def timeProbability(s):
 		#If word is empty move to next word
 		if tempWord ==  "" and i > 0:
 			tempWord = s[i-1]
+			result = " " + result  
 			i = i-1
 
 		#Search for a number to match the ending
 		if Tokens.Times_numbers.has_key(tempWord) or tempWord in str(Tokens.Times_numbers.values()):
-			result = tempWord + " " +result
+			result = tempWord  + result
 			present_num = True
 			i = i-1
+		else:
+			result = ""
 
 		#Search for prefixes to append
 		if i >= 0 and result != "":
@@ -63,7 +65,7 @@ def timeProbability(s):
 		for time in Tokens.Times_approx_meal:				#dinner / lunch
 			if i >= 0 and s[i] == time:
 				i = i-1
-				result = time + " " + result
+				returnDict.update({time:25})
 				present_approx = True
 				break
 
@@ -87,9 +89,9 @@ def timeProbability(s):
 		elif present_approx:
 			resultProb = 25
 
-		print (result)
 		if result != "":
+			result = result.strip()
 			returnDict[result] = resultProb
-
-		i= i-1
-	return resultProb
+		else:
+			i = i -1
+	return returnDict
