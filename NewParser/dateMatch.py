@@ -41,11 +41,13 @@ def addDays(n):
 
 
 def dateMatch(s):
-	s = s.split(" ")
-	i = 0
+	i = 0	
+	if type(s) is str:
+		s = [s]
 	
 	#For all words in string
 	while (i<len(s)):
+		
 		#Check for today/tomorrow
 		if s[i]  == "today" or s[i] == "tonight":
 			return time.strftime("%d.%m.%y")
@@ -108,14 +110,5 @@ def dateMatch(s):
 		i = i + 1
 	return 0
 
-
-print(dateMatch("today"))
-print(dateMatch("tomorrow"))
-print(dateMatch("monday"))
-print(dateMatch("next monday"))
-print(dateMatch("2 weeks on monday"))
-print(dateMatch("3 weeks on monday"))
-
-print(dateMatch("11.11"))		
 						
 		
