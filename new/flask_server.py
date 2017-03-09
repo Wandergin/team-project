@@ -8,7 +8,14 @@ from pprint import pprint
 import datetime
 import json
 from flask_cors import CORS, cross_origin
+
+from mainParser import mainParser
+
 CORS(app)
+
+app.config.update(
+    PROPAGATE_EXCEPTIONS = True
+)
 
 @app.route('/')
 def api_root():
@@ -28,7 +35,10 @@ def api_search():
     if 'q' in request.args:
 
         search = request.args['q']
-        tokens = mainParse.main(search)
+        search = str(search)
+        tokens = mainParser(search)
+
+        #return tokens
         return json.dumps(tokens)
         #return search
     else:
