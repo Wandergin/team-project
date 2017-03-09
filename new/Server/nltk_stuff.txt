@@ -1,0 +1,9 @@
+After checking for tags, each token will be put into a tuple with its tag.
+
+
+tags:
+
+JJ	:	adjective
+NN	:	singular noun
+NNS	:	plural noun
+
