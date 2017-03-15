@@ -143,8 +143,13 @@
                     <span data-bind="text: bookWithDisplay"></span>
                 </div>
                 <div class="search-box">
+<<<<<<< HEAD
                     <input type="text" class="s-box"></input>
                     <a href="#" class="s-button" data-bind="text: 'SEARCH', css: 's-button', click: performSearch class='s-button">SEARCH</a>
+=======
+                    <input type="text" class="s-box" data-bind="value: searchText, valueUpdate: 'input', attr: {placeholder: 'City, postcode or restaurant name'}, jqAutoSourceValueProp: 'label', jqAuto: {source: searchRestaurants, select: selectSearchResult, renderMenu: renderSearchResults, minLength: 2}"/>
+                    <a href="#" data-bind="text: 'SEARCH', css: 's-button', click: performSearch"></a>
+>>>>>>> 715015d2e7d380ded720a4ee9a59d59c503a0545
                 </div>
                 
                 
