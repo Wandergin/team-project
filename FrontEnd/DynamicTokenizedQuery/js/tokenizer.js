@@ -1,6 +1,32 @@
-var foundTokens = ["Chinese","table for 2", "at 9pm"];
 var inputCounter = 0;
 var tokenCounter = 0;
+var foundTokens = [];
+var suggestions = ["suggestion1","suggestion2","suggestion3"]
+
+
+function grabTokens(inputQuery) {
+    foundTokens = [];
+    $.ajax({
+        url: "http://localhost:5000/search",
+        method: "GET",
+        data:{"q":inputQuery.toLowerCase()},
+        success: function(res){
+            console.log("success");
+            console.log(res);
+        }
+    });
+}
+
+
+function closeDropdown() {
+    ("#myDropdown").classList.remove('show');
+    for (var i = 0; i < $(".dropdown-content").length; i++) {
+        var openDropdown = $(".dropdown-content")[i];
+        if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+        }
+    }
+}
 
 function forcePlaceholderRemoval() {
     var empty = true;
@@ -33,6 +59,8 @@ function constructQuery(inputQuery) {
     var tokenBegin = 0;
     var tokenEnd = 0;
 
+    foundTokens = grabTokens(inputQuery);
+
     $.each(foundTokens, function(index, token){
         if (inputQuery.indexOf(token) >= 0) {
             tokenBegin = inputQuery.indexOf(token);
@@ -61,8 +89,29 @@ function constructQuery(inputQuery) {
             if (unique == true) {
                 console.log("New unique token");
                 tokenCounter++;
-                var $div = $('<div class="item" id="token'+tokenCounter+'" data-token="cuisine" data-value="chinese">'+item.value+'<a href="javascript:void(0)" onClick="removeButton($(this))" class="remove" tabindex="-1" title="Remove">×</a></div>');
-                $(".items").append($div)
+
+                var $div = $('<div class="item dropdown" id="token'+tokenCounter+'" data-token="cuisine" data-value="chinese">'+item.value+'<a href="javascript:void(0)" onClick="removeButton($(this))" class="remove" tabindex="-1" title="Remove">×</a></div>');
+                $(".items").append($div);
+
+                $(".dropdown").append('<div id="myDropdown" class="dropdown-content"></div>');
+                for (var i=0; i<suggestions.length; i++) {
+                    $("#myDropdown").append('<a class="suggestion'+(i+1)+'" onClick="close()" href="#"> '+suggestions[i]+'</a>');
+                } 
+
+                // Click listeners
+                $(".item").click(function(){
+                    console.log($(this)[0].id);
+                    // $("#"+$(this)[0].id).css("background-color","blue !important"); 
+                    
+                    document.getElementById("myDropdown").classList.toggle("show");
+                    
+                    
+                });
+                // $("#myDropdown>.link1").click(function(){
+                //     console.log("HI");
+                //     document.getElementById("myDropdown").classList.toggle("hide");
+                // });
+
             }
             
 
@@ -82,14 +131,13 @@ function constructQuery(inputQuery) {
                 inputCounter++;
                 var $input = $('<input type="text"  id="input'+inputCounter+'" class="input-tags demo-default" value="'+item.value+'" placeholder="City, postcode or restaurant name">');            
                 $(".items").append($input);
-                $("#input"+inputCounter).attr("size",item.value.length);
+                $("#input"+inputCounter).css("width",item.value.length+"ch");
             }
 
 
         }
     });
     if ($(".items").children().last()[0].nodeName == "DIV") {
-        console.log("YAS");
         inputCounter++;
         var $input = $('<input type="text"  id="input'+inputCounter+'" class="input-tags demo-default" placeholder="City, postcode or restaurant name">');            
         $(".items").append($input);
@@ -138,50 +186,12 @@ $(document).ready(function(){
 
         constructQuery(inputQuery);
 
-
-        // $.each(tokens, function(index, token){
-
-
-
-        //     if (inputQuery.indexOf(token) >= 0) {
-                
-        //         caretStart = inputQuery.indexOf(token)
-        //     //     var caretEnd = caretStart + token.length;
-        //     //     console.log("The token is between "+ caretStart +" and " + caretEnd);
-        //     //     inputQuery = inputQuery.substring(caretEnd,query.length);
-        //     //     console.log("Query should be " + inputQuery);
-                
-        //     //     // Query constructor
-        //     //     var clone = $("#input-tags").clone();  
-        //     //     var rest = clone[0].value.split(token); 
-        //     //     console.log(rest);
-        //     //     //rest.attr("id","input"+inputCounter);
-
-        //     //     // If token is the last word of the :
-        //     //     //   put the rest of the query before the word as a new input field
-
-
-
-        //     //     $("#input-tags").before($div);
-        //     //     $("#input-tags").val(rest[0]);
-        //     //     // $("#input-tags").val(inputQuery);
-
-        //     //     console.log(token);
-        //     //     console.log("REST: ");
-        //     //     console.log(rest[0].value);
-        //     }
-        // });
-        
-
         forcePlaceholderRemoval();
 
     });
-
-    // Click listeners
-    // $(".items").click(function(){
-    //     $("#active").focus();
-
-    //     // $(this).parent().remove();
-    // });
 });
 
+/* Bugs: 
+ * - When first term gets deleted, all input fields are deleted
+ * - Second term is broken
+ */
