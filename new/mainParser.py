@@ -8,6 +8,7 @@ import timeMatch
 import partyProbability
 import partyMatch
 import operator
+import Tokens
 
 #Dictionary to hold final tokens
 tokenDict = {}
@@ -18,7 +19,7 @@ def mainParser(s, userLocation):
 
 	#Get different tokens
 	cuisineTokens = getCuisine(s)
-	dateTokens = getDate(s)	
+	dateTokens = getDate(s)
 	peopleTokens = getPeople(s)
 	timeTokens = getTime(s)
 	
@@ -85,7 +86,7 @@ def mainParser(s, userLocation):
 		tempToken = cuisineTokens[i]
 		if stillPresent(s, tempToken):
 			s = removeToken(s, tempToken)
-			cuisines += [tempToken]	
+			cuisines += [tempToken]
 		i = i + 1
 
 	if cuisines != []:

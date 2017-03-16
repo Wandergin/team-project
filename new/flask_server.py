@@ -10,7 +10,14 @@ from pprint import pprint
 import datetime
 import json
 from flask_cors import CORS, cross_origin
+
+from mainParser import mainParser
+
 CORS(app)
+
+app.config.update(
+    PROPAGATE_EXCEPTIONS = True
+)
 
 @app.route('/')
 def api_root():
