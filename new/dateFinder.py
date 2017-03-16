@@ -19,10 +19,12 @@ def isDate(s):
 	#For all numbers 
 	while (j < len(date)):
 		if str.isdigit(date[j]):
+
 			#If first number must be a real day ( 1 - 31 ) 
 			if j == 0:
 				if (int(date[j]) < 1 or int(date[j]) > 31):
 					return "0"
+
 			#If second number must be a real month ( 1 - 12 )
 			elif j == 1:
 				if (int(date[j]) < 1 or int(date[j]) > 12):

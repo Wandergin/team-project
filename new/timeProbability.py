@@ -5,13 +5,11 @@ finalReturn = {}
 
 
 def timeProbability(s):
-
+	
 	#Covert string to lowercase list	
 	s = s.lower()
-	s.translate(None, string.punctuation)
 	s = s.split(" ")
 	i = len(s) -1
-
 	returnDict = {}
 
 	#For each word in string
@@ -33,23 +31,29 @@ def timeProbability(s):
 		#Search for a suffix that guarantees a time
 		for ending in Tokens.Times_specific_suffixes:
 			#If found take ending out and add to the result
-			if tempWord.endswith(ending):
-				result  = result + ending
+			if s[i].endswith(ending):
+				result  = result +ending
 				tempWord = tempWord.replace(ending, '')
 				present_suf = True
 				break
-
+	
 		#If word is empty move to next word
 		if tempWord ==  "" and i > 0:
 			tempWord = s[i-1]
 			result = " " + result  
 			i = i-1
 
+
 		#Search for a number to match the ending
 		if Tokens.Times_numbers.has_key(tempWord) or tempWord in str(Tokens.Times_numbers.values()):
 			result = tempWord  + result
 			present_num = True
 			i = i-1
+		elif len(tempWord.split(".")) == 2:
+			if tempWord.split(".")[0] in str(Tokens.Times_numbers.values()) and tempWord.split(".")[1] in str(Tokens.Times_numbers_mins.values()):
+				result = tempWord + result
+				present_num = True
+				i = i-1
 		else:
 			result = ""
 
