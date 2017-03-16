@@ -22,7 +22,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="js/jqueryui.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!--        end         -->
 
     <link rel="icon" type="image/vnd.microsoft.icon" href="https://resdiary.blob.core.windows.net/uploads/FileUploads/bd65fc20-8de5-4993-91a5-c070161011d8.ico">
@@ -132,9 +131,11 @@
                                     <div class="search-title">
                                         <span data-bind="text: bookWithDisplay"></span>
                                     </div>
-                                    <div class="search-box">
-                                        <input type="text" class="s-box"></input>
-                                        <a href="#" class="s-button">SEARCH</a>
+                                    <div class="search-box">                                        
+                                        <div class="items">
+                                            <input type="text" class="input-tags demo-default s-box" placeholder="City, postcode or restaurant name">
+                                            <button href="#" class="s-button">SEARCH</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -221,5 +222,8 @@
         </div>
     </div>
 </body>
+<!--      custom js     -->
+<script src="js/tokenizer.js"></script>
+<!--        end         -->
 
 </html>

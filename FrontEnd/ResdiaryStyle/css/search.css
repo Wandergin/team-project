@@ -514,7 +514,7 @@ body {
   padding: 0;
   color: #999999 !important;
   background: white;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif !important;
 }
 ul {
   margin: 0 auto;
@@ -2492,7 +2492,7 @@ span.avios-icon a {
 .search-box .s-button {
   position: relative;
   right: 8px;
-  top: -60px;
+  top: -66px;
   padding: 8px;
   float: right;
   display: inline-block;
@@ -2502,7 +2502,7 @@ span.avios-icon a {
   text-align: center;
   font-size: 24px;
   font-weight: bold;
-  border-radius: 4px;
+  border-radius: 8px;
   letter-spacing: 4px;
 }
 .search-box .s-button:hover {

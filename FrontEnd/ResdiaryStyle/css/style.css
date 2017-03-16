@@ -1,0 +1,145 @@
+h3 {
+    color:white;
+}
+
+.container {
+    background-image: url(../bg.jpg);
+    padding: 2%;
+}
+
+#query {
+    width:50%;
+    margin: 0 auto;
+}
+
+#input {
+    padding: 3%;
+    height: 3%;
+    width:100%;
+    font-size: 1.1em;
+}
+
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.control-group {
+    width: 100%;
+    background-color: white;
+    border-radius: 3px;
+}
+
+/*#input0 {
+
+    width: 40%;
+}*/
+
+.input-tags {
+    position:relative;
+    line-height: 2.3em;
+    border: none;
+    outline: none;
+/*    width: 30%;*/
+}
+
+/*.s-button {
+    position: relative;
+    float:right;
+    padding: 5px 12px;
+    border-radius: 3px;
+    margin: 1px;
+}*/
+
+.item {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin: 0 3px 3px 0;
+    padding: 2px 6px;
+    background-image: linear-gradient(to bottom, #1da7ee, #178ee9);
+    color: #ffffff;
+    border: 1px solid #0073bb;
+    padding-right: 24px !important;
+
+    text-shadow: 0 1px 0 rgba(0, 51, 83, 0.3);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #1b9dec;
+    background-image: -moz-linear-gradient(top, #1da7ee, #178ee9);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#1da7ee), to(#178ee9));
+    background-image: -webkit-linear-gradient(top, #1da7ee, #178ee9);
+    background-image: -o-linear-gradient(top, #1da7ee, #178ee9);
+    background-image: linear-gradient(to bottom, #1da7ee, #178ee9);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff1da7ee', endColorstr='#ff178ee9', GradientType=0);
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.2), inset 0 1px rgba(255,255,255,0.03);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.2), inset 0 1px rgba(255,255,255,0.03);
+
+
+}
+
+.remove {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 17px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+    color: inherit;
+    text-decoration: none;
+    vertical-align: middle;
+    display: inline-block;
+    padding: 2px 0 0 0;
+    border-left: 1px solid #0073bb;
+    -webkit-border-radius: 0 2px 2px 0;
+    -moz-border-radius: 0 2px 2px 0;
+    border-radius: 0 2px 2px 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.items {
+    padding-left: 5px;
+    cursor: text;
+    height: 34px;
+}
+
+
+/* Dropdown button on hover & focus */
+.item:hover, .item:focus {
+    background-color: #3e8e41;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
