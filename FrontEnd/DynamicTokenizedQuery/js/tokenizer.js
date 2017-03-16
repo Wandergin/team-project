@@ -2,6 +2,22 @@ var inputCounter = 0;
 var tokenCounter = 0;
 var suggestions = ["suggestion1","suggestion2","suggestion3"]
 
+function sortFoundTokens(foundTokens, inputQuery) {
+    var sortOrder = {};
+    var sortedTokens = [];
+    $.each(foundTokens, function(index, item){
+        // console.log(inputQuery+"  "+item);
+        key = inputQuery.indexOf(item)
+        sortOrder[key] = item;
+    });
+    console.log(sortOrder)
+
+    $.each(sortOrder, function(index, item){
+        sortedTokens.push(item);
+    });
+    console.log(sortedTokens);
+    return sortedTokens;
+}
 
 function grabTokens(inputQuery) {
     var foundTokens = [];
@@ -23,6 +39,7 @@ function grabTokens(inputQuery) {
                     }
                 }
             });
+            foundTokens = sortFoundTokens(foundTokens, inputQuery);
             constructQuery(foundTokens, inputQuery)
         },
     });
@@ -220,7 +237,7 @@ function crawlAndCollect(items) {
     return query;
 }
 
-$(document).ready(function(){
+$(document).ready(function() {
     $("#input0").focus();
     $(document).keyup(function(e) {
         if (((e.which > 47) && (e.which < 111)) || (e.which == 32)){
@@ -243,7 +260,7 @@ $(document).ready(function(){
     });
 
     //Search button - console.log the tokens
-    $(document).on('click', 'button', function(){
+    $(document).on('click', 'button', function() {
         var dictionary = {"cuisine": "", "location": "", "time": "", "covers": "","features": ""};
         $(".item").each(function() {
             var str = $(this).text().replace('×', '');

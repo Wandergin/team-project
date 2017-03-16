@@ -1,7 +1,7 @@
 from flask import Flask, url_for
 app = Flask(__name__)
 from flask import request
-import mainParser
+from mainParser import mainParser
 import getLocation
 
 #import nltk
@@ -35,9 +35,9 @@ def api_article(articleid):
 @app.route('/search')
 def api_search():
     if 'q' in request.args:
-	location = getLocation.getLocation(request)
+        location = getLocation.getLocation(request)
         search = str(request.args['q'])
-        tokens = mainParser.mainParser(search, location)
+        tokens = mainParser(search, location)
         return json.dumps(tokens)
         #return search
     else:
@@ -45,5 +45,3 @@ def api_search():
 
 if __name__ == '__main__':
     app.run()
-
-	
