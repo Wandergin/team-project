@@ -1,239 +1,225 @@
-
-
-
 <!DOCTYPE html>
+
+
 <html>
+
 <head>
     <title>Online Restaurant Bookings | ResDiary</title>
 
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-itunes-app" content="app-id=1141667303" />
     <meta name="description" content="Instant online reservations and verified diner reviews at restaurants worldwide. Find restaurants in London, Dublin, Auckland, Bali, Edinburgh, Hong Kong, Chicago, Bergen, Copenhagen  and more." />
-    
-    <link rel="canonical" href="https://www.resdiary.com" />
+
+    <!--       metas        -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <!--        end         -->
+
+    <!-- jQuery + Bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/jqueryui.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--        end         -->
 
     <link rel="icon" type="image/vnd.microsoft.icon" href="https://resdiary.blob.core.windows.net/uploads/FileUploads/bd65fc20-8de5-4993-91a5-c070161011d8.ico">
-    
-    <link rel="stylesheet" type="text/css" href="css/layout.css"/>
 
+    <link rel="stylesheet" type="text/css" href="css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="css/search.css" />
+    <!--     custom css     -->
+    <link rel="stylesheet" href="css/style.css">
+    <!--        end         -->    
 
-    
-    <link rel="stylesheet" type="text/css" href="css/search.css"/>
-    
+</head>
 
-    
-
-    
-    </head>
-    <body>
-        
-        <noscript>
-            <iframe src="//www.googletagmanager.com/ns.html?id=GTM-KFBSNV" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-        </noscript> 
-
-        
-        
-        
-        <div id="alert-area">
-            <rd-alert params="alertText: alertText, alertHeader: alertHeader, alertButtonText: alertButtonText, jqXhrError: jqXhrError"></rd-alert>
-        </div>
-        <div class="page">
-            <div class="header">
-                
-
-
-
-
-
-
-<div class="sxs-wrapper">
-    <div class="content-left">
-        <a href="https://www.resdiary.com"><img class="logo" src="https://resdiary.blob.core.windows.net/uploads/FileUploads/b26b9a2d-757d-434b-91d3-ff9b293a1117.png"/></a>
-    </div>
-    <div class="content-right">
-        <ul>
-                <li><a class="content-right-button" href="https://restaurateurs.resdiary.com/blog" target="_blank">BLOG<i class="fa fa-comments fa-1x"></i></a></li>
-            <li><a class="content-right-button" href="https://restaurateurs.resdiary.com/" target="_blank">FOR RESTAURATEURS<i class="fa fa-cutlery fa-1x"></i></a></li>
-                
-                <li>
-                    <a class="content-right-button concierge-button" href="#">LOGIN<i class="fa fa-lock fa-1x"></i></a>
+<body>
+    <div class="page">
+        <div class="header">
+            <div class="sxs-wrapper">
+                <div class="content-left">
+                    <a href="https://www.resdiary.com"><img class="logo" src="https://resdiary.blob.core.windows.net/uploads/FileUploads/b26b9a2d-757d-434b-91d3-ff9b293a1117.png" />
+                    </a>
+                </div>
+                <div class="content-right">
                     <ul>
-                        <li><a class="content-right-button concierge-button" href="#" data-bind="click: showDialog">DINER LOGIN<i class="fa fa-lock fa-1x"></i></a></li>
-                        <li><a class="content-right-button" href="https://uk.resdiary.com/login">RESTAURANT LOGIN<i class="fa fa-lock fa-1x"></i></a></li>
+                        <li><a class="content-right-button" href="https://restaurateurs.resdiary.com/blog" target="_blank">BLOG<i class="fa fa-comments fa-1x"></i></a>
+                        </li>
+                        <li><a class="content-right-button" href="https://restaurateurs.resdiary.com/" target="_blank">FOR RESTAURATEURS<i class="fa fa-cutlery fa-1x"></i></a>
+                        </li>
 
-                            <li><a class="content-right-button concierge-button" href="/Concierge/Login">CONCIERGE LOGIN<i class="fa fa-lock fa-1x"></i></a></li>
-                    </ul>
-                </li>
-        </ul>
-    </div>
-    <div class="content-show-options"><i class="fa fa-bars"></i>
-    </div>
-    <div class="content-right-small">
-        <ul>
-                <li>
-                    <a class="content-right-button" href="https://restaurateurs.resdiary.com/blog" target="_blank">BLOG<i class="fa fa-comments fa-1x"></i></a>
-                </li>
-            <li>
-                <a class="content-right-button" href="https://restaurateurs.resdiary.com/" target="_blank">FOR RESTAURATEURS<i class="fa fa-cutlery fa-1x"></i></a>
-            </li>
-
-                
-                <li>
-                    <div class="content-right-fixed">LOGIN</div>
-                    <div class="content-right-opaque-background">
-                        <ul>
-                            <li>
-                                <a class="content-right-button" data-bind="click: showDialog" href="#">DINER LOGIN<i class="fa fa-lock fa-1x"></i></a>
-                            </li>
-                            <li>
-                                <a class="content-right-button" href="https://uk.resdiary.com/login" target="_blank">RESTAURANT LOGIN<i class="fa fa-lock fa-1x"></i></a>
-                            </li>
-
-                                <li>
-                                    <a class="content-right-button" href="/Concierge/Login">CONCIERGE LOGIN<i class="fa fa-lock fa-1x"></i></a>
+                        <li>
+                            <a class="content-right-button concierge-button" href="#">LOGIN<i class="fa fa-lock fa-1x"></i></a>
+                            <ul>
+                                <li><a class="content-right-button concierge-button" href="#" data-bind="click: showDialog">DINER LOGIN<i class="fa fa-lock fa-1x"></i></a>
                                 </li>
-                        </ul>
+                                <li><a class="content-right-button" href="https://uk.resdiary.com/login">RESTAURANT LOGIN<i class="fa fa-lock fa-1x"></i></a>
+                                </li>
+
+                                <li><a class="content-right-button concierge-button" href="/Concierge/Login">CONCIERGE LOGIN<i class="fa fa-lock fa-1x"></i></a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content-show-options"><i class="fa fa-bars"></i>
+                </div>
+                <div class="content-right-small">
+                    <ul>
+                        <li>
+                            <a class="content-right-button" href="https://restaurateurs.resdiary.com/blog" target="_blank">BLOG<i class="fa fa-comments fa-1x"></i></a>
+                        </li>
+                        <li>
+                            <a class="content-right-button" href="https://restaurateurs.resdiary.com/" target="_blank">FOR RESTAURATEURS<i class="fa fa-cutlery fa-1x"></i></a>
+                        </li>
+
+
+                        <li>
+                            <div class="content-right-fixed">LOGIN</div>
+                            <div class="content-right-opaque-background">
+                                <ul>
+                                    <li>
+                                        <a class="content-right-button" data-bind="click: showDialog" href="#">DINER LOGIN<i class="fa fa-lock fa-1x"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="content-right-button" href="https://uk.resdiary.com/login" target="_blank">RESTAURANT LOGIN<i class="fa fa-lock fa-1x"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a class="content-right-button" href="/Concierge/Login">CONCIERGE LOGIN<i class="fa fa-lock fa-1x"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sxs-wrapper-social">
+                <div class="sxs-wrapper-social-inner">
+                    <div class="content-left-social">
+                        <span>The best times. The best tables.</span>
                     </div>
-                </li>
-        </ul>
-    </div>
-</div>
-<div class="sxs-wrapper-social">
-    <div class="sxs-wrapper-social-inner">
-        <div class="content-left-social">
-            <span>The best times. The best tables.</span>
-        </div>
-        <div class="content-right-social">
-                <a class="content-right-button-social fa fa-facebook-square" href="https://www.facebook.com/resdiary" target="_blank"></a>
-                            <a class="content-right-button-social fa fa-twitter-square" href="https://twitter.com/ResDiary" target="_blank"></a>
-                            <a class="content-right-button-social fa fa-google-plus-square" href="https://plus.google.com/101789749919937042780" target="_blank"></a>
-                            <a class="content-right-button-social fa fa-pinterest-square" href="https://uk.pinterest.com/ResDiary/" target="_blank"></a>
-                            <a class="content-right-button-social fa fa-instagram" href="https://www.instagram.com/resdiary/" target="_blank"></a>
-        </div>
-    </div>
-</div>
-<div id="sign-up-modal" class="ko-hidden-div" data-bind="visible: true, jqDialog: {autoOpen: false, modal: true, minWidth: 320, dialogClass: 'no-titlebar', resizable: false}, openDialog: isShowingDialog, jqDialogCloseOnClickAway: true">
-    
-   
-
-</div>
-
-            </div>
-            <div id="main" class="main" itemscope itemtype="http://schema.org/Restaurant">
-                <div class="wrapper">
-                    
-
-
-
-
-<div id="main-container">
-<div class="top-container" data-bind="with: searchViewModel">
-    <div id="promotions-tooltip">
-        <ul data-bind="foreach: tooltipPromotions, visible: !promotionsLoading()">
-            <li data-bind="text: Name"></li>
-        </ul>
-    </div>
-    <div class="top-wrapper">
-        <div class="wrapper-row">
-            <div class="search-container">
-                <div class="search-title">
-                    <span data-bind="text: bookWithDisplay"></span>
+                    <div class="content-right-social">
+                        <a class="content-right-button-social fa fa-facebook-square" href="https://www.facebook.com/resdiary" target="_blank"></a>
+                        <a class="content-right-button-social fa fa-twitter-square" href="https://twitter.com/ResDiary" target="_blank"></a>
+                        <a class="content-right-button-social fa fa-google-plus-square" href="https://plus.google.com/101789749919937042780" target="_blank"></a>
+                        <a class="content-right-button-social fa fa-pinterest-square" href="https://uk.pinterest.com/ResDiary/" target="_blank"></a>
+                        <a class="content-right-button-social fa fa-instagram" href="https://www.instagram.com/resdiary/" target="_blank"></a>
+                    </div>
                 </div>
-                <div class="search-box">
-                    <input type="text" class="s-box"></input>
-                    <a href="#" class="s-button" data-bind="text: 'SEARCH', css: 's-button', click: performSearch class='s-button">SEARCH</a>
+            </div>
+            <div id="sign-up-modal" class="ko-hidden-div" data-bind="visible: true, jqDialog: {autoOpen: false, modal: true, minWidth: 320, dialogClass: 'no-titlebar', resizable: false}, openDialog: isShowingDialog, jqDialogCloseOnClickAway: true">
 
+
+
+            </div>
+
+        </div>
+        <div id="main" class="main" itemscope itemtype="http://schema.org/Restaurant">
+            <div class="wrapper">
+                <div id="main-container">
+                    <div class="top-container" data-bind="with: searchViewModel">
+                        <div id="promotions-tooltip">
+                            <ul data-bind="foreach: tooltipPromotions, visible: !promotionsLoading()">
+                                <li data-bind="text: Name"></li>
+                            </ul>
+                        </div>
+                        <div class="top-wrapper">
+                            <div class="wrapper-row">
+                                <div class="search-container">
+                                    <div class="search-title">
+                                        <span data-bind="text: bookWithDisplay"></span>
+                                    </div>
+                                    <div class="search-box">
+                                        <input type="text" class="s-box"></input>
+                                        <a href="#" class="s-button">SEARCH</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="footer">
+
+
+
+                        <div class="sxs-wrapper-footer">
+                            <div class="footer-res-title">
+                                <span><B>RESDIARY</B> FOR MOBILE</span>
+                            </div>
+                            <div class="footer-res-count">
+                                <span>Over 6,800 restaurants in your pocket.</span>
+                            </div>
+
+                        </div>
+                        <div class="footer-signup">
+                            <div class="sxs-wrapper-footer">
+                                <div class="footer-signup-title">
+                                    <span>Sign up online today!</span>
+                                </div>
+                                <div class="footer-signup-description">
+                                    <span>ResDiary - the online reservation system that is available anywhere in the world.</span>
+                                </div>
+                                <div class="footer-signup-button">
+                                    <a href="https://restaurateurs.resdiary.com/pricing" target="_blank">JOIN RESDIARY</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer-social">
+                            <div class="sxs-wrapper-footer">
+                                <ul class="footer-social-list">
+                                    <li>
+                                        <a href="https://www.facebook.com/resdiary" target="_blank"><span class="social-icon"><i class="fa fa-facebook"></i></span></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://twitter.com/ResDiary" target="_blank"><span class="social-icon"><i class="fa fa-twitter"></i></span></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://plus.google.com/101789749919937042780" target="_blank"><span class="social-icon"><i class="fa fa-google-plus"></i></span></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.instagram.com/resdiary/" target="_blank"><span class="social-icon"><i class="fa fa-instagram"></i></span></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://uk.pinterest.com/ResDiary/" target="_blank"><span class="social-icon"><i class="fa fa-pinterest"></i></span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="footer-copyright">
+                            <div class="sxs-wrapper-footer">
+                                <span>&#169; 2016 RestaurantDiary.com limited. All Rights Reserved. Registered in the UK : Company No. SC258100 : 36 Renfield Street, Glasgow, G2 1LU</span>
+                            </div>
+                        </div>
+                        <div class="footer-legal">
+                            <div class="sxs-wrapper-footer">
+                                <ul class="footer-legal-list">
+                                    <li>
+                                        <a href="https://restaurateurs.resdiary.com/" target="_blank"><span class="link-text">For Restaurateurs</span></a>
+                                    </li>
+                                    <li class="border-left">
+                                        <a href="https://restaurateurs.resdiary.com/privacy-statement" target="_blank"><span class="link-text">Privacy Statement</span></a>
+                                    </li>
+                                    <li class="border-left">
+                                        <a href="/Terms" rel="nofollow"><span class="link-text">Terms &amp; Conditions</span></a>
+                                    </li>
+                                    <li class="border-left">
+                                        <a href="https://restaurateurs.resdiary.com/careers" target="_blank"><span class="link-text">Careers</span></a>
+                                    </li>
+                                    <li class="border-left">
+                                        <a href="https://restaurateurs.resdiary.com/contact" target="_blank"><span class="link-text">Contact ResDiary</span></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                
-                
-                
-                
             </div>
-            
         </div>
     </div>
-</div>
+</body>
 
-
-            <div class="footer">
-                
-
-
-    <div class="sxs-wrapper-footer">
-        <div class="footer-res-title">
-            <span><B>RESDIARY</B> FOR MOBILE</span>
-        </div>
-        <div class="footer-res-count">
-            <span>Over 6,800 restaurants in your pocket.</span>
-        </div>
-        
-    </div>
-    <div class="footer-signup">
-        <div class="sxs-wrapper-footer">
-            <div class="footer-signup-title">
-                <span>Sign up online today!</span>
-            </div>
-            <div class="footer-signup-description">
-                <span>ResDiary - the online reservation system that is available anywhere in the world.</span>
-            </div>
-            <div class="footer-signup-button">
-                <a href="https://restaurateurs.resdiary.com/pricing" target="_blank">JOIN RESDIARY</a>
-            </div>
-        </div>
-    </div>
-<div class="footer-social">
-    <div class="sxs-wrapper-footer">
-        <ul class="footer-social-list">
-                <li>
-                    <a href="https://www.facebook.com/resdiary" target="_blank"><span class="social-icon"><i class="fa fa-facebook"></i></span></a>
-                </li>
-                            <li>
-                    <a href="https://twitter.com/ResDiary" target="_blank"><span class="social-icon"><i class="fa fa-twitter"></i></span></a>
-                </li>
-                            <li>
-                    <a href="https://plus.google.com/101789749919937042780" target="_blank"><span class="social-icon"><i class="fa fa-google-plus"></i></span></a>
-                </li>
-                            <li>
-                    <a href="https://www.instagram.com/resdiary/" target="_blank"><span class="social-icon"><i class="fa fa-instagram"></i></span></a>
-                </li>
-                            <li>
-                    <a href="https://uk.pinterest.com/ResDiary/" target="_blank"><span class="social-icon"><i class="fa fa-pinterest"></i></span></a>
-                </li>
-        </ul>
-    </div>
-</div>
-<div class="footer-copyright">
-    <div class="sxs-wrapper-footer">
-        <span>&#169; 2016 RestaurantDiary.com limited. All Rights Reserved. Registered in the UK : Company No. SC258100 : 36 Renfield Street, Glasgow, G2 1LU</span>
-    </div>
-</div>
-<div class="footer-legal">
-    <div class="sxs-wrapper-footer">
-        <ul class="footer-legal-list">
-                <li>
-                    <a href="https://restaurateurs.resdiary.com/" target="_blank"><span class="link-text">For Restaurateurs</span></a>
-                </li>
-            <li class="border-left">
-                <a href="https://restaurateurs.resdiary.com/privacy-statement" target="_blank"><span class="link-text">Privacy Statement</span></a>
-            </li>
-            <li class="border-left">
-                <a href="/Terms" rel="nofollow"><span class="link-text">Terms &amp; Conditions</span></a>
-            </li>
-                <li class="border-left">
-                    <a href="https://restaurateurs.resdiary.com/careers" target="_blank"><span class="link-text">Careers</span></a>
-                </li>
-                <li class="border-left">
-                    <a href="https://restaurateurs.resdiary.com/contact" target="_blank"><span class="link-text">Contact ResDiary</span></a>
-                </li>
-        </ul>
-    </div>
-</div>
-            </div>
-        </div>
-        
-    </body>
 </html>
