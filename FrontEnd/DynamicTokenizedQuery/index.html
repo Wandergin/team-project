@@ -14,15 +14,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!--        end         -->
 
-    <!-- selectize js files -->
-    <script src="js/selectize.js"></script>
-    <script src="js/index.js"></script>
-    <!--        end         -->
-    
-    <!-- selectize css files-->
-    <link rel="stylesheet" href="css/normalize.css">
-    <!--        end         -->
-
     <!--     custom css     -->
     <link rel="stylesheet" href="css/style.css">
     <!--        end         -->    
@@ -44,22 +35,7 @@
         </div>  
     </div>
 </body>
-<script>
-    $(document).ready(function(){
-        
-        $(document).on('click', 'button', function(){
-            var dictionary = {"cuisine": "", "location": "", "time": "", "covers": "","features": ""};
-            $(".item").each(function() {
-                var str = $(this).text().replace('×', '');
-                var token = $(this).data('token');
-                dictionary[token] = str;                
-            });
-            console.log(dictionary);
-            
-        
-        });
-    });
-</script>
+
 <!--      custom js     -->
 <script src="js/tokenizer.js"></script>
 <!--        end         -->
