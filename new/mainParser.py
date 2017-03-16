@@ -228,9 +228,15 @@ def formatDict(inDict):
 
 
 	suggestions = []
+
 	for cuisine in Tokens.Cuisines_ethnic:
-		if cuisine != output['cuisine'][0]:
-			suggestions.append(cuisine)
+		if len(output['cuisine']) > 0:
+			if cuisine != output['cuisine'][0]:
+				suggestions.append(cuisine)
+		else:
+			if cuisine != output['cuisine']:
+				suggestions.append(cuisine)
+
 
 	output['cuisineSuggestions'] = suggestions
 
