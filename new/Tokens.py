@@ -50,13 +50,15 @@ Times_specific_prefixes	= 	["at", "around","for", "in"]
 
 Times_specific_actual =		["noon"]
 
-Times_specific_suffixes	= 	["am","hours", "minutes", "oclock", "pm"]
+Times_specific_suffixes	= 	["am","hours", "minutes", "oclock", "o'clock", "pm"]
 
 Times_approx =			{"early": "10:00", "morning": "10:00", "afternoon": "13:00", "evening": "17:00", "late": "21:00", "night": "21:00"}
 
 Times_approx_meal = 		{"breakfast":"10:00", "brunch":"12:00", "lunch":"14:00", "lunchtime":"14:00", "dinner":"17:00", "dinnertime":"17:00"}
 
 Times_numbers = 		{"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve":12}
+
+Times_numbers_mins = 	{"five past": 05, "ten past": 10, "quarter past": 15, "twenty past": 20, "twenty five past": 25, "half past": 30, "twenty five to": 35, "twenty to": 40, "quarter to":45, "ten to": 50, "five to": 55} 
 
 
 ##############################

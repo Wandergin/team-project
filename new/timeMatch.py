@@ -8,11 +8,12 @@ def timeMatch(s):
 	i = 0
 	#Scan for number
 	while i < len(s):
-		if str.isdigit(s[i][0]) and (s[i].endswith("am") or s[i].endswith("pm")):
-			tempStr = s[i]
-			s[i] = tempStr[:-2]
-			s.insert( i+1, tempStr[-2:])
-			break
+		for ending in Tokens.Times_specific_suffixes:
+			if str.isdigit(s[i][0]) and (s[i].endswith(ending)):
+				tempStr = s[i]
+				s[i] = tempStr[:-len(ending)]
+				s.insert( i+1, tempStr[-len(ending):])
+				break
 		i = i +1
 	i = 0
 
@@ -21,7 +22,7 @@ def timeMatch(s):
 			hour = int(s[i])
 			break
 		elif Tokens.Times_numbers.has_key(s[i]):
-			hour = int(Times_numbers.get(s[i]))
+			hour = int(Tokens.Times_numbers.get(s[i]))
 			break
 		elif Tokens.Times_approx_meal.has_key(s[i]):
 			return Tokens.Times_approx_meal.get(s[i])
@@ -31,13 +32,16 @@ def timeMatch(s):
 			i= i+1
 		
 
+	print hour
 	#Scan for AM / PM
 	if i +1 >= len(s):
                 hour = guessHour(hour) 
- 	elif s[i+1] == "oclock":
+ 	elif s[i+1] == "oclock" or s[i+1] == "o'clock":
 		hour = guessHour(hour) 
 	elif s[i+1] == "pm":
 		hour = hour +12
+	elif s[i+1] == "am":
+		hour = hour
 	else:
 		hour = guessHour(hour)
 	

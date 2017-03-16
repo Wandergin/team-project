@@ -37,6 +37,7 @@ def partyProbability(s):
 			if s[i] in Tokens.People_approx_suffix:
 				result = result + " " + s[i]
 				probability = 100
-		returnDict[result] = probability
+		if result != "":
+			returnDict[result] = probability
 		i +=1
 	return returnDict

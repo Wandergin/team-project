@@ -11,8 +11,6 @@ def dateProbability(s):
 
 	#For all words in string
 	while (i<len(s)):
-		print i
-		print s
 		#Check for today/tomorrow/monday
 		if (s[i] in Tokens.Dates_common) or (s[i] in Tokens.Dates_days) :
 			returnDict.update( {s[i]:100} )

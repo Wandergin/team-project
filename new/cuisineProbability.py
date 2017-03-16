@@ -6,7 +6,9 @@ def cuisineProbability(s):
 	returnArray = []
 	i = 0
 	
+	#For all words in the query
 	while i < len(s):
+
 		#Search all ethnic cusines
 		for token in Tokens.Cuisines_ethnic:
 			token = token.split(" ")
@@ -33,7 +35,7 @@ def cuisineProbability(s):
 	return returnArray
 
 
-
+#Compares a possible token and cuisine tokens
 def compare(s, i, token):
 	if type(token) is str:
 		token = [token]

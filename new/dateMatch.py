@@ -4,10 +4,12 @@ import time
 import calendar
 import dateFinder
 
+#Checks is year is a leap year
 def isLeapYear():
 	year = int(time.strftime("%Y"))
 	return calendar.isleap(year)
 
+#Adds a certain amount of days to the current day
 def addDays(n):
 	#Days in the months, Jan = 0  Dec = 11
 	months = [ 31, 28 + isLeapYear(), 31 ,30, 31, 30, 31, 31, 30, 31, 30 ,31] 
@@ -109,6 +111,3 @@ def dateMatch(s):
 					return day + "." + Tokens.Dates_months.get(s[i]) + "." + time.strftime("%y") + "."
 		i = i + 1
 	return 0
-
-						
-		
