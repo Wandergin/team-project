@@ -100,6 +100,10 @@ def mainParser(s, userLocation):
 				setLocation(tempLocation[1], userLocation)
 				s = removeToken(s, tempLocation[1])
 
+	if len(locationTokens) > 1:
+		if len(locationTokens[0]) > 1:
+			tokenDict['locationName'] = locationTokens[0][0]
+
 	#Return tokens
 	return formatDict(tokenDict)
 	'''
@@ -215,15 +219,24 @@ def formatDict(inDict):
 	if 'location' in inDict.keys():
 		output['location'] = inDict['location']
 
+	if 'locationName' in inDict.keys():
+		output['locationName'] = inDict['locationName']
+
 	#TODO: remove Glasgow from location when location search is fixed
 	#output['location'] = "Glasgow"
 	output['locationSuggestions'] = ["Queen Street Station", "West End"]
 
 
 	suggestions = []
+
 	for cuisine in Tokens.Cuisines_ethnic:
-		if cuisine != output['cuisine'][0]:
-			suggestions.append(cuisine)
+		if len(output['cuisine']) > 0:
+			if cuisine != output['cuisine'][0]:
+				suggestions.append(cuisine)
+		else:
+			if cuisine != output['cuisine']:
+				suggestions.append(cuisine)
+
 
 	output['cuisineSuggestions'] = suggestions
 
