@@ -55,7 +55,7 @@ function modifyTheFiller(filler, token) {
     console.log(fillerVal.indexOf(token[0].innerText.substring(0,token[0].innerText.length-1)));
     filler[0].value = fillerVal.substring(0,fillerVal.indexOf(token[0].innerText.substring(0,token[0].innerText.length-1)));
     fillerVal = filler[0].value;
-    $("#"+filler[0].id).css("width",fillerVal.length+"ch");
+    $("#"+filler[0].id).css("width",fillerVal.length*0.8+"ch");
     console.log(filler);
     console.log(token);
 }
@@ -194,7 +194,7 @@ function constructQuery(foundTokens, inputQuery) {
 
             console.log("Unique = "+ unique);
 
-            // ???
+            // ??? RESOLVE THIS MESS
             // If no duplicate tokens found, add the filler to the end of the query
             if (unique == true) {
                 console.log("New unique input");
@@ -241,8 +241,6 @@ $(document).ready(function() {
     $("#input0").focus();
     $(document).keyup(function(e) {
         if (((e.which > 47) && (e.which < 111)) || (e.which == 32)){
-            console.log(e.key);
-            console.log($(".items"));
             var inputQuery = crawlAndCollect($(".items"));
             grabTokens(inputQuery);
             forcePlaceholderRemoval();
@@ -272,6 +270,5 @@ $(document).ready(function() {
 });
 
 /* Bugs: 
- * - When first term gets deleted, all input fields are deleted
- * - Second term is broken
+ * When a token gets deleted and gets inputted again, it doesn't reduce the width of the previous input field 
  */
