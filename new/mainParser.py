@@ -96,12 +96,16 @@ def mainParser(s, userLocation):
 	if len(locationTokens) == 0:
 		for word in s.split():
 			tempLocation = locationMatch.locationMatch(word, userLocation)
-			if tempLocation[0] < 2000:
-				setLocation(tempLocation[1], userLocation)
-				s = removeToken(s, tempLocation[1])
+			if tempLocation != None:
+				if tempLocation[0] < 2000:
+					setLocation(tempLocation[1], userLocation)
+					s = removeToken(s, tempLocation[1])
 
-	if len(locationTokens) > 1:
-		if len(locationTokens[0]) > 1:
+	print locationTokens
+	if len(locationTokens) > 0:
+		print locationTokens[0]
+		print locationTokens[0][0]
+		if len(locationTokens[0]) > 0:
 			tokenDict['locationName'] = locationTokens[0][0]
 
 	#Return tokens
@@ -114,6 +118,19 @@ def formatDict(inDict):
 	output = {}
 	if 'cuisine' in inDict.keys():
 		output['cuisine']  = inDict['cuisine']
+
+		suggestions = []
+
+		for cuisine in Tokens.Cuisines_ethnic:
+			if len(output['cuisine']) > 0:
+				if cuisine != output['cuisine'][0]:
+					suggestions.append(cuisine)
+			else:
+				if cuisine != output['cuisine']:
+					suggestions.append(cuisine)
+
+
+		output['cuisineSuggestions'] = suggestions
 
 	if 'date' in inDict.keys():
 		output['date']  = inDict['date']
@@ -139,22 +156,7 @@ def formatDict(inDict):
 	output['locationSuggestions'] = ["Queen Street Station", "West End"]
 
 
-	suggestions = []
 
-	for cuisine in Tokens.Cuisines_ethnic:
-		if len(output['cuisine']) > 0:
-			if cuisine != output['cuisine'][0]:
-				suggestions.append(cuisine)
-		else:
-			if cuisine != output['cuisine']:
-				suggestions.append(cuisine)
-
-
-	output['cuisineSuggestions'] = suggestions
-
-
-	#TODO: change distance?
-	#TODO: add in lat and long from location search
 
 	return output
 
