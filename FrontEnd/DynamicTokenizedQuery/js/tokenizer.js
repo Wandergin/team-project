@@ -10,12 +10,10 @@ function sortFoundTokens(foundTokens, inputQuery) {
         key = inputQuery.indexOf(item)
         sortOrder[key] = item;
     });
-    console.log(sortOrder)
 
     $.each(sortOrder, function(index, item){
         sortedTokens.push(item);
     });
-    console.log(sortedTokens);
     return sortedTokens;
 }
 
@@ -30,7 +28,9 @@ function grabTokens(inputQuery) {
             res = JSON.parse(res);
             console.log(res)
             $.each(res, function(key, item){
-                if (item != "" && item != []) {
+                console.log("Suggestions??");
+                console.log(key.indexOf("Suggestions") > 0)
+                if (item != "" && item != [] && !(key.indexOf("Suggestions") > 0)) {
                     if (typeof item === "string") {
                         foundTokens.push(item)
                     }
