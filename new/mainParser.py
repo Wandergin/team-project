@@ -95,11 +95,12 @@ def mainParser(s, userLocation):
 	#If not location tokens try each remaining word
 	if len(locationTokens) == 0:
 		for word in s.split():
-			tempLocation = locationMatch.locationMatch(word, userLocation)
-			if tempLocation != None:
-				if tempLocation[0] < 2000:
-					setLocation(tempLocation[1], userLocation)
-					s = removeToken(s, tempLocation[1])
+			if word != 'cuisine':
+				tempLocation = locationMatch.locationMatch(word, userLocation)
+				if tempLocation != None:
+					if tempLocation[0] < 2000:
+						setLocation(tempLocation[1], userLocation)
+						s = removeToken(s, tempLocation[1])
 
 	print locationTokens
 	if len(locationTokens) > 0:
@@ -153,7 +154,7 @@ def formatDict(inDict):
 
 	#TODO: remove Glasgow from location when location search is fixed
 	#output['location'] = "Glasgow"
-	output['locationSuggestions'] = ["Queen Street Station", "West End"]
+	#output['locationSuggestions'] = ["Queen Street Station", "West End"]
 
 
 
