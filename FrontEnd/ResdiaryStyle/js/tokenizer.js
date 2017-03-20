@@ -261,7 +261,7 @@ $(document).ready(function() {
     $(document).on('click', 'button', function() {
         var dictionary = {"cuisine": "", "location": "", "time": "", "covers": "","features": ""};
         $(".item").each(function() {
-            var str = $(this).text().replace('×', '');
+            var str = $(this).text().replace('×', '').split(" ")[0];
             var token = $(this).data('token');
             dictionary[token] = str;
         });
