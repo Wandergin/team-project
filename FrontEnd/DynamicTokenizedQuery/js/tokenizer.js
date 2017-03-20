@@ -10,12 +10,10 @@ function sortFoundTokens(foundTokens, inputQuery) {
         key = inputQuery.indexOf(item)
         sortOrder[key] = item;
     });
-    console.log(sortOrder)
 
     $.each(sortOrder, function(index, item){
         sortedTokens.push(item);
     });
-    console.log(sortedTokens);
     return sortedTokens;
 }
 
@@ -30,16 +28,18 @@ function grabTokens(inputQuery) {
             res = JSON.parse(res);
             console.log(res)
             $.each(res, function(key, item){
-                if (item != "" && item != []) {
-                    if (typeof item === "string") {
+                if (item != "" && item != [] && !(key.indexOf("Suggestions") > 0)) {
+                    // if (typeof item === "string") {
                         foundTokens.push(item)
-                    }
-                    else {
-                        foundTokens.push(item[0])
-                    }
+                    // }
+                    // else {
+                    //     foundTokens.push(item[0])
+                    // }
                 }
             });
             foundTokens = sortFoundTokens(foundTokens, inputQuery);
+            console.log("grabTokens found:");
+            console.log(foundTokens);
             constructQuery(foundTokens, inputQuery)
         },
     });
@@ -240,7 +240,7 @@ function crawlAndCollect(items) {
 $(document).ready(function() {
     $("#input0").focus();
     $(document).keyup(function(e) {
-        if (((e.which > 47) && (e.which < 111)) || (e.which == 32)){
+        if (e.which == 32){
             var inputQuery = crawlAndCollect($(".items"));
             grabTokens(inputQuery);
             forcePlaceholderRemoval();

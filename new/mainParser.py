@@ -95,113 +95,43 @@ def mainParser(s, userLocation):
 	#If not location tokens try each remaining word
 	if len(locationTokens) == 0:
 		for word in s.split():
-			tempLocation = locationMatch.locationMatch(word, userLocation)
-			if tempLocation[0] < 2000:
-				setLocation(tempLocation[1], userLocation)
-				s = removeToken(s, tempLocation[1])
+			if word != 'cuisine':
+				tempLocation = locationMatch.locationMatch(word, userLocation)
+				if tempLocation != None:
+					if tempLocation[0] < 2000:
+						setLocation(tempLocation[1], userLocation)
+						s = removeToken(s, tempLocation[1])
 
-	if len(locationTokens) > 1:
-		if len(locationTokens[0]) > 1:
+	print locationTokens
+	if len(locationTokens) > 0:
+		print locationTokens[0]
+		print locationTokens[0][0]
+		if len(locationTokens[0]) > 0:
 			tokenDict['locationName'] = locationTokens[0][0]
 
 	#Return tokens
 	return formatDict(tokenDict)
-	'''
-	#Format String
-	s = formatString(s)
 
-	#Get different tokens
-	cuisineTokens = getCuisine(s)
-	dateTokens = getDate(s)
-	peopleTokens = getPeople(s)
-	timeTokens = getTime(s)
-
-	#Start with high probability
-	i = 100
-	skipped = False
-
-	#While probability is greater than 0
-	while i > 0:
-
-		#If probability is high enough and token hasn't been selected already, select people token
-		if len(peopleTokens) > 0 and not tokenDict.has_key("people"):
-			tempToken = peopleTokens[len(peopleTokens) - 1]
-			if tempToken[1] >= i:
-				if stillPresent(s, tempToken[0]):
-					setPeople(tempToken[0])
-					s = removeToken(s, tempToken[0])
-				else:
-					del peopleTokens[-1]
-					skipped  = True
-
-		#If probability is high enough and token hasn't been selected already, select date token
-		if len(dateTokens) > 0 and not tokenDict.has_key("date"):
-			tempToken = dateTokens[len(dateTokens) - 1]
-			if tempToken[1] == i:
-				if stillPresent(s,  tempToken[0]):
-					setDate(tempToken[0])
-					s = removeToken(s, tempToken[0])
-				else:
-					del dateTokens[-1]
-					skipped  = True
-
-		#If probability is high enough and token hasn't been selected already, select time token
-		if len(timeTokens) > 0 and not tokenDict.has_key("time"):
-			tempToken = timeTokens[len(timeTokens) - 1]
-			if tempToken[1] == i:
-				if stillPresent(s,  tempToken[0]):
-					setTime(tempToken[0])
-					s = removeToken(s, tempToken[0])
-				else:
-					del timeTokens[-1]
-					skipped  = True
-
-
-		#If a token type was skipped (highest token not present in string) keep probability the same, else make lower
-		if skipped == False:
-			i = i -25
-		else:
-			skipped = False
-
-	#Get possible location tokens
-	locationTokens = getLocation(s, userLocation)
-
-	#If location token, select location token and remove from string
-	if len(locationTokens) > 0:
-		tempToken = locationTokens[0]
-		setLocation(tempToken[0], userLocation)
-		s = removeToken(s, tempToken[0])
-
-	#For all possible cuisine tokens, select as cuisine token if still present
-	cuisines = []
-	i = 0
-	while i < len(cuisineTokens):
-		tempToken = cuisineTokens[i]
-		if stillPresent(s, tempToken):
-			s = removeToken(s, tempToken)
-			cuisines += [tempToken]
-		i = i + 1
-
-	if cuisines != []:
-		setCuisine(cuisines)
-
-	#If not location tokens try each remaining word
-	if len(locationTokens) == 0:
-		for word in s.split():
-			tempLocation = locationMatch.locationMatch(word, userLocation)
-			if tempLocation[0] < 2000:
-				setLocation(tempLocation[1], userLocation)
-				s = removeToken(s, tempLocation[1])
-
-	#Return tokens
-	return formatDict(tokenDict)'''
 
 
 def formatDict(inDict):
-	output = {  "cuisine": "",  "cuisineSuggestions": [""],  "covers": "",  "coverSuggestions": [],  "date": "",  "dateSuggestions": [],  "time": "",  "timeSuggestions": [],  "location": "",  "locationSuggestions": [],  "lat": "",  "long": "",  "distance": "5"}
-
+	#output = {  "cuisine": "",  "cuisineSuggestions": [""],  "covers": "",  "coverSuggestions": [],  "date": "",  "dateSuggestions": [],  "time": "",  "timeSuggestions": [],  "location": "",  "locationSuggestions": [],  "lat": "",  "long": "",  "distance": "5"}
+	output = {}
 	if 'cuisine' in inDict.keys():
 		output['cuisine']  = inDict['cuisine']
+
+		suggestions = []
+
+		for cuisine in Tokens.Cuisines_ethnic:
+			if len(output['cuisine']) > 0:
+				if cuisine != output['cuisine'][0]:
+					suggestions.append(cuisine)
+			else:
+				if cuisine != output['cuisine']:
+					suggestions.append(cuisine)
+
+
+		output['cuisineSuggestions'] = suggestions
 
 	if 'date' in inDict.keys():
 		output['date']  = inDict['date']
@@ -224,25 +154,10 @@ def formatDict(inDict):
 
 	#TODO: remove Glasgow from location when location search is fixed
 	#output['location'] = "Glasgow"
-	output['locationSuggestions'] = ["Queen Street Station", "West End"]
+	#output['locationSuggestions'] = ["Queen Street Station", "West End"]
 
 
-	suggestions = []
 
-	for cuisine in Tokens.Cuisines_ethnic:
-		if len(output['cuisine']) > 0:
-			if cuisine != output['cuisine'][0]:
-				suggestions.append(cuisine)
-		else:
-			if cuisine != output['cuisine']:
-				suggestions.append(cuisine)
-
-
-	output['cuisineSuggestions'] = suggestions
-
-
-	#TODO: change distance?
-	#TODO: add in lat and long from location search
 
 	return output
 
@@ -305,23 +220,29 @@ def setDate(date):
 #Gets location tokens
 def getLocation(s, userLocation):
 	location = locationProbability.locationProbability(s, userLocation)
-	location = sorted(location.items(), key=operator.itemgetter(1))
-	return location
+	if location != None:
+		location = sorted(location.items(), key=operator.itemgetter(1))
+		return location
+	else:
+		return None
 
 #Sets location tokens
 def setLocation(location, userLocation):
 	location = locationMatch.locationMatch(location, userLocation)
-	tokenDict.update({"location": location[2]})
+	if location != None:
+		tokenDict.update({"location": location[2]})
 
 #Gets people tokens
 def getPeople(s):
 	people = partyProbability.partyProbability(s)
-	people = sorted(people.items(), key=operator.itemgetter(1))
+	if people != None:
+		people = sorted(people.items(), key=operator.itemgetter(1))
 	return people
 
 #Sets people tokens
 def setPeople(people):
 	people = partyMatch.partyMatch(people)
+
 	tokenDict.update({"people": people})
 
 #Gets time tokens
@@ -332,6 +253,8 @@ def getTime(s):
 
 #Sets time tokens
 def setTime(time):
+	print "Matching time"
+	print time
 	time = timeMatch.timeMatch(time)
 	tokenDict.update({"time":time})
 
