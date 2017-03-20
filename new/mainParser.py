@@ -13,7 +13,7 @@ import Tokens
 #Dictionary to hold final tokens
 tokenDict = {}
 
-def mainParser(s, userLocation):
+def mainParser(s, userLocation, searchType):
 		#Format String
 	s = formatString(s)
 
@@ -46,7 +46,14 @@ def mainParser(s, userLocation):
 			tempToken = dateTokens[len(dateTokens) - 1]
 			if tempToken[1] == i:
 				if stillPresent(s,  tempToken[0]):
-					setDate(tempToken[0])
+					if searchType == "search":
+
+						setDate(tempToken[0])
+
+					else:
+						tokenDict['date'] = tempToken[0]
+
+
 					s = removeToken(s, tempToken[0])
 				else:
 					del dateTokens[-1]
@@ -57,7 +64,11 @@ def mainParser(s, userLocation):
 			tempToken = timeTokens[len(timeTokens) - 1]
 			if tempToken[1] == i:
 				if stillPresent(s,  tempToken[0]):
-					setTime(tempToken[0])
+					if searchType == "search":
+						setTime(tempToken[0])
+					else:
+						tokenDict['time'] = tempToken[0]
+
 					s = removeToken(s, tempToken[0])
 				else:
 					del timeTokens[-1]
@@ -110,11 +121,11 @@ def mainParser(s, userLocation):
 			tokenDict['locationName'] = locationTokens[0][0]
 
 	#Return tokens
-	return formatDict(tokenDict)
+	return formatDict(tokenDict, searchType)
 
 
 
-def formatDict(inDict):
+def formatDict(inDict, searchType):
 	#output = {  "cuisine": "",  "cuisineSuggestions": [""],  "covers": "",  "coverSuggestions": [],  "date": "",  "dateSuggestions": [],  "time": "",  "timeSuggestions": [],  "location": "",  "locationSuggestions": [],  "lat": "",  "long": "",  "distance": "5"}
 	output = {}
 	if 'cuisine' in inDict.keys():
@@ -135,11 +146,13 @@ def formatDict(inDict):
 
 	if 'date' in inDict.keys():
 		output['date']  = inDict['date']
-		output['dateSuggestions'] = dateSuggestions(output['date'])
+		if searchType == "search":
+			output['dateSuggestions'] = dateSuggestions(output['date'])
 
 	if 'time' in inDict.keys():
 		output['time']  = inDict['time']
-		output['timeSuggestions'] = timeSuggestions(output['time'])
+		if searchType == "search":
+			output['timeSuggestions'] = timeSuggestions(output['time'])
 
 
 	if 'people' in inDict.keys():
@@ -215,6 +228,7 @@ def getDate(s):
 #Sets date tokens
 def setDate(date):
 	date = dateMatch.dateMatch(date)
+	print date
 	tokenDict.update({"date":date})
 
 #Gets location tokens
