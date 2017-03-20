@@ -28,15 +28,13 @@ function grabTokens(inputQuery) {
             res = JSON.parse(res);
             console.log(res)
             $.each(res, function(key, item){
-                console.log("Suggestions??");
-                console.log(key.indexOf("Suggestions") > 0)
                 if (item != "" && item != [] && !(key.indexOf("Suggestions") > 0)) {
-                    if (typeof item === "string") {
+                    // if (typeof item === "string") {
                         foundTokens.push(item)
-                    }
-                    else {
-                        foundTokens.push(item[0])
-                    }
+                    // }
+                    // else {
+                    //     foundTokens.push(item[0])
+                    // }
                 }
             });
             foundTokens = sortFoundTokens(foundTokens, inputQuery);
