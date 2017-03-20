@@ -40,6 +40,8 @@ function grabTokens(inputQuery) {
                 }
             });
             foundTokens = sortFoundTokens(foundTokens, inputQuery);
+            console.log("grabTokens found:");
+            console.log(foundTokens);
             constructQuery(foundTokens, inputQuery)
         },
     });
@@ -240,7 +242,7 @@ function crawlAndCollect(items) {
 $(document).ready(function() {
     $("#input0").focus();
     $(document).keyup(function(e) {
-        if (((e.which > 47) && (e.which < 111)) || (e.which == 32)){
+        if (e.which == 32){
             var inputQuery = crawlAndCollect($(".items"));
             grabTokens(inputQuery);
             forcePlaceholderRemoval();
