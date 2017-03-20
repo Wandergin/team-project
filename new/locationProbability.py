@@ -6,9 +6,9 @@ def locationProbability(s, userLocation):
 	i = 0
 	s = s.split(" ")
 
-	#Try and find locations with words after "in" "near" "at" 
+	#Try and find locations with words after "in" "near" "at"
 	while i < len(s):
-		if s[i] in ["in", "near", "at"]:
+		if s[i] in ["in", "near", "around", "beside"]:
 			if len(s) -  i -1 >= 3  :
 				j = 3
 			else:
@@ -27,17 +27,9 @@ def locationProbability(s, userLocation):
 				if location[0] < minDistance:
 					minDistance = location[0]
 					minLocation = location[1]
-				
+
 			#Add to return Dictionary
 			returnDict.update({minLocation: minDistance})
 		i = i+ 1
 
 	return returnDict
-		
-
-		
-			
-			
-
-				
-	

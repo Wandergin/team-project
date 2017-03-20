@@ -3,6 +3,8 @@ app = Flask(__name__)
 from flask import request
 from mainParser import mainParser
 import getLocation
+from nocache import nocache
+
 
 #import nltk
 import sys
