@@ -98,7 +98,7 @@ function removeButton(o) {
     tokenCounter = tokenCounter - 1;
     
     if ($(".items").children().length == 1) {
-        var $input = $('<input type="text"  id="input'+inputCounter+'" value="" onfocus="this.value = this.value;" class="input-tags demo-default s-box" placeholder="City, postcode or restaurant name">');            
+        var $input = $('<input type="text"  id="input'+inputCounter+'" value="" onfocus="this.value = this.value;" class="input-tags demo-default s-box" placeholder="Enter some values">');            
         $(".items").prepend($input);
         $("#input"+inputCounter).focus();
     }
@@ -212,7 +212,7 @@ function constructQuery(foundTokens, inputQuery) {
     // If the last item in the query is a token, add a filler field to the end
     if ($(".items").children().last()[0].nodeName == "DIV") {
         inputCounter++;
-        var $input = $('<input type="text"  id="input'+inputCounter+'" value=" " onfocus="this.value = this.value;" class="input-tags demo-default s-box" placeholder="City, postcode or restaurant name">');            
+        var $input = $('<input type="text"  id="input'+inputCounter+'" value=" " onfocus="this.value = this.value;" class="input-tags demo-default s-box" placeholder="Enter some values">');            
         $(".items").append($input);
         $("#input"+inputCounter).focus();
     }

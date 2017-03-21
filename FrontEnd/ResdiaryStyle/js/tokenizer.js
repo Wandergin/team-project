@@ -97,7 +97,7 @@ function removeButton(o) {
     tokenCounter = tokenCounter - 1;
 
     if ($(".items").children().length == 1) {
-        var $input = $('<input type="text"  id="input'+inputCounter+'" value="" onfocus="this.value = this.value;" class="input-tags demo-default " placeholder="City, postcode or restaurant name">');
+        var $input = $('<input type="text"  id="input'+inputCounter+'" value="" onfocus="this.value = this.value;" class="input-tags demo-default " placeholder="Enter some values">');
         $(".items").prepend($input);
         $("#input"+inputCounter).focus();
     }
@@ -199,7 +199,7 @@ function constructQuery(foundTokens, inputQuery) {
             // if (unique == true) {
             //     console.log("New unique input");
             //     inputCounter++;
-            //     var $input = $('<input type="text"  id="input'+inputCounter+'" class="input-tags demo-default " value="'+item.value+'" placeholder="City, postcode or restaurant name">');
+            //     var $input = $('<input type="text"  id="input'+inputCounter+'" class="input-tags demo-default " value="'+item.value+'" placeholder="Enter some values">');
             //     $(".items").append($input);
             //     $("#input"+inputCounter).css("width",item.value.length+"ch");
             // }
@@ -211,7 +211,7 @@ function constructQuery(foundTokens, inputQuery) {
     // If the last item in the query is a token, add a filler field to the end
     if ($(".items").children().last()[0].nodeName == "DIV") {
         inputCounter++;
-        var $input = $('<input type="text"  id="input'+inputCounter+'" value=" " onfocus="this.value = this.value;" class="input-tags demo-default " placeholder="City, postcode or restaurant name">');
+        var $input = $('<input type="text"  id="input'+inputCounter+'" value=" " onfocus="this.value = this.value;" class="input-tags demo-default " placeholder="Enter some values">');
         $(".items").append($input);
         $("#input"+inputCounter).focus();
     }
