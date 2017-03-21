@@ -19,6 +19,7 @@ function sortFoundTokens(foundTokens, inputQuery) {
 
 function grabTokens(inputQuery) {   
     var foundTokens = [];
+    // var foundSuggestions = [];
     console.log("SENDING: "+ inputQuery);
     $.ajax({
         url: "http://localhost:5000/tokens",
