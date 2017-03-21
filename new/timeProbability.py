@@ -5,8 +5,9 @@ finalReturn = {}
 
 
 def timeProbability(s):
-	
-	#Covert string to lowercase list	
+	print "Time is testing:"
+	print s
+	#Covert string to lowercase list
 	s = s.lower()
 	s = s.split(" ")
 	i = len(s) -1
@@ -36,11 +37,11 @@ def timeProbability(s):
 				tempWord = tempWord.replace(ending, '')
 				present_suf = True
 				break
-	
+
 		#If word is empty move to next word
 		if tempWord ==  "" and i > 0:
 			tempWord = s[i-1]
-			result = " " + result  
+			result = " " + result
 			i = i-1
 
 
@@ -49,11 +50,14 @@ def timeProbability(s):
 			result = tempWord  + result
 			present_num = True
 			i = i-1
-		elif len(tempWord.split(".")) == 2:
-			if tempWord.split(".")[0] in str(Tokens.Times_numbers.values()) and tempWord.split(".")[1] in str(Tokens.Times_numbers_mins.values()):
-				result = tempWord + result
-				present_num = True
-				i = i-1
+		elif len(tempWord.split(":")) == 2:
+			if tempWord.split(":")[0] in str(Tokens.Times_numbers.values()):
+				if int(tempWord.split(":")[1]):
+					print "int value of tempWord.split[1]"
+					if (int(tempWord.split(":")[1]) >= 0) and (int(tempWord.split(":")[1]) <= 59):
+						result = tempWord + result
+						present_num = True
+						i = i-1
 		else:
 			result = ""
 
@@ -98,4 +102,5 @@ def timeProbability(s):
 			returnDict[result] = resultProb
 		else:
 			i = i -1
+	print returnDict
 	return returnDict

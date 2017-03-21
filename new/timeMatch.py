@@ -9,7 +9,9 @@ def timeMatch(s):
 	#Scan for number
 	while i < len(s):
 		for ending in Tokens.Times_specific_suffixes:
+
 			if str.isdigit(s[i][0]) and (s[i].endswith(ending)):
+				print "doing some stuff"
 				tempStr = s[i]
 				s[i] = tempStr[:-len(ending)]
 				s.insert( i+1, tempStr[-len(ending):])
@@ -22,11 +24,13 @@ def timeMatch(s):
 		if ":" in s[i]:
 			timeNums = s[i].split(":")
 			print "We might have a proper time"
-			if timeNums[i] in str(Tokens.Times_numbers.values()):
+			print timeNums
+			if timeNums[0] in str(Tokens.Times_numbers.values()):
 				print "Found a real num"
 				hour = int(timeNums[0])
 				minute = int(timeNums[1])
 				break
+
 		elif s[i] in str(Tokens.Times_numbers.values()):
 			hour = int(s[i])
 			print "Direct hour"
