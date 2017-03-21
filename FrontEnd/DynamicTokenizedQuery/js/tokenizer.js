@@ -17,7 +17,7 @@ function sortFoundTokens(foundTokens, inputQuery) {
     return sortedTokens;
 }
 
-function grabTokens(inputQuery) {
+function grabTokens(inputQuery) {   
     var foundTokens = [];
     console.log("SENDING: "+ inputQuery);
     $.ajax({
@@ -29,12 +29,13 @@ function grabTokens(inputQuery) {
             console.log(res)
             $.each(res, function(key, item){
                 if (item != "" && item != [] && !(key.indexOf("Suggestions") > 0)) {
-                    // if (typeof item === "string") {
+                    if (typeof item === "string" || typeof item === "integer") {
                         foundTokens.push(item)
-                    // }
-                    // else {
-                    //     foundTokens.push(item[0])
-                    // }
+                    }
+
+                    else {
+                        foundTokens.push(item[0])
+                    }
                 }
             });
             foundTokens = sortFoundTokens(foundTokens, inputQuery);
