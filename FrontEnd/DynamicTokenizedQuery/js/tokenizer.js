@@ -19,9 +19,10 @@ function sortFoundTokens(foundTokens, inputQuery) {
 
 function grabTokens(inputQuery) {   
     var foundTokens = [];
+    inputQuery = inputQuery.replace(" ","+");
     console.log("SENDING: "+ inputQuery);
     $.ajax({
-        url: "http://localhost:5000/search",
+        url: "http://localhost:5000/tokens",
         method: "GET",
         data:{"q":inputQuery.toLowerCase()},
         success: function(res){
@@ -32,7 +33,6 @@ function grabTokens(inputQuery) {
                     if (typeof item === "string" || typeof item === "integer") {
                         foundTokens.push(item)
                     }
-
                     else {
                         foundTokens.push(item[0])
                     }

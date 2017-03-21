@@ -56,7 +56,18 @@ def api_search():
     if 'q' in request.args:
         location = getLocation.getLocation(request)
         search = str(request.args['q'])
-        tokens = mainParser(search, location)
+        tokens = mainParser(search, location, "search")
+        return json.dumps(tokens)
+        #return search
+    else:
+        return ''
+
+@app.route('/tokens')
+def api_token():
+    if 'q' in request.args:
+        location = getLocation.getLocation(request)
+        search = str(request.args['q'])
+        tokens = mainParser(search, location, "token")
         return json.dumps(tokens)
         #return search
     else:

@@ -8,8 +8,8 @@ Skip_words = 		["i", "want"]
 ##		Dietary:	Defines various dietary restrictions one may have
 ##		Belief:		Defines various belief restrictions one may have
 
-Cuisines_ethnic = 	["african", "american", "arabic", "british", "caribbean", "chineese", "european",
-		 	"english",  "french", "greek", "indian", "irish", "italian", "japanese", "kurdish", 
+Cuisines_ethnic = 	["african", "american", "arabic", "british", "caribbean", "chinese", "european",
+		 	"english",  "french", "greek", "indian", "irish", "italian", "japanese", "kurdish",
 		 	"lebanese", "mediterranean", "mexican", "middle eastern", "mongolian", "nordic",
 		 	"oriental", "persian", "portuguese", "south american", "spanish", "thai", "turkish"]
 
@@ -24,7 +24,7 @@ Cuisines_belief =	["kosher", "halal", "organic", "vegen", "vegetarian"]
 ##		Common:		Defines commonly used dates
 ##		Days:		Dictionary mapping each day to a number (place in the week)
 ##		Months:		Dictoinary mapping each month a a number (place in the year)
-		
+
 
 Dates_prefixes = 	["this", "next", "on", "for"]
 
@@ -58,7 +58,7 @@ Times_approx_meal = 		{"breakfast":"10:00", "brunch":"12:00", "lunch":"14:00", "
 
 Times_numbers = 		{"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10, "eleven": 11, "twelve":12}
 
-Times_numbers_mins = 	{"five past": 05, "ten past": 10, "quarter past": 15, "twenty past": 20, "twenty five past": 25, "half past": 30, "twenty five to": 35, "twenty to": 40, "quarter to":45, "ten to": 50, "five to": 55} 
+Times_numbers_mins = 	{"five past": 05, "ten past": 10, "quarter past": 15, "twenty past": 20, "twenty five past": 25, "half past": 30, "twenty five to": 35, "twenty to": 40, "quarter to":45, "ten to": 50, "five to": 55}
 
 
 ##############################
@@ -77,12 +77,12 @@ People_approx_suffix = 		["party", "table", "group"]
 
 
 ##############################
-##Location - 	Specific prefixes:	Defines words that may come before a specific place e.g. near George Square	
+##Location - 	Specific prefixes:	Defines words that may come before a specific place e.g. near George Square
 #		Specific suffixes:	Defines words that may come after a specific place e.g.
 #		Radius prefixes:	Defines words that may come before a specified radius e.g. within 2 miles from George Square
 #		Radius suff distance:	Defines distances for a radius e.g  	'  '
 #		Radius suff time:	Defines times for a radius e.g within 10 minutes walk from Glasgow University
-#		Radius suff travel:	Defines travel methods for a radius e.g   '  '		
+#		Radius suff travel:	Defines travel methods for a radius e.g   '  '
 
 Location_specific_prefixes = 	["about", "around", "beside","closeby","close to", "near", "nearby", "next to", "not far from", "roughly", "in the vicinity of"]
 
@@ -91,5 +91,5 @@ Location_radius_prefixes =	["at most", "less than", "within"]
 Location_radius_suff_distance =	["block", "steet", "mile", "metres" "kilometer", "k"]
 
 Location_radius_suff_time = 	["hours", "minutes"]
-	
+
 Location_radius_suff_travel=	["cycle","drive", "walk"]
