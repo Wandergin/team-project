@@ -17,8 +17,45 @@ function sortFoundTokens(foundTokens, inputQuery) {
     return sortedTokens;
 }
 
+function sendTokens(inputQuery) {
+    var sendTokens = {};
+    console.log("SENDING: "+ inputQuery);
+    $.ajax({
+        url: "http://localhost:5000/search",
+        method: "GET",
+        data:{"q":inputQuery.toLowerCase()},
+        success: function(res){
+            res = JSON.parse(res);
+            console.log(res)
+            // $.each(res, function(key, item){
+            //     if (item != "" && item != [] && (key.indexOf("Suggestions") <= 0) && key != "location") {
+            //         if (typeof item === "string" || typeof item === "integer") {
+            //             foundTokens.push(item)
+            //         }
+            //         else { // the token is an array
+            //             $.each(item, function(k, i){ 
+            //                 foundTokens.push(i);
+            //             });
+            //         }
+            //     }
+            //     else if (key.indexOf("Suggestions") > 0) {
+                    
+            //     }
+            // });
+            $.each(res, function(key, item){
+                if (item != "" && item != [] && (key.indexOf("Suggestions") <= 0) && key != "location") {
+                    sendTokens[key]=item;
+                }
+            });
+            console.log("sending to ResDiary API:");
+            console.log(sendTokens);
+        },
+    });
+}
+
 function grabTokens(inputQuery) {
     var foundTokens = [];
+    var foundSuggestions = [];
     console.log("SENDING: "+ inputQuery);
     $.ajax({
         url: "http://localhost:5000/tokens",
@@ -28,13 +65,18 @@ function grabTokens(inputQuery) {
             res = JSON.parse(res);
             console.log(res)
             $.each(res, function(key, item){
-                if (item != "" && item != [] && !(key.indexOf("Suggestions") > 0) && key != "location") {
+                if (item != "" && item != [] && (key.indexOf("Suggestions") <= 0) && key != "location") {
                     if (typeof item === "string" || typeof item === "integer") {
                         foundTokens.push(item)
                     }
-                    else {
-                        foundTokens.push(item[0])
+                    else { // the token is an array
+                        $.each(item, function(k, i){ 
+                            foundTokens.push(i);
+                        });
                     }
+                }
+                else if (key.indexOf("Suggestions") > 0) {
+                    
                 }
             });
             foundTokens = sortFoundTokens(foundTokens, inputQuery);
@@ -259,6 +301,8 @@ $(document).ready(function() {
 
     //Search button - console.log the tokens
     $(document).on('click', 'button', function() {
+        var inputQuery = crawlAndCollect($(".items"));
+        sendTokens(inputQuery);
         var dictionary = {"cuisine": "", "location": "", "time": "", "covers": "","features": ""};
         $(".item").each(function() {
             var str = $(this).text().replace('×', '');
