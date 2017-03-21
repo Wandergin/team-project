@@ -27,21 +27,6 @@ function sendTokens(inputQuery) {
         success: function(res){
             res = JSON.parse(res);
             console.log(res)
-            // $.each(res, function(key, item){
-            //     if (item != "" && item != [] && (key.indexOf("Suggestions") <= 0) && key != "location") {
-            //         if (typeof item === "string" || typeof item === "integer") {
-            //             foundTokens.push(item)
-            //         }
-            //         else { // the token is an array
-            //             $.each(item, function(k, i){ 
-            //                 foundTokens.push(i);
-            //             });
-            //         }
-            //     }
-            //     else if (key.indexOf("Suggestions") > 0) {
-                    
-            //     }
-            // });
             $.each(res, function(key, item){
                 if (item != "" && item != [] && (key.indexOf("Suggestions") <= 0) && key != "location") {
                     sendTokens[key]=item;
@@ -49,6 +34,7 @@ function sendTokens(inputQuery) {
             });
             console.log("sending to ResDiary API:");
             console.log(sendTokens);
+            // JOHN: this is the where you take the tokens from
         },
     });
 }
