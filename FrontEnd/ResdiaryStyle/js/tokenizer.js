@@ -34,11 +34,21 @@ function sendTokens(inputQuery) {
                 }
             });
             console.log("sending to ResDiary API:");
+            // Still returns the name only and not coordinates
             console.log(sendTokens);
-            return sendTokens;
+            // Code below is sort of irrelevant since we cannot send requests, but if someone manages to make it work, then ucomment it.
+            // var cuisineEnum = cuisineDict[sendTokens["cuisine"][0]];
+            // var location = sendTokens["locationName"]
+            // var covers = sendTokens["covers"];
+            // var time = sendTokens["time"];
+            // var date = sendTokens["date"];
+            // console.log("Send request final: ");
+            // console.log(cuisineEnum);
             // JOHN: this is the where you take the tokens from
         }
+
     });
+
 }
 
 function grabTokens(inputQuery) {
@@ -304,15 +314,14 @@ $(document).ready(function() {
     $(document).on('click', 'button', function() {
         var inputQuery = crawlAndCollect($(".items"));
 
-        var dictionary = sendTokens(inputQuery);
-        var cuisineEnum = cuisineDict[dictionary["cuisine"]][0];
-        var latitude = dictionary["location"][0];
-        var longitude = dictionary["location"][1];
-        var covers = dictionary["covers"];
-        var time = dictionary["time"];
-        var date = dictionary["date"];
+        sendTokens(inputQuery);
+        // XML request does not work due to same-site origin policies of the internet.
+        // var xhr = new XMLHttpRequest();
+        // xhr.open("GET", "https://www.resdiary.com/api/Restaurant/LocationSearch?lat=51.5073509&lon=-0.1277583&page=1&distance=10&visitDate=null&visitTime=10pm&covers=null&includeAllPages=false&selectedCuisines=1&selectedSortOrder=4");
+        // xhr.send();
+        // console.log(xhr.status);
+        // console.log(xhr.statusText);
 
-        console.log(dictionary);
     });
 });
 
