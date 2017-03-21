@@ -1,11 +1,13 @@
 var inputCounter = 0;
 var tokenCounter = 0;
-var suggestions = ["suggestion1","suggestion2","suggestion3"]
+var suggestions = ["suggestion1","suggestion2","suggestion3"];
+var cuisineDict = {'mexican': 63, 'chinese': 28, 'eastern european': 37, 'german': 46, 'contemporary': 29, 'moroccan': 69, 'asian': 6, 'singaporean': 85, 'sunday lunch': 94, 'thai': 98, 'modern australian': 67, 'turkish': 100, 'byo': 21, 'spanish': 91, 'indonesian': 51, 'deli': 34, 'aussie bbq': 8, 'all you can eat': 2, 'wine bar': 114, 'vegan': 101, 'gastro pub': 45, 'banquet': 12, 'malaysian': 60, 'pizza': 75, 'italian': 54, 'modern new zealand': 68, 'piano bar': 74, 'fish': 41, 'scottish': 81, 'mediterranean': 62, 'japanese': 55, 'cocktails': 113, 'persian': 111, 'salads': 79, 'american fusion': 110, 'caribbean': 25, 'high tea': 49, 'asian fusion': 7, 'fondue': 42, 'indian': 50, 'modern peruvian': 109, 'international': 52, 'creole': 31, 'street food style': 93, 'bistro': 14, 'cajun': 23, 'middle eastern': 65, 'french': 43, 'pasta': 73, 'afternoon tea': 1, 'chilean': 27, 'steak': 92, 'diner': 36, 'filipino': 39, 'burger joint': 20, 'vegetarian': 102, 'vietnamese': 103, 'british': 17, 'american': 3, 'levantine': 107, 'smokehouse': 88, 'modern asian': 66, 'locavore': 59, 'pan asian': 72, 'fresh salads': 44, 'latin american': 112, 'nepalese': 70, 'bbq & grill': 13, 'continental': 30, 'brazilian': 16, 'modern balinese': 105, 'danish': 33, 'set menu': 83, 'michelin star': 64, 'bosnian': 15, 'south east asian': 90, 'argentinian': 5, 'brunch': 18, 'tearoom': 97, 'lebanese': 57, 'slow food': 86, 'romantic': 78, 'scandinavian': 80, 'fine dining': 40, 'seafood': 82, 'irish': 53, 'balinese': 10, 'peruvian': 108, 'sushi': 95, 'halal': 48, 'cantonese': 24, 'arabic': 4, 'cafe': 22, 'south american': 89, 'raw food': 77, 'modern indonesian': 104, 'food safari': 106, 'small plates': 87, 'bakery': 9, 'dessert': 35, 'korean': 56, 'european': 38, 'child friendly': 26, 'buffet': 19, 'norwegian': 71, 'maltese': 61, 'tibetan': 99, 'cuban': 32, 'baltic states': 11, 'punjabi': 76, 'greek': 47, 'locally sourced': 58, 'african': 0, 'tapas': 96, 'sicilian': 84};
 
 function sortFoundTokens(foundTokens, inputQuery) {
     var sortOrder = {};
     var sortedTokens = [];
     $.each(foundTokens, function(index, item){
+        // console.log(inputQuery+"  "+item);
         key = inputQuery.indexOf(item)
         sortOrder[key] = item;
     });
@@ -27,12 +29,13 @@ function sendTokens(inputQuery) {
             res = JSON.parse(res);
             console.log(res)
             $.each(res, function(key, item){
-                if (item != "" && item != [] && (key.indexOf("Suggestions") <= 0) && key != "locationName") {
+                if (item != "" && item != [] && (key.indexOf("Suggestions") <= 0) && key != "location") {
                     sendTokens[key]=item;
                 }
             });
             console.log("sending to ResDiary API:");
             console.log(sendTokens);
+            return sendTokens;
             // JOHN: this is the where you take the tokens from
         },
     });
@@ -55,13 +58,13 @@ function grabTokens(inputQuery) {
                         foundTokens.push(item)
                     }
                     else { // the token is an array
-                        $.each(item, function(k, i){ 
+                        $.each(item, function(k, i){
                             foundTokens.push(i);
                         });
                     }
                 }
                 else if (key.indexOf("Suggestions") > 0) {
-                    
+
                 }
             });
             foundTokens = sortFoundTokens(foundTokens, inputQuery);
@@ -287,13 +290,15 @@ $(document).ready(function() {
     //Search button - console.log the tokens
     $(document).on('click', 'button', function() {
         var inputQuery = crawlAndCollect($(".items"));
-        sendTokens(inputQuery);
-        var dictionary = {"cuisine": "", "location": "", "time": "", "covers": "","features": ""};
-        $(".item").each(function() {
-            var str = $(this).text().replace('×', '');
-            var token = $(this).data('token');
-            dictionary[token] = str;
-        });
+
+        var dictionary = sendTokens(inputQuery);
+        var cuisineEnum = cuisineDict[dictionary["cuisine"]][0];
+        var latitude = dictionary["location"][0];
+        var longitude = dictionary["location"][1];
+        var covers = dictionary["covers"];
+        var time = dictionary["time"];
+        var date = dictionary["date"];
+
         console.log(dictionary);
     });
 });
