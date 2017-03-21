@@ -29,7 +29,7 @@ function grabTokens(inputQuery) {
             console.log(res)
             $.each(res, function(key, item){
                 if (item != "" && item != [] && !(key.indexOf("Suggestions") > 0)) {
-                    if (typeof item === "string" && typeof item === "integer") {
+                    if (typeof item === "string" || typeof item === "integer") {
                         foundTokens.push(item)
                     }
 
