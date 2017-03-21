@@ -6,7 +6,6 @@ function sortFoundTokens(foundTokens, inputQuery) {
     var sortOrder = {};
     var sortedTokens = [];
     $.each(foundTokens, function(index, item){
-        // console.log(inputQuery+"  "+item);
         key = inputQuery.indexOf(item)
         sortOrder[key] = item;
     });
@@ -28,7 +27,7 @@ function sendTokens(inputQuery) {
             res = JSON.parse(res);
             console.log(res)
             $.each(res, function(key, item){
-                if (item != "" && item != [] && (key.indexOf("Suggestions") <= 0) && key != "location") {
+                if (item != "" && item != [] && (key.indexOf("Suggestions") <= 0) && key != "locationName") {
                     sendTokens[key]=item;
                 }
             });
