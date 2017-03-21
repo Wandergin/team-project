@@ -34,7 +34,7 @@ function sendTokens(inputQuery) {
             console.log("sending to ResDiary API:");
             console.log(sendTokens);
             // JOHN: this is the where you take the tokens from
-        },
+        }
     });
 }
 
@@ -60,9 +60,14 @@ function grabTokens(inputQuery) {
                         });
                     }
                 }
-                else if (key.indexOf("Suggestions") > 0) {
-                    
-                }
+                // else if (key.indexOf("Suggestions") > 0) {
+                //     switch(key.replace("")){
+                //         case "cover":
+                //             break
+                //         case "cuisine":
+
+                //     }
+                // }
             });
             foundTokens = sortFoundTokens(foundTokens, inputQuery);
             console.log("grabTokens found:");
