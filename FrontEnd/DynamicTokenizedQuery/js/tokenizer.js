@@ -28,7 +28,7 @@ function grabTokens(inputQuery) {
             res = JSON.parse(res);
             console.log(res)
             $.each(res, function(key, item){
-                if (item != "" && item != [] && !(key.indexOf("Suggestions") > 0)) {
+                if ((item != "" && item != [] && !(key.indexOf("Suggestions") > 0) && item != "location")) {
                     if (typeof item === "string" || typeof item === "integer") {
                         foundTokens.push(item)
                     }
@@ -196,13 +196,13 @@ function constructQuery(foundTokens, inputQuery) {
 
             // ??? RESOLVE THIS MESS
             // If no duplicate tokens found, add the filler to the end of the query
-            if (unique == true) {
-                console.log("New unique input");
-                inputCounter++;
-                var $input = $('<input type="text"  id="input'+inputCounter+'" class="input-tags demo-default s-box" value="'+item.value+'" placeholder="City, postcode or restaurant name">');            
-                $(".items").append($input);
-                $("#input"+inputCounter).css("width",item.value.length+"ch");
-            }
+            // if (unique == true) {
+            //     console.log("New unique input");
+            //     inputCounter++;
+            //     var $input = $('<input type="text"  id="input'+inputCounter+'" class="input-tags demo-default s-box" value="'+item.value+'" placeholder="City, postcode or restaurant name">');            
+            //     $(".items").append($input);
+            //     $("#input"+inputCounter).css("width",item.value.length+"ch");
+            // }
 
 
         }
