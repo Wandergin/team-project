@@ -759,7 +759,7 @@ ul {
   padding-bottom: 100px;
 }
 .wrapper-row {
-  display: table-row;
+  display: table;
   margin: 0 auto;
 }
 .body-wrapper {

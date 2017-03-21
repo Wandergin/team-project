@@ -28,7 +28,7 @@ function grabTokens(inputQuery) {
             res = JSON.parse(res);
             console.log(res)
             $.each(res, function(key, item){
-                if (item != "" && item != [] && !(key.indexOf("Suggestions") > 0)) {
+                if (item != "" && item != [] && !(key.indexOf("Suggestions") > 0) && key != "location") {
                     if (typeof item === "string" || typeof item === "integer") {
                         foundTokens.push(item)
                     }
