@@ -30,7 +30,7 @@
     <link rel="stylesheet" type="text/css" href="css/search.css" />
     <!--     custom css     -->
     <link rel="stylesheet" href="css/style.css">
-    <!--        end         -->    
+    <!--        end         -->
 
 </head>
 
@@ -131,12 +131,15 @@
                                     <div class="search-title">
                                         <span data-bind="text: bookWithDisplay"></span>
                                     </div>
-                                    <div class="search-box">                                       
-                                        <div class="items">
-                                            <input type="text" class="input-tags demo-default s-box" placeholder="City, postcode or restaurant name">
-                                            <button href="#" class="s-button">SEARCH</button>
-                                        </div>
-                                    </div>
+                                    
+                                      <div class="control-group">
+                                          <input type="text" id="input-default" value="" placeholder="City, postcode or restaurant name" tabindex="-1" style="display: none;">
+                                          <div class="items">
+                                              <input type="text" id="input0" class="input-tags demo-default" placeholder="City, postcode or restaurant name">
+                                              <button type="button" href="#" class="btn btn-primary s-button">SEARCH</button>
+                                          </div>
+                                      </div>
+                                    
                                 </div>
                             </div>
                         </div>

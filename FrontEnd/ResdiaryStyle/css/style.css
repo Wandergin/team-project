@@ -19,14 +19,7 @@ h3 {
     font-size: 1.1em;
 }
 
-input,
-button,
-select,
-textarea {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
+
 
 .control-group {
     width: 100%;
@@ -34,26 +27,28 @@ textarea {
     border-radius: 3px;
 }
 
-/*#input0 {
+#input0 {
 
     width: 40%;
-}*/
+}
 
 .input-tags {
     position:relative;
-    line-height: 2.3em;
+    line-height: 2.2em;
     border: none;
     outline: none;
 /*    width: 30%;*/
 }
 
-/*.s-button {
+
+
+.s-button {
     position: relative;
     float:right;
     padding: 5px 12px;
     border-radius: 3px;
     margin: 1px;
-}*/
+}
 
 .item {
     position: relative;
@@ -142,4 +137,26 @@ textarea {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+}
+
+@media screen and (max-width: 1000px) {
+  .input-tags {
+      position:relative;
+      line-height: 2.0em;
+      border: none;
+      outline: none;
+  /*    width: 30%;*/
+  }
+  #input0 {
+      width: 74%;
+  }
+  .s-button {
+      position: relative;
+      float:right;
+      padding: 5px 12px;
+      border-radius: 3px;
+      margin: 0px;
+      width: 25%;
+
+  }
 }
