@@ -41,6 +41,7 @@ def addDays(n):
 
 
 def dateMatch(s):
+    s = s.strip(" ")
 	i = 0
 	if type(s) is str:
 		s = [s]
