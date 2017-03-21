@@ -60,14 +60,22 @@ function grabTokens(inputQuery) {
                         });
                     }
                 }
-                // else if (key.indexOf("Suggestions") > 0) {
-                //     switch(key.replace("")){
-                //         case "cover":
-                //             break
-                //         case "cuisine":
-
-                //     }
-                // }
+                else if (key.indexOf("Suggestions") > 0) {
+                    switch(key.replace("Suggestions","")){
+                        case "cover":
+                            console.log("COVER");
+                            break;
+                        case "cuisine":
+                            console.log("CUISINE");
+                            break;
+                        case "date":
+                            console.log("DATE");
+                            break;
+                        case "time":
+                            console.log("TIME");
+                            break;
+                    }
+                }
             });
             foundTokens = sortFoundTokens(foundTokens, inputQuery);
             console.log("grabTokens found:");
