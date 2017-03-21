@@ -156,11 +156,13 @@ def formatDict(inDict, searchType):
 
 
 	if 'people' in inDict.keys():
-		output['covers']  = inDict['people']
-		output['coverSuggestions'] = coverSuggestions(output['covers'])
+		output['covers']  = str(inDict['people'])
+		output['coverSuggestions'] = coverSuggestions(inDict['people'])
 
 	if 'location' in inDict.keys():
 		output['location'] = inDict['location']
+		if len(output['location']) == 2:
+			output['location'] = (str(output['location'][0]), str(output['location'][1]))
 
 	if 'locationName' in inDict.keys():
 		output['locationName'] = inDict['locationName']
@@ -169,13 +171,13 @@ def formatDict(inDict, searchType):
 	#output['location'] = "Glasgow"
 	#output['locationSuggestions'] = ["Queen Street Station", "West End"
 
-	print output	
+	print output
 
 	return output
 
 
 def coverSuggestions(covers):
-	return [covers-1, covers+1]
+	return [str(covers-1), str(covers+1)]
 
 def timeSuggestions(time):
 	from datetime import datetime, timedelta
@@ -226,6 +228,8 @@ def getDate(s):
 
 #Sets date tokens
 def setDate(date):
+	print "SEt date"
+	print date
 	date = dateMatch.dateMatch(date)
 	tokenDict.update({"date":date})
 
