@@ -1,7 +1,6 @@
 var inputCounter = 0;
 var tokenCounter = 0;
 var suggestions = ["suggestion1","suggestion2","suggestion3"]
-var cuisineEnum = 0;
 
 function sortFoundTokens(foundTokens, inputQuery) {
     var sortOrder = {};
@@ -11,12 +10,10 @@ function sortFoundTokens(foundTokens, inputQuery) {
         key = inputQuery.indexOf(item)
         sortOrder[key] = item;
     });
-    console.log(sortOrder)
 
     $.each(sortOrder, function(index, item){
         sortedTokens.push(item);
     });
-    console.log(sortedTokens);
     return sortedTokens;
 }
 
@@ -24,21 +21,21 @@ function grabTokens(inputQuery) {
     var foundTokens = [];
     console.log("SENDING: "+ inputQuery);
     $.ajax({
-        url: "http://localhost:5000/search",
+        url: "http://localhost:5000/tokens",
         method: "GET",
         data:{"q":inputQuery.toLowerCase()},
         success: function(res){
             res = JSON.parse(res);
             console.log(res)
             $.each(res, function(key, item){
-              if (item != "" && item != [] && !(key.indexOf("Suggestions") > 0)) {
-                  if (typeof item === "string") {
-                      foundTokens.push(item)
-                  }
-                  else {
-                      foundTokens.push(item[0])
-                  }
-              }
+                if (item != "" && item != [] && !(key.indexOf("Suggestions") > 0)) {
+                    if (typeof item === "string" || typeof item === "integer") {
+                        foundTokens.push(item)
+                    }
+                    else {
+                        foundTokens.push(item[0])
+                    }
+                }
             });
             foundTokens = sortFoundTokens(foundTokens, inputQuery);
             console.log("grabTokens found:");
@@ -100,7 +97,7 @@ function removeButton(o) {
     tokenCounter = tokenCounter - 1;
 
     if ($(".items").children().length == 1) {
-        var $input = $('<input type="text"  id="input'+inputCounter+'" value="" onfocus="this.value = this.value;" class="input-tags demo-default" placeholder="City, postcode or restaurant name">');
+        var $input = $('<input type="text"  id="input'+inputCounter+'" value="" onfocus="this.value = this.value;" class="input-tags demo-default " placeholder="City, postcode or restaurant name">');
         $(".items").prepend($input);
         $("#input"+inputCounter).focus();
     }
@@ -199,13 +196,13 @@ function constructQuery(foundTokens, inputQuery) {
 
             // ??? RESOLVE THIS MESS
             // If no duplicate tokens found, add the filler to the end of the query
-            if (unique == true) {
-                console.log("New unique input");
-                inputCounter++;
-                var $input = $('<input type="text"  id="input'+inputCounter+'" class="input-tags demo-default" value="'+item.value+'" placeholder="City, postcode or restaurant name">');
-                $(".items").append($input);
-                $("#input"+inputCounter).css("width",item.value.length+"ch");
-            }
+            // if (unique == true) {
+            //     console.log("New unique input");
+            //     inputCounter++;
+            //     var $input = $('<input type="text"  id="input'+inputCounter+'" class="input-tags demo-default " value="'+item.value+'" placeholder="City, postcode or restaurant name">');
+            //     $(".items").append($input);
+            //     $("#input"+inputCounter).css("width",item.value.length+"ch");
+            // }
 
 
         }
@@ -214,7 +211,7 @@ function constructQuery(foundTokens, inputQuery) {
     // If the last item in the query is a token, add a filler field to the end
     if ($(".items").children().last()[0].nodeName == "DIV") {
         inputCounter++;
-        var $input = $('<input type="text"  id="input'+inputCounter+'" value=" " onfocus="this.value = this.value;" class="input-tags demo-default" placeholder="City, postcode or restaurant name">');
+        var $input = $('<input type="text"  id="input'+inputCounter+'" value=" " onfocus="this.value = this.value;" class="input-tags demo-default " placeholder="City, postcode or restaurant name">');
         $(".items").append($input);
         $("#input"+inputCounter).focus();
     }
@@ -243,7 +240,7 @@ function crawlAndCollect(items) {
 $(document).ready(function() {
     $("#input0").focus();
     $(document).keyup(function(e) {
-        if (e.keyCode === 0 || e.keyCode === 32){
+        if (e.which == 32){
             var inputQuery = crawlAndCollect($(".items"));
             grabTokens(inputQuery);
             forcePlaceholderRemoval();
@@ -264,7 +261,7 @@ $(document).ready(function() {
     $(document).on('click', 'button', function() {
         var dictionary = {"cuisine": "", "location": "", "time": "", "covers": "","features": ""};
         $(".item").each(function() {
-            var str = $(this).text().replace('×', '').split(" ")[0];
+            var str = $(this).text().replace('×', '');
             var token = $(this).data('token');
             dictionary[token] = str;
         });
