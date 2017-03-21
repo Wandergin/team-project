@@ -67,7 +67,7 @@ def mainParser(s, userLocation, searchType):
 					if searchType == "search":
 						setTime(tempToken[0])
 					else:
-						tokenDict['time'] = tempToken[0]
+						tokenDict['time'] = tempToken[0].replace("at ","")
 
 					s = removeToken(s, tempToken[0])
 				else:
@@ -228,7 +228,6 @@ def getDate(s):
 #Sets date tokens
 def setDate(date):
 	date = dateMatch.dateMatch(date)
-	print date
 	tokenDict.update({"date":date})
 
 #Gets location tokens
