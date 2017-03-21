@@ -154,10 +154,9 @@ def formatDict(inDict):
 
 	#TODO: remove Glasgow from location when location search is fixed
 	#output['location'] = "Glasgow"
-	#output['locationSuggestions'] = ["Queen Street Station", "West End"]
+	#output['locationSuggestions'] = ["Queen Street Station", "West End"
 
-
-
+	print output	
 
 	return output
 
@@ -260,6 +259,7 @@ def setTime(time):
 
 #Formats the query
 def formatString(s):
+	tokenDict.clear()
 	s = s.lower()
 	s = s.strip()
 	return s
