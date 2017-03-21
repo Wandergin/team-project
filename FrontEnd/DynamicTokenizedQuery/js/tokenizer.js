@@ -19,7 +19,6 @@ function sortFoundTokens(foundTokens, inputQuery) {
 
 function grabTokens(inputQuery) {   
     var foundTokens = [];
-    inputQuery = inputQuery.replace(" ","+");
     console.log("SENDING: "+ inputQuery);
     $.ajax({
         url: "http://localhost:5000/tokens",
