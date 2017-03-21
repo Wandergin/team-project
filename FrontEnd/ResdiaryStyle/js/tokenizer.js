@@ -37,7 +37,7 @@ function sendTokens(inputQuery) {
             console.log(sendTokens);
             return sendTokens;
             // JOHN: this is the where you take the tokens from
-        },
+        }
     });
 }
 
@@ -63,9 +63,20 @@ function grabTokens(inputQuery) {
                         });
                     }
                 }
+<<<<<<< HEAD
                 else if (key.indexOf("Suggestions") > 0) {
 
                 }
+=======
+                // else if (key.indexOf("Suggestions") > 0) {
+                //     switch(key.replace("")){
+                //         case "cover":
+                //             break
+                //         case "cuisine":
+
+                //     }
+                // }
+>>>>>>> 5709c85202e38edbf9a35556c0c758b2e23730d7
             });
             foundTokens = sortFoundTokens(foundTokens, inputQuery);
             console.log("grabTokens found:");
