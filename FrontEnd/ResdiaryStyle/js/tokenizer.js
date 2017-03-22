@@ -81,7 +81,10 @@ function grabTokens(inputQuery) {
                             console.log("COVER");
                             break;
                         case "cuisine":
-                            suggestions = 
+                            pres = res.cuisineSuggestions;
+                            console.log(pres)
+                            suggestions = [pres[0],pres[1],pres[2]];
+                            console.log(suggestions);
                             console.log("CUISINE");
                             break;
                         case "date":
@@ -119,13 +122,8 @@ function modifyTheFiller(filler, token) {
 function closeDropdown(token) {
     console.log("E");
     console.log(token);
-    ("#myDropdown").classList.remove('show');
-    for (var i = 0; i < $(".dropdown-content").length; i++) {
-        var openDropdown = $(".dropdown-content")[i];
-        if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
-        }
-    }
+    console.log($("#"+token.id+">#myDropdown"));
+    $("#"+token.id+">#myDropdown")[0].style.display = "none !important";
 }
 
 function forcePlaceholderRemoval() {
@@ -227,21 +225,23 @@ function constructQuery(foundTokens, inputQuery) {
                 }
 
                 // Suggestion dropdown constructor
-                // $(".dropdown").append('<div id="myDropdown" class="dropdown-content"></div>');
-                // for (var i=0; i<suggestions.length; i++) {
-                //     $("#myDropdown").append('<a class="suggestion'+(i+1)+'" onClick="closeDropdown(token'+tokenCounter+')" href="#"> '+suggestions[i]+'</a>');
-                // }
+                $(".dropdown").append('<div id="myDropdown" class="dropdown-content"></div>');
+                for (var i=0; i<suggestions.length; i++) {
+                    $("#myDropdown").append('<a class="suggestion'+(i+1)+'" onClick="closeDropdown(token'+tokenCounter+')" href="#"> '+suggestions[i]+'</a>');
+                }
 
                 
                 
                 // Click listeners (dropdown)
                 $(".dropdown").click(function(){
-                    console.log($(".item"));
+                    console.log($(this));
                     // for (tokens in $(".item")) {
                     //     console.log(tokens);
                     // }
-                    console.log($(this).children());
-                    // $(this).children()[1].style.display = "block";
+                    if ($(this).id != "token1") {
+                        $(".item").children()[1].style.display = "block";
+                    }
+                    
                 });
             }
 
