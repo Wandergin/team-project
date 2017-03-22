@@ -29,12 +29,24 @@ function sendTokens(inputQuery) {
             res = JSON.parse(res);
             console.log(res)
             $.each(res, function(key, item){
-                if (item != "" && item != [] && (key.indexOf("Suggestions") <= 0) && key != "location") {
+                if (item != "" && item != [] && (key.indexOf("Suggestions") <= 0) && key != "Name") {
+                    console.log(item);
                     sendTokens[key]=item;
                 }
             });
             console.log("sending to ResDiary API:");
             console.log(sendTokens);
+
+            var cuisineEnum = cuisineDict[sendTokens["cuisine"][0]];
+            var location = sendTokens["location"].substring(1,sendTokens["location"].length-1).split(", ");
+            var latitude = location[0];
+            var longitude = location[1];
+            var covers = sendTokens["covers"];
+            var time = sendTokens["time"];
+            var date = sendTokens["date"];
+
+            window.open("https://www.resdiary.com/api/Restaurant/LocationSearch?lat="+latitude+"&lon="+longitude+"&page=1&distance=10&visitDate="+date+"&visitTime="+time+"&covers="+covers+"&includeAllPages=false&selectedCuisines="+cuisineEnum+"&selectedSortOrder=4","_self")
+
             return sendTokens;
             // JOHN: this is the where you take the tokens from
         }
@@ -69,6 +81,7 @@ function grabTokens(inputQuery) {
                             console.log("COVER");
                             break;
                         case "cuisine":
+                            suggestions = 
                             console.log("CUISINE");
                             break;
                         case "date":
@@ -103,7 +116,9 @@ function modifyTheFiller(filler, token) {
     console.log(token);
 }
 
-function closeDropdown() {
+function closeDropdown(token) {
+    console.log("E");
+    console.log(token);
     ("#myDropdown").classList.remove('show');
     for (var i = 0; i < $(".dropdown-content").length; i++) {
         var openDropdown = $(".dropdown-content")[i];
@@ -140,7 +155,7 @@ function removeButton(o) {
     tokenCounter = tokenCounter - 1;
 
     if ($(".items").children().length == 1) {
-        var $input = $('<input type="text"  id="input'+inputCounter+'" value="" onfocus="this.value = this.value;" class="input-tags demo-default " placeholder="Enter some values">');
+        var $input = $('<input type="text"  id="input'+inputCounter+'" value="" onfocus="this.value = this.value;" class="input-tags demo-default" placeholder="Enter some values">');
         $(".items").prepend($input);
         $("#input"+inputCounter).focus();
     }
@@ -204,7 +219,7 @@ function constructQuery(foundTokens, inputQuery) {
                 console.log("New unique token: "+item.value);
                 tokenCounter++;
 
-                var $div = $('<div class="item dropdown" id="token'+tokenCounter+'" data-token="cuisine" data-value="chinese">'+item.value+'<a href="javascript:void(0)" onClick="removeButton($(this))" class="remove" tabindex="-1" title="Remove">×</a></div>');
+                var $div = $('<div class="item dropdown" id="token'+tokenCounter+'">'+item.value+'<a href="javascript:void(0)" onClick="removeButton($(this))" class="remove" tabindex="-1" title="Remove">×</a></div>');
                 $(".items").append($div);
 
                 if (tokenCounter > 1) {
@@ -212,15 +227,21 @@ function constructQuery(foundTokens, inputQuery) {
                 }
 
                 // Suggestion dropdown constructor
-                $(".dropdown").append('<div id="myDropdown" class="dropdown-content"></div>');
-                for (var i=0; i<suggestions.length; i++) {
-                    $("#myDropdown").append('<a class="suggestion'+(i+1)+'" onClick="close()" href="#"> '+suggestions[i]+'</a>');
-                }
+                // $(".dropdown").append('<div id="myDropdown" class="dropdown-content"></div>');
+                // for (var i=0; i<suggestions.length; i++) {
+                //     $("#myDropdown").append('<a class="suggestion'+(i+1)+'" onClick="closeDropdown(token'+tokenCounter+')" href="#"> '+suggestions[i]+'</a>');
+                // }
 
+                
+                
                 // Click listeners (dropdown)
-                $(".item").click(function(){
-                    console.log($(this)[0].id);
-                    document.getElementById("myDropdown").classList.toggle("show");
+                $(".dropdown").click(function(){
+                    console.log($(".item"));
+                    // for (tokens in $(".item")) {
+                    //     console.log(tokens);
+                    // }
+                    console.log($(this).children());
+                    // $(this).children()[1].style.display = "block";
                 });
             }
 
@@ -305,12 +326,12 @@ $(document).ready(function() {
         var inputQuery = crawlAndCollect($(".items"));
 
         var dictionary = sendTokens(inputQuery);
-        var cuisineEnum = cuisineDict[dictionary["cuisine"]][0];
-        var latitude = dictionary["location"][0];
-        var longitude = dictionary["location"][1];
-        var covers = dictionary["covers"];
-        var time = dictionary["time"];
-        var date = dictionary["date"];
+        // var cuisineEnum = cuisineDict[dictionary["cuisine"]][0];
+        // var latitude = dictionary["location"][0];
+        // var longitude = dictionary["location"][1];
+        // var covers = dictionary["covers"];
+        // var time = dictionary["time"];
+        // var date = dictionary["date"];
 
         console.log(dictionary);
     });
