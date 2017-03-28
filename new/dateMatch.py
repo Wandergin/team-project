@@ -111,5 +111,3 @@ def dateMatch(s):
 	                return day + "." + Tokens.Dates_months.get(s[i]) + "." + time.strftime("%y") + "."
 	    i = i + 1
 	return 0
-
-print dateMatch("this saturday")
