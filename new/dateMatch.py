@@ -27,7 +27,7 @@ def addDays(n):
         today[0] = today[0] + 1
 
         # If on to the next month
-        if today[0] > months[today[1]]:
+        if today[0] > (months[today[1]] + 1):
             today[0] = 1
             today[1] = today[1] + 1
 
@@ -44,7 +44,7 @@ def addDays(n):
 def dateMatch(s):
 	s = s.split(" ")
 	i = 0
-	
+
 
 	# For all words in string
 	while (i < len(s)):
@@ -111,3 +111,5 @@ def dateMatch(s):
 	                return day + "." + Tokens.Dates_months.get(s[i]) + "." + time.strftime("%y") + "."
 	    i = i + 1
 	return 0
+
+print dateMatch("this saturday")
