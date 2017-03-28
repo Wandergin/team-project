@@ -1,0 +1,10 @@
+127.0.0.1 - - [28/Mar/2017 17:01:38] "GET /FrontEnd/ResdiaryStyle/ HTTP/1.1" 200 -
+127.0.0.1 - - [28/Mar/2017 17:01:38] "GET /FrontEnd/ResdiaryStyle/js/jqueryui.js HTTP/1.1" 200 -
+127.0.0.1 - - [28/Mar/2017 17:01:38] "GET /FrontEnd/ResdiaryStyle/css/layout.css HTTP/1.1" 200 -
+127.0.0.1 - - [28/Mar/2017 17:01:38] "GET /FrontEnd/ResdiaryStyle/css/search.css HTTP/1.1" 200 -
+127.0.0.1 - - [28/Mar/2017 17:01:38] "GET /FrontEnd/ResdiaryStyle/css/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [28/Mar/2017 17:01:38] "GET /FrontEnd/ResdiaryStyle/js/tokenizer.js HTTP/1.1" 200 -
+127.0.0.1 - - [28/Mar/2017 17:01:38] "GET /FrontEnd/ResdiaryStyle/css/stroke.css HTTP/1.1" 200 -
+127.0.0.1 - - [28/Mar/2017 17:01:38] "GET /FrontEnd/ResdiaryStyle/fonts/OpenSans-Regular-webfont.woff HTTP/1.1" 200 -
+127.0.0.1 - - [28/Mar/2017 17:01:38] "GET /FrontEnd/ResdiaryStyle/fonts/fontawesome-webfont.woff?v=4.1.0 HTTP/1.1" 200 -
+127.0.0.1 - - [28/Mar/2017 17:01:38] "GET /FrontEnd/ResdiaryStyle/fonts/OpenSans-Bold-webfont.woff HTTP/1.1" 200 -

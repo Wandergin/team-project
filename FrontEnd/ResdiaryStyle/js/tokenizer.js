@@ -37,15 +37,11 @@ function findTokenPositions(foundTokens, inputQuery) {
 
     // Parsing query into token and filler list
     $.each(foundTokens, function(index, token){
-        // console.log("Parsing: "+token);
-        console.log(inputQuery.indexOf(token));
         if (inputQuery.indexOf(token) > 0) { // Token is not the first item
             fillerBegin = previousTokenEnd;
             fillerEnd = inputQuery.indexOf(token);
             tokenBegin = inputQuery.indexOf(token);
             tokenEnd = inputQuery.indexOf(token) + token.length;
-            console.log("Token begins at "+tokenBegin+" and ends at "+tokenEnd+ " : "+inputQuery.substring(tokenBegin, tokenEnd));
-            console.log("Filler begins at "+fillerBegin+" and ends at "+fillerEnd+ " : "+inputQuery.substring(fillerBegin, fillerEnd));
             fields.push({"fillerBegin":fillerBegin,"fillerEnd":fillerEnd, "type":"filler", "value":inputQuery.substring(fillerBegin, fillerEnd)});
             tokenEnd = inputQuery.indexOf(token) + token.length;
             fields.push({"tokenBegin":tokenBegin, "tokenEnd":tokenEnd, "type":"token", "value":token});
@@ -54,7 +50,6 @@ function findTokenPositions(foundTokens, inputQuery) {
         else if (inputQuery.indexOf(token) == 0) { // Token is the first item
             tokenBegin = 0;
             tokenEnd = token.length;
-            console.log("Token begins at "+tokenBegin+" and ends at "+tokenEnd+ " : "+inputQuery.substring(tokenBegin, tokenEnd));
             fields.push({"tokenBegin":tokenBegin, "tokenEnd":tokenEnd, "type":"token", "value":token});
             previousTokenEnd = tokenEnd;
         }
@@ -64,15 +59,14 @@ function findTokenPositions(foundTokens, inputQuery) {
 
 /**
  * Removes the reduntant part of the filler that has been made into a token. 
- * @param {string} filler - The string representation of an input field.
- * @param {string} token - The string representation of a token.
+ * @param {Object} filler - Input field object representing a filler.
+ * @param {Object} token - A div object representing a token.
  */
 function modifyTheFiller(filler, token) {
     if (filler[0].nodeName == "BUTTON") {
         return;
     }
     fillerVal = filler[0].value;
-    console.log(fillerVal.indexOf(token[0].innerText.substring(0,token[0].innerText.length-1)));
     filler[0].value = fillerVal.substring(0,fillerVal.indexOf(token[0].innerText.substring(0,token[0].innerText.length-1)));
     fillerVal = filler[0].value;
     $("#"+filler[0].id).css("width",fillerVal.length*0.8+"ch");
@@ -80,7 +74,7 @@ function modifyTheFiller(filler, token) {
 
 /**
  * Removes the token from the client query. 
- * 
+ * @param {Object} token - A div object representing a token.
  *
  */
 function removeToken(token) {
@@ -103,7 +97,7 @@ function removeToken(token) {
 
 /**
  * Closes the opened dropdown. 
- *
+ * @param {Object} token - A div object representing a token.
  *
  */
 function closeDropdown(token) {
@@ -112,8 +106,6 @@ function closeDropdown(token) {
 
 /**
  * Creates dropdowns for suggestions. Mostly for demonstration purposes, still lacks functionality. 
- *
- *
  */
 function bindDropdown() {
     $(".dropdown").append('<div id="myDropdown" class="dropdown-content"></div>');
@@ -146,12 +138,10 @@ function constructQuery(foundTokens, inputQuery) {
             $.each($(".items>div"), function(index, i) {
                 if (item.value == i.innerText.substring(0,item.value.length)) {
                     unique = false;
-                    console.log("Found a duplicate token: "+i.innerText.substring(0,item.value.length));
                 }
             });
             // If no duplicate tokens found, add the token to the end of the query
             if (unique == true) {
-                console.log("New unique token: "+item.value);
                 tokenCounter++;
                 var $div = $('<div class="item dropdown" id="token'+tokenCounter+'">'+item.value+'<a href="javascript:void(0)" onClick="removeToken($(this))" class="remove" tabindex="-1" title="Remove">×</a></div>');
                 $(".items").append($div);
@@ -167,7 +157,6 @@ function constructQuery(foundTokens, inputQuery) {
             $.each($(".items>input"), function(index, i) {
                 if (item.value == i.value.substring(0,item.value.length)) {
                     unique = false;
-                    console.log("Duplicate filler: "+i.innerText.substring(0,item.value.length));
                 }
             });
         }
@@ -209,7 +198,6 @@ function grabDisplayTokens(inputQuery) {
                 }
             });
             foundTokens = sortFoundTokens(foundTokens, inputQuery);
-            console.log("Tokens found: "+foundTokens);
             constructQuery(foundTokens, inputQuery)
         },
     });
@@ -273,12 +261,10 @@ function forcePlaceholderRemoval() {
 
 /**
  * Go through each of the items, if it's a div, extract it's token, if it's an input field, extract it's value 
- *
- *
+ * @param {Array} items - The Array of objects representing tokens and fillers.
  */
 function crawlAndCollect(items) {
     var query = "";
-    console.log("Crawling...");
     items.children().each(function(){
         if ($(this)[0].nodeName == "DIV") {
             query += $(this)[0].innerText.substring(0,$(this)[0].innerText.length-1);
