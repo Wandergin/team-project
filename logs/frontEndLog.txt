@@ -1,10 +1,42 @@
-127.0.0.1 - - [28/Mar/2017 16:51:01] "GET /FrontEnd/ResdiaryStyle/ HTTP/1.1" 200 -
-127.0.0.1 - - [28/Mar/2017 16:51:01] "GET /FrontEnd/ResdiaryStyle/js/jqueryui.js HTTP/1.1" 200 -
-127.0.0.1 - - [28/Mar/2017 16:51:01] "GET /FrontEnd/ResdiaryStyle/css/layout.css HTTP/1.1" 200 -
-127.0.0.1 - - [28/Mar/2017 16:51:01] "GET /FrontEnd/ResdiaryStyle/css/search.css HTTP/1.1" 200 -
-127.0.0.1 - - [28/Mar/2017 16:51:01] "GET /FrontEnd/ResdiaryStyle/css/style.css HTTP/1.1" 200 -
-127.0.0.1 - - [28/Mar/2017 16:51:01] "GET /FrontEnd/ResdiaryStyle/js/tokenizer.js HTTP/1.1" 200 -
-127.0.0.1 - - [28/Mar/2017 16:51:01] "GET /FrontEnd/ResdiaryStyle/css/stroke.css HTTP/1.1" 200 -
-127.0.0.1 - - [28/Mar/2017 16:51:01] "GET /FrontEnd/ResdiaryStyle/fonts/OpenSans-Regular-webfont.woff HTTP/1.1" 200 -
-127.0.0.1 - - [28/Mar/2017 16:51:01] "GET /FrontEnd/ResdiaryStyle/fonts/fontawesome-webfont.woff?v=4.1.0 HTTP/1.1" 200 -
-127.0.0.1 - - [28/Mar/2017 16:51:01] "GET /FrontEnd/ResdiaryStyle/fonts/OpenSans-Bold-webfont.woff HTTP/1.1" 200 -
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+127.0.0.1 - - [28/Mar/2017 17:01:40] "GET /tokens?q=chinese%20 HTTP/1.1" 200 -
+127.0.0.1 - - [28/Mar/2017 17:01:43] "GET /tokens?q=chinese%20for%20 HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/werkzeug/serving.py", line 205, in run_wsgi
+    execute(self.server.app)
+  File "/Library/Python/2.7/site-packages/werkzeug/serving.py", line 193, in execute
+    application_iter = app(environ, start_response)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1994, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1985, in wsgi_app
+    response = self.handle_exception(e)
+  File "/Library/Python/2.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1540, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Python/2.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Mario/git/aqb/new/flask_server.py", line 70, in api_token
+    tokens = mainParser(search, location, "token")
+  File "/Users/Mario/git/aqb/new/mainParser.py", line 23, in mainParser
+    peopleTokens = getPeople(s)
+  File "/Users/Mario/git/aqb/new/mainParser.py", line 253, in getPeople
+    people = partyProbability.partyProbability(s)
+  File "/Users/Mario/git/aqb/new/partyProbability.py", line 23, in partyProbability
+    if s[i] .isdigit():
+IndexError: list index out of range
+127.0.0.1 - - [28/Mar/2017 17:01:44] "GET /tokens?q=chinese%20for%202%20 HTTP/1.1" 200 -
+127.0.0.1 - - [28/Mar/2017 17:01:45] "GET /tokens?q=chinese%20for%202%20people%20 HTTP/1.1" 200 -
+127.0.0.1 - - [28/Mar/2017 17:01:47] "GET /tokens?q=chinese%20for%202%20people%20in%20 HTTP/1.1" 200 -
+127.0.0.1 - - [28/Mar/2017 17:01:49] "GET /tokens?q=chinese%20for%202%20people%20in%20glasgow%20 HTTP/1.1" 200 -
