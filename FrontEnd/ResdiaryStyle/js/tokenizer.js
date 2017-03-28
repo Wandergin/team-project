@@ -3,7 +3,11 @@ var tokenCounter = 0;
 var suggestions = ["suggestion1","suggestion2","suggestion3"];
 var cuisineDict = {'mexican': 63, 'chinese': 28, 'eastern european': 37, 'german': 46, 'contemporary': 29, 'moroccan': 69, 'asian': 6, 'singaporean': 85, 'sunday lunch': 94, 'thai': 98, 'modern australian': 67, 'turkish': 100, 'byo': 21, 'spanish': 91, 'indonesian': 51, 'deli': 34, 'aussie bbq': 8, 'all you can eat': 2, 'wine bar': 114, 'vegan': 101, 'gastro pub': 45, 'banquet': 12, 'malaysian': 60, 'pizza': 75, 'italian': 54, 'modern new zealand': 68, 'piano bar': 74, 'fish': 41, 'scottish': 81, 'mediterranean': 62, 'japanese': 55, 'cocktails': 113, 'persian': 111, 'salads': 79, 'american fusion': 110, 'caribbean': 25, 'high tea': 49, 'asian fusion': 7, 'fondue': 42, 'indian': 50, 'modern peruvian': 109, 'international': 52, 'creole': 31, 'street food style': 93, 'bistro': 14, 'cajun': 23, 'middle eastern': 65, 'french': 43, 'pasta': 73, 'afternoon tea': 1, 'chilean': 27, 'steak': 92, 'diner': 36, 'filipino': 39, 'burger joint': 20, 'vegetarian': 102, 'vietnamese': 103, 'british': 17, 'american': 3, 'levantine': 107, 'smokehouse': 88, 'modern asian': 66, 'locavore': 59, 'pan asian': 72, 'fresh salads': 44, 'latin american': 112, 'nepalese': 70, 'bbq & grill': 13, 'continental': 30, 'brazilian': 16, 'modern balinese': 105, 'danish': 33, 'set menu': 83, 'michelin star': 64, 'bosnian': 15, 'south east asian': 90, 'argentinian': 5, 'brunch': 18, 'tearoom': 97, 'lebanese': 57, 'slow food': 86, 'romantic': 78, 'scandinavian': 80, 'fine dining': 40, 'seafood': 82, 'irish': 53, 'balinese': 10, 'peruvian': 108, 'sushi': 95, 'halal': 48, 'cantonese': 24, 'arabic': 4, 'cafe': 22, 'south american': 89, 'raw food': 77, 'modern indonesian': 104, 'food safari': 106, 'small plates': 87, 'bakery': 9, 'dessert': 35, 'korean': 56, 'european': 38, 'child friendly': 26, 'buffet': 19, 'norwegian': 71, 'maltese': 61, 'tibetan': 99, 'cuban': 32, 'baltic states': 11, 'punjabi': 76, 'greek': 47, 'locally sourced': 58, 'african': 0, 'tapas': 96, 'sicilian': 84};
 
-/* Sorts tokens that have been found in the response in order they need to be presented. */
+/**
+ * Sorts tokens that have been found in the response in order they need to be presented. 
+ * @param {Array}  foundTokens - The tokens that have been found in the response.
+ * @param {string} inputQuery - The string representation of client query.
+ */
 function sortFoundTokens(foundTokens, inputQuery) {
     
     var sortOrder = {};
@@ -18,7 +22,11 @@ function sortFoundTokens(foundTokens, inputQuery) {
     return sortedTokens;
 }
 
-// Find the positions of each found token in the client query.
+/**
+ * Find the positions of each found token in the client query 
+ * @param {Array}  foundTokens - The tokens that have been found in the response.
+ * @param {string} inputQuery - The string representation of client query.
+ */
 function findTokenPositions(foundTokens, inputQuery) {
     var fields = [];
     console.log(inputQuery);
@@ -28,7 +36,6 @@ function findTokenPositions(foundTokens, inputQuery) {
     var previousTokenEnd = 0;
 
     // Parsing query into token and filler list
-    console.log(foundTokens)
     $.each(foundTokens, function(index, token){
         // console.log("Parsing: "+token);
         console.log(inputQuery.indexOf(token));
@@ -55,7 +62,11 @@ function findTokenPositions(foundTokens, inputQuery) {
     return fields;
 }
 
-// Removes the reduntant part of the filler that has been made into a token.
+/**
+ * Removes the reduntant part of the filler that has been made into a token. 
+ * @param {string} filler - The string representation of an input field.
+ * @param {string} token - The string representation of a token.
+ */
 function modifyTheFiller(filler, token) {
     if (filler[0].nodeName == "BUTTON") {
         return;
@@ -65,19 +76,22 @@ function modifyTheFiller(filler, token) {
     filler[0].value = fillerVal.substring(0,fillerVal.indexOf(token[0].innerText.substring(0,token[0].innerText.length-1)));
     fillerVal = filler[0].value;
     $("#"+filler[0].id).css("width",fillerVal.length*0.8+"ch");
-    console.log(filler);
-    console.log(token);
 }
 
-function removeToken(o) {
-    if (o.parent().next()[0].value == " ") {
+/**
+ * Removes the token from the client query. 
+ * 
+ *
+ */
+function removeToken(token) {
+    if (token.parent().next()[0].value == " ") {
         inputCounter = inputCounter - 1;
-        o.parent().next().remove();
+        token.parent().next().remove();
     }
-    if (o.parent().prev()[0].nodeName != "BUTTON") {
-        o.parent().prev().css("width","30ch").focus();
+    if (token.parent().prev()[0].nodeName != "BUTTON") {
+        token.parent().prev().css("width","30ch").focus();
     }
-    o.parent().remove();
+    token.parent().remove();
     forcePlaceholderRemoval();
     tokenCounter = tokenCounter - 1;
     if ($(".items").children().length == 1) {
@@ -87,29 +101,37 @@ function removeToken(o) {
     }
 }
 
-// Closes the opened dropdown.
+/**
+ * Closes the opened dropdown. 
+ *
+ *
+ */
 function closeDropdown(token) {
-    console.log("E");
-    console.log(token);
-    console.log($("#"+token.id+">#myDropdown"));
     $("#"+token.id+">#myDropdown")[0].style.display = "none !important";
 }
 
-// Creates dropdowns for suggestions. Mostly for demonstration purposes, still lacks functionality.
+/**
+ * Creates dropdowns for suggestions. Mostly for demonstration purposes, still lacks functionality. 
+ *
+ *
+ */
 function bindDropdown() {
     $(".dropdown").append('<div id="myDropdown" class="dropdown-content"></div>');
     for (var i=0; i<suggestions.length; i++) {
         $("#myDropdown").append('<a class="suggestion'+(i+1)+'" onClick="closeDropdown(token'+tokenCounter+')" href="#"> '+suggestions[i]+'</a>');
     }
     $(".dropdown").click(function(){
-        console.log($(this));
         if ($(this).id != "token1") {
             $(".item").children()[1].style.display = "block";
         }
     });
 }
 
-// Constructs a query from tokens and fillers
+/**
+ * Constructs a query from tokens and fillers 
+ * @param {Array}  foundTokens - The tokens that have been found in the response.
+ * @param {string} inputQuery - The string representation of client query.
+ */
 function constructQuery(foundTokens, inputQuery) {
     var fields = findTokenPositions(foundTokens, inputQuery);
     // if there are tokens in the query, remove the first input
@@ -145,10 +167,9 @@ function constructQuery(foundTokens, inputQuery) {
             $.each($(".items>input"), function(index, i) {
                 if (item.value == i.value.substring(0,item.value.length)) {
                     unique = false;
-                    console.log("Found a duplicate filler: "+i.innerText.substring(0,item.value.length));
+                    console.log("Duplicate filler: "+i.innerText.substring(0,item.value.length));
                 }
             });
-            console.log("Unique = "+ unique);
         }
     });
     // If the last item in the query is a token, add a filler field to the end
@@ -160,18 +181,21 @@ function constructQuery(foundTokens, inputQuery) {
     }
 }
 
+/**
+ * Send a request to local API, retrieve and sort the tokens, send them to query construction function. 
+ * @param {string} inputQuery - The string representation of client query.
+ */
 function grabDisplayTokens(inputQuery) {
-    // Send a request to local API, retrieve and sort the tokens, send them to query construction function.
     var foundTokens = [];
     var foundSuggestions = [];
-    console.log("SENDING: "+ inputQuery);
+    console.log("Sending to local API: "+ inputQuery);
     $.ajax({
         url: "http://localhost:5000/tokens",
         method: "GET",
         data:{"q":inputQuery.toLowerCase()},
         success: function(res){
             res = JSON.parse(res);
-            console.log(res)
+            console.log(res);
             $.each(res, function(key, item){
                 if (item != "" && item != [] && (key.indexOf("Suggestions") <= 0) && key != "location") {
                     if (typeof item === "string" || typeof item === "integer") {
@@ -185,27 +209,28 @@ function grabDisplayTokens(inputQuery) {
                 }
             });
             foundTokens = sortFoundTokens(foundTokens, inputQuery);
-            console.log("grabDisplayTokens found:");
-            console.log(foundTokens);
+            console.log("Tokens found: "+foundTokens);
             constructQuery(foundTokens, inputQuery)
         },
     });
 }
 
+/**
+ * Send a request to local API, retrieve tokens and then input them into ResDiary API. 
+ * @param {string} inputQuery - The string representation of client query.
+ */
 function grabSearchTokens(inputQuery) {
-    // Send a request to local API, retrieve tokens and then input them into ResDiary API.
     var searchTokens = {};
-    console.log("SENDING: "+ inputQuery);
+    console.log("Sending to local API: "+ inputQuery);
     $.ajax({
         url: "http://localhost:5000/search",
         method: "GET",
         data:{"q":inputQuery.toLowerCase()},
         success: function(res){
             res = JSON.parse(res);
-            console.log(res)
+            console.log(res);
             $.each(res, function(key, item){
                 if (item != "" && item != [] && (key.indexOf("Suggestions") <= 0) && key != "Name") {
-                    console.log(item);
                     searchTokens[key]=item;
                 }
             });
@@ -228,6 +253,11 @@ function grabSearchTokens(inputQuery) {
     });
 }
 
+/**
+ * Puts a space in the new input field to hide the placeholder. 
+ *
+ *
+ */
 function forcePlaceholderRemoval() {
     var empty = true;
     if ($(".items").children().length > 2) {
@@ -241,9 +271,12 @@ function forcePlaceholderRemoval() {
     }
 }
 
+/**
+ * Go through each of the items, if it's a div, extract it's token, if it's an input field, extract it's value 
+ *
+ *
+ */
 function crawlAndCollect(items) {
-    // Go through each of the items, if it's a div, extract it's token, if it's an
-    // input field, extract it's value
     var query = "";
     console.log("Crawling...");
     items.children().each(function(){
@@ -258,8 +291,13 @@ function crawlAndCollect(items) {
     return query;
 }
 
-$(document).ready(function() {
-    $("#input0").focus();
+/**
+ * Creates listeners for user input: space - update the query, 
+ * backspace - delete a character, delete - do nothing, 
+ * click on search button - update and send the query to ResDiary API.
+ */
+function createListeners() {
+    // Listener for keyboard input
     $(document).keyup(function(e) {
         if (e.which == 32){
             var inputQuery = crawlAndCollect($(".items"));
@@ -274,9 +312,13 @@ $(document).ready(function() {
             console.log("delete");
         }
     });
-    //Search button - console.log the tokens
     $(document).on('click', 'button', function() {
         var inputQuery = crawlAndCollect($(".items"));
         grabSearchTokens(inputQuery);
     });
+}
+
+$(document).ready(function() {
+    $("#input0").focus();
+    createListeners();
 });
