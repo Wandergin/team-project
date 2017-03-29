@@ -4,3 +4,4 @@ pip install nltk
 pip install python-geoip
 pip install python-geoip-geolite2
 pip install geopy
+pip install requests
