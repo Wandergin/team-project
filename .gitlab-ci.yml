@@ -2,8 +2,93 @@ image: python:2.7
 
 before_script:
      - echo "starting before script"
+     - cd new
+     - chmod +x install.sh
+     - ./install.sh 
     # Initialize any necessary dependencies before the scripts are
     # executed.
+
+
+
+#Checks if all the python files compile
+will_compile:
+    script:
+    - echo "testing if python files compile"
+    - python -m py_compile *.py
+
+
+#Tests cuisine functions
+cuisine_tests:
+    script:
+    - echo "testing cuisine functions"
+
+    - echo "testing cuisineProbability"
+    - python cuisineTests.py
+
+
+#Tests date functions
+date_tests:
+    script:
+    - echo "testing date functions"
+
+    - echo "testing dateFinder"
+    - python dateFinderTests.py
+
+    - echo "testing dateProbability"
+    - python dateProbabilityTests.py
+
+    - echo "testing dateMatch"
+    - python dateMatchTests.py
+
+
+#Tests cover functions
+cover_tests:
+    script:
+    - echo "testing cover functions"
+
+    - echo "testing partyProbability"
+    - python partyProbabilityTests.py
+
+    - echo "testing partyMatch"
+    - python partyMatchTests.py
+
+
+#Tests time functions
+time_tests:
+    script:
+    - echo "testing time functions"
+
+    - echo "testing timeProbability"
+    - python timeProbabilityTests.py
+
+    - echo "testing timeMatch"
+    - python timeMatchTests.py
+
+
+#Tests location functions
+location_tests:
+    script:
+    - echo "testing location functions"
+
+    - echo "testing locationMatch"
+    - python locationMatchTests.py
+   
+    - echo "testing locationProbability"
+    - python locationProbabilityTests.py
+
+
+mainParser_tests:									#Tests mainParser functions
+    script:
+    - echo "testing empty string"
+    - python mainParserTests.py
+                          
+
+server_will_run:										#Checks if the server will run
+    script:
+    - echo "testing server starts"
+    - timeout 15s python flask_server.py
+
+
 rspec:
     script:
      - echo "starting rspec"
