@@ -43,9 +43,9 @@ def isDate(s):
 		j = j +1
 	
 	#If date exists then return
-	returnString =  date[0] + "." + date[1] 
+	returnString =  date[0] + "/" + date[1] 
 	if len(date) > 2:
-		returnString = returnString + "." + date[2] 
+		returnString = returnString + "/" + date[2] 
 	else:
-		returnString = returnString + time.strftime(".%y")
+		returnString = returnString + time.strftime("/%y")
 	return returnString
