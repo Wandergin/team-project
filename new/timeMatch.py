@@ -81,6 +81,8 @@ def guessHour(hour):
 	#If in 24h format
 	if 12 < hour < 24:
 		return hour
+	elif hour > 24:
+		return 0
 
         #Before 10 then probably PM, else probably AM
 	if hour < 10:
