@@ -5,8 +5,10 @@ var cuisineDict = {'mexican': 63, 'chinese': 28, 'eastern european': 37, 'german
 
 /**
  * Sorts tokens that have been found in the response in order they need to be presented. 
+ * @summary asjsd vkjs d
  * @param {Array}  foundTokens - The tokens that have been found in the response.
- * @param {string} inputQuery - The string representation of client query.
+ * @param {String} inputQuery - The string representation of client query.
+ * @returns {Array} sorted tokens in the right order for presentation.
  */
 function sortFoundTokens(foundTokens, inputQuery) {
     
@@ -23,9 +25,10 @@ function sortFoundTokens(foundTokens, inputQuery) {
 }
 
 /**
- * Find the positions of each found token in the client query 
+ * Finds the positions of each found token in the client query 
  * @param {Array}  foundTokens - The tokens that have been found in the response.
- * @param {string} inputQuery - The string representation of client query.
+ * @param {String} inputQuery - The string representation of client query.
+ * @returns {Array} fields for positions of the tokens in the client query.
  */
 function findTokenPositions(foundTokens, inputQuery) {
     var fields = [];
@@ -58,7 +61,7 @@ function findTokenPositions(foundTokens, inputQuery) {
 }
 
 /**
- * Removes the reduntant part of the filler that has been made into a token. 
+ * Removes the redundant part of the filler that has been made into a token. 
  * @param {Object} filler - Input field object representing a filler.
  * @param {Object} token - A div object representing a token.
  */
@@ -88,10 +91,12 @@ function removeToken(token) {
     token.parent().remove();
     forcePlaceholderRemoval();
     tokenCounter = tokenCounter - 1;
+    // If the client query is empty and the first entry in the query
+    // was the targeted token, then create a new input field
     if ($(".items").children().length == 1) {
         var $input = $('<input type="text"  id="input'+inputCounter+'" value="" onfocus="this.value = this.value;" class="input-tags demo-default" placeholder="Enter some values">');
         $(".items").prepend($input);
-        $("#input"+inputCounter).focus();
+        $("#input"+inputCounter).css("width","30ch").focus();
     }
 }
 
@@ -120,9 +125,9 @@ function bindDropdown() {
 }
 
 /**
- * Constructs a query from tokens and fillers 
+ * Constructs a query from tokens and fillers.
  * @param {Array}  foundTokens - The tokens that have been found in the response.
- * @param {string} inputQuery - The string representation of client query.
+ * @param {String} inputQuery - The string representation of client query.
  */
 function constructQuery(foundTokens, inputQuery) {
     var fields = findTokenPositions(foundTokens, inputQuery);
@@ -151,14 +156,6 @@ function constructQuery(foundTokens, inputQuery) {
                 // Function for attaching dropdowns to tokens
                 bindDropdown();
             }
-        } else if (item.type == "filler") {
-            var unique = true;
-            // Parsing through fillers that are already in the query, checking for duplicates
-            $.each($(".items>input"), function(index, i) {
-                if (item.value == i.value.substring(0,item.value.length)) {
-                    unique = false;
-                }
-            });
         }
     });
     // If the last item in the query is a token, add a filler field to the end
@@ -171,8 +168,8 @@ function constructQuery(foundTokens, inputQuery) {
 }
 
 /**
- * Send a request to local API, retrieve and sort the tokens, send them to query construction function. 
- * @param {string} inputQuery - The string representation of client query.
+ * Sends a request to local API, retrieves and sorts the tokens, sends them to query construction function. 
+ * @param {String} inputQuery - The string representation of client query.
  */
 function grabDisplayTokens(inputQuery) {
     var foundTokens = [];
@@ -204,8 +201,8 @@ function grabDisplayTokens(inputQuery) {
 }
 
 /**
- * Send a request to local API, retrieve tokens and then input them into ResDiary API. 
- * @param {string} inputQuery - The string representation of client query.
+ * Sends a request to local API, retrieves tokens and then inputs them into ResDiary API. 
+ * @param {String} inputQuery - The string representation of client query.
  */
 function grabSearchTokens(inputQuery) {
     var searchTokens = {};
@@ -235,23 +232,15 @@ function grabSearchTokens(inputQuery) {
             var time = searchTokens["time"];
             var date = searchTokens["date"];
             window.open("https://www.resdiary.com/api/Restaurant/LocationSearch?lat="+latitude+"&lon="+longitude+"&page=1&distance=10&visitDate="+date+"&visitTime="+time+"&covers="+covers+"&includeAllPages=false&selectedCuisines="+cuisineEnum+"&selectedSortOrder=4","_self")
-
-            return searchTokens;
         }
     });
 }
 
 /**
  * Puts a space in the new input field to hide the placeholder. 
- *
- *
  */
 function forcePlaceholderRemoval() {
-    var empty = true;
     if ($(".items").children().length > 2) {
-        empty = false
-    }
-    if (empty == false) {
         $("#input0").attr("placeholder","");
     }
     else {
@@ -260,8 +249,9 @@ function forcePlaceholderRemoval() {
 }
 
 /**
- * Go through each of the items, if it's a div, extract it's token, if it's an input field, extract it's value 
+ * Goes through each of the items, if it's a div, extract it's token, if it's an input field, extracts it's value.
  * @param {Array} items - The Array of objects representing tokens and fillers.
+ * @returns {String} the client query.
  */
 function crawlAndCollect(items) {
     var query = "";
@@ -289,13 +279,6 @@ function createListeners() {
             var inputQuery = crawlAndCollect($(".items"));
             grabDisplayTokens(inputQuery);
             forcePlaceholderRemoval();
-        }
-        else if (e.which == 8) {
-            console.log("backspace");
-        }
-        else if (e.which == 46) {
-            e.preventDefault();
-            console.log("delete");
         }
     });
     $(document).on('click', 'button', function() {

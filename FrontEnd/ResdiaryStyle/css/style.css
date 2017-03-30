@@ -41,12 +41,10 @@ h3 {
 /*    width: 30%;*/
 }
 
-
-
 .s-button {
     position: relative;
     float:right;
-    padding: 5px 12px;
+    padding: 6px 12px;
     border-radius: 3px;
     margin: 1px;
     background-image: linear-gradient(to bottom, #1da7ee, #178ee9);

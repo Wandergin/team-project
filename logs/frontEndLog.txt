@@ -1,1 +1,511 @@
- * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+Traceback (most recent call last):
+  File "./new/flask_serve127.0.0.1 - - [30/Mar/2017 14:54:55] "GET /tokens?q=chinese%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:54:58] "GET /tokens?q=chinese%20table%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:54:58] "GET /tokens?q=chinese%20table%20for%20 HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/werkzeug/serving.py", line 205, in run_wsgi
+    execute(self.server.app)
+  File "/Library/Python/2.7/site-packages/werkzeug/serving.py", line 193, in execute
+    application_iter = app(environ, start_response)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1994, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1985, in wsgi_app
+    response = self.handle_exception(e)
+  File "/Library/Python/2.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1540, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Python/2.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Mario/git/aqb/new/flask_server.py", line 70, in api_token
+    tokens = mainParser(search, location, "token")
+  File "/Users/Mario/git/aqb/new/mainParser.py", line 23, in mainParser
+    peopleTokens = getPeople(s)
+  File "/Users/Mario/git/aqb/new/mainParser.py", line 253, in getPeople
+    people = partyProbability.partyProbability(s)
+  File "/Users/Mario/git/aqb/new/partyProbability.py", line 23, in partyProbability
+    if s[i] .isdigit():
+IndexError: list index out of range
+127.0.0.1 - - [30/Mar/2017 14:54:59] "GET /tokens?q=chinese%20table%20for%202%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:55:55] "GET /tokens?q=chinese%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:55:56] "GET /tokens?q=chinese%20table%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:55:57] "GET /tokens?q=chinese%20table%20for%20 HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/werkzeug/serving.py", line 205, in run_wsgi
+    execute(self.server.app)
+  File "/Library/Python/2.7/site-packages/werkzeug/serving.py", line 193, in execute
+    application_iter = app(environ, start_response)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1994, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1985, in wsgi_app
+    response = self.handle_exception(e)
+  File "/Library/Python/2.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1540, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Python/2.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Mario/git/aqb/new/flask_server.py", line 70, in api_token
+    tokens = mainParser(search, location, "token")
+  File "/Users/Mario/git/aqb/new/mainParser.py", line 23, in mainParser
+    peopleTokens = getPeople(s)
+  File "/Users/Mario/git/aqb/new/mainParser.py", line 253, in getPeople
+    people = partyProbability.partyProbability(s)
+  File "/Users/Mario/git/aqb/new/partyProbability.py", line 23, in partyProbability
+    if s[i] .isdigit():
+IndexError: list index out of range
+127.0.0.1 - - [30/Mar/2017 14:55:57] "GET /tokens?q=chinese%20table%20for%202%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:56:00] "GET /tokens?q=chinese%20table%20for%202%20can%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:56:01] "GET /tokens?q=chinese%20table%20for%202%20can%20%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:56:03] "GET /tokens?q=chinese%20table%20for%202%20can%20i%20 HTTP/1.1" 200 -
+Time is testing:
+chinese
+{}
+[]
+{'cuisine': ['chinese'], 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table
+{}
+[]
+{'cuisine': ['chinese'], 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table for 2
+{'for 2': 25}
+[]
+{'coverSuggestions': ['1', '3'], 'cuisine': ['chinese'], 'covers': '2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese
+{}
+[]
+{'cuisine': ['chinese'], 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table
+{}
+[]
+{'cuisine': ['chinese'], 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table for 2
+{'for 2': 25}
+[]
+{'coverSuggestions': ['1', '3'], 'cuisine': ['chinese'], 'covers': '2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table for 2 can
+{'for 2': 25}
+[]
+{'coverSuggestions': ['1', '3'], 'cuisine': ['chinese'], 'covers': '2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table for 2 can
+{'for 2': 25}
+[]
+{'coverSuggestions': ['1', '3'], 'cuisine': ['chinese'], 'covers': '2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table for 2 can i
+{'for 2': 25}
+[]
+{'coverSuggestions': ['1', '3'], 'cuisine': ['chinese'], 'location': '(5.5859456, 7.0669651)', 'covers': '2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table for 2 can i get
+{'for 2': 25}
+[]
+{'coverSuggestions': ['1', '3'], 'cu127.0.0.1 - - [30/Mar/2017 14:56:04] "GET /tokens?q=chinese%20table%20for%202%20can%20i%20get%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:56:05] "GET /tokens?q=chinese%20table%20for%202%20can%20i%20get%20glasgow%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:56:06] "GET /tokens?q=chinese%20table%20for%202%20can%20i%20get%20in%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:56:08] "GET /tokens?q=chinese%20table%20for%202%20can%20i%20get%20in%20glasgow%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:56:14] "GET /tokens?q=i%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:56:15] "GET /tokens?q=i%20would%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:56:17] "GET /tokens?q=i%20would%20chinese%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:56:19] "GET /tokens?q=chinese%20table%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:56:19] "GET /tokens?q=chinese%20table%20fo%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:56:20] "GET /tokens?q=chinese%20table%20for%20 HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/werkzeug/serving.py", line 205, in run_wsgi
+    execute(self.server.app)
+  File "/Library/Python/2.7/site-packages/werkzeug/serving.py", line 193, in execute
+    application_iter = app(environ, start_response)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1994, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1985, in wsgi_app
+    response = self.handle_exception(e)
+  File "/Library/Python/2.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1540, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Python/2.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Mario/git/aqb/new/flask_server.py", line 70, in api_token
+    tokens = mainParser(search, location, "token")
+  File "/Users/Mario/git/aqb/new/mainParser.py", line 23, in mainParser
+    peopleTokens = getPeople(s)
+  File "/Users/Mario/git/aqb/new/mainParser.py", line 253, in getPeople
+    people = partyProbability.partyProbability(s)
+  File "/Users/Mario/git/aqb/new/partyProbability.py", line 23, in partyProbability
+    if s[i] .isdigit():
+IndexError: list index out of range
+127.0.0.1 - - [30/Mar/2017 14:56:21] "GET /tokens?q=chinese%20table%20for%202%20 HTTP/1.1" 200 -
+isine': ['chinese'], 'location': '(5.5859456, 7.0669651)', 'covers': '2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table for 2 can i get glasgow
+{'for 2': 25}
+[]
+{'coverSuggestions': ['1', '3'], 'cuisine': ['chinese'], 'location': '(5.5859456, 7.0669651)', 'covers': '2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table for 2 can i get in
+{'for 2': 25}
+[('', 9223372036854775807)]
+('', 9223372036854775807)
+
+{'coverSuggestions': ['1', '3'], 'cuisine': ['chinese'], 'locationName': '', 'covers': '2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table for 2 can i get in glasgow
+{'for 2': 25}
+[('glasgow', 6204.519830449194)]
+('glasgow', 6204.519830449194)
+glasgow
+{'cuisine': ['chinese'], 'covers': '2', 'coverSuggestions': ['1', '3'], 'location': '(55.856656, -4.2435816)', 'locationName': 'glasgow', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+i
+{}
+[]
+{'location': '(5.5859456, 7.0669651)'}
+Time is testing:
+i would
+{}
+[]
+{'location': '(5.5859456, 7.0669651)'}
+Time is testing:
+i would chinese
+{}
+[]
+{'cuisine': ['chinese'], 'location': '(5.5859456, 7.0669651)', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table
+{}
+[]
+{'cuisine': ['chinese'], 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table fo
+{}
+[]
+{'cuisine': ['chinese'], 'location': '(7.3125131, -8.6790983)', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table for 2
+{'for 2': 25}
+[]
+{'coverSuggestions': ['1', '3'], 'cuisine': ['chinese'], 'covers': '2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table for 2 can
+{'for 2': 25}
+[]
+{'coverSuggestions': ['1'127.0.0.1 - - [30/Mar/2017 14:56:23] "GET /tokens?q=chinese%20table%20for%202%20can%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:56:24] "GET /tokens?q=chinese%20table%20for%202%20can%20i%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:56:24] "GET /tokens?q=chinese%20table%20for%202%20can%20i%20in%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:56:26] "GET /tokens?q=chinese%20table%20for%202%20can%20i%20in%20glasgow%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:57:01] "GET /tokens?q=i%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:57:02] "GET /tokens?q=iw HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:57:03] "GET /tokens?q=i%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:57:04] "GET /tokens?q=i%20would%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:57:05] "GET /tokens?q=i%20would%20like%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:57:07] "GET /tokens?q=i%20would%20like%20some%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:57:08] "GET /tokens?q=i%20would%20like%20some%20chines%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:57:10] "GET /tokens?q=i%20would%20like%20some%20chinese%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:57:11] "GET /tokens?q=chinese%20and%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:57:14] "GET /tokens?q=chinese%20and%20at%20 HTTP/1.1" 200 -
+, '3'], 'cuisine': ['chinese'], 'covers': '2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table for 2 can i
+{'for 2': 25}
+[]
+{'coverSuggestions': ['1', '3'], 'cuisine': ['chinese'], 'location': '(5.5859456, 7.0669651)', 'covers': '2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table for 2 can i in
+{'for 2': 25}
+[('', 9223372036854775807)]
+('', 9223372036854775807)
+
+{'coverSuggestions': ['1', '3'], 'cuisine': ['chinese'], 'locationName': '', 'covers': '2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese table for 2 can i in glasgow
+{'for 2': 25}
+[('glasgow', 6204.519830449194)]
+('glasgow', 6204.519830449194)
+glasgow
+{'cuisine': ['chinese'], 'covers': '2', 'coverSuggestions': ['1', '3'], 'location': '(55.856656, -4.2435816)', 'locationName': 'glasgow', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+i
+{}
+[]
+{'location': '(5.5859456, 7.0669651)'}
+Time is testing:
+iw
+{}
+[]
+{}
+Time is testing:
+i
+{}
+[]
+{'location': '(5.5859456, 7.0669651)'}
+Time is testing:
+i would
+{}
+[]
+{'location': '(5.5859456, 7.0669651)'}
+Time is testing:
+i would like
+{}
+[]
+{'location': '(6.9003, 7.4765)'}
+Time is testing:
+i would like some
+{}
+[]
+{'location': '(14.7298396, -3.6428915)'}
+Time is testing:
+i would like some chines
+{}
+[]
+{'location': '(14.7298396, -3.6428915)'}
+Time is testing:
+i would like some chinese
+{}
+[]
+{'cuisine': ['chinese'], 'location': '(14.7298396, -3.6428915)', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese and
+{}
+[]
+{'cuisine': ['chinese'], 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese and at
+{}
+[]
+{'cuisine': ['chinese'], 'location': '(12.6000135, -8.01326194376664)', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese and at 9pm
+{'at 9pm': 100}
+[]
+{'cuisine': ['chinese'], 'time': '9pm', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'j127.0.0.1 - - [30/Mar/2017 14:57:15] "GET /tokens?q=chinese%20and%20at%209pm%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:57:17] "GET /tokens?q=chinese%20and%20at%209pm%20for%20 HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/werkzeug/serving.py", line 205, in run_wsgi
+    execute(self.server.app)
+  File "/Library/Python/2.7/site-packages/werkzeug/serving.py", line 193, in execute
+    application_iter = app(environ, start_response)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1994, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1985, in wsgi_app
+    response = self.handle_exception(e)
+  File "/Library/Python/2.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1540, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Python/2.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Mario/git/aqb/new/flask_server.py", line 70, in api_token
+    tokens = mainParser(search, location, "token")
+  File "/Users/Mario/git/aqb/new/mainParser.py", line 23, in mainParser
+    peopleTokens = getPeople(s)
+  File "/Users/Mario/git/aqb/new/mainParser.py", line 253, in getPeople
+    people = partyProbability.partyProbability(s)
+  File "/Users/Mario/git/aqb/new/partyProbability.py", line 23, in partyProbability
+    if s[i] .isdigit():
+IndexError: list index out of range
+127.0.0.1 - - [30/Mar/2017 14:57:17] "GET /tokens?q=chinese%20and%20at%209pm%20for%202%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:57:19] "GET /tokens?q=chinese%20and%20at%209pm%20for%202%20in%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 14:57:21] "GET /tokens?q=chinese%20and%20at%209pm%20for%202%20in%20glasgow%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:20:32] "GET /tokens?q=chines%20e HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:20:32] "GET /tokens?q=chinese%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:20:33] "GET /tokens?q=chinese%20cuising%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:20:34] "GET /tokens?q=chinese%20cuisine%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:20:35] "GET /tokens?q=chinese%20cuisine%20table%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:20:36] "GET /tokens?q=chinese%20cuisine%20table%20for%20 HTTP/1.1" 500 -
+Error on request:
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/werkzeug/serving.py", line 205, in run_wsgi
+    execute(self.server.app)
+  File "/Library/Python/2.7/site-packages/werkzeug/serving.py", line 193, in execute
+    application_iter = app(environ, start_response)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1994, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1985, in wsgi_app
+    response = self.handle_exception(e)
+  File "/Library/Python/2.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1540, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1982, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1614, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Python/2.7/site-packages/flask_cors/extension.py", line 161, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1517, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1612, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1598, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Mario/git/aqb/new/flask_server.py", line 70, in api_token
+    tokens = mainParser(search, location, "token")
+  File "/Users/Mario/git/aqb/new/mainParser.py", line 23, in mainParser
+    peopleTokens = getPeople(s)
+  File "/Users/Mario/git/aqb/new/mainParser.py", line 253, in getPeople
+    people = partyProbability.partyProbability(s)
+  File "/Users/Mario/git/aqb/new/partyProbability.py", line 23, in partyProbability
+    if s[i] .isdigit():
+IndexError: list index out of range
+127.0.0.1 - - [30/Mar/2017 15:20:36] "GET /tokens?q=chinese%20cuisine%20table%20for%202%20 HTTP/1.1" 200 -
+apanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese and at 9pm for 2
+{'for 2': 25, 'at 9pm': 100}
+[]
+{'coverSuggestions': ['1', '3'], 'cuisine': ['chinese'], 'time': '9pm', 'covers': '2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese and at 9pm for 2 in
+{'for 2': 25, 'at 9pm': 100}
+[('', 9223372036854775807)]
+('', 9223372036854775807)
+
+{'cuisine': ['chinese'], 'covers': '2', 'coverSuggestions': ['1', '3'], 'time': '9pm', 'locationName': '', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese and at 9pm for 2 in glasgow
+{'for 2': 25, 'at 9pm': 100}
+[('glasgow', 6204.519830449194)]
+('glasgow', 6204.519830449194)
+glasgow
+{'cuisine': ['chinese'], 'covers': '2', 'coverSuggestions': ['1', '3'], 'location': '(55.856656, -4.2435816)', 'time': '9pm', 'locationName': 'glasgow', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chines e
+{}
+[]
+{}
+Time is testing:
+chinese
+{}
+[]
+{'cuisine': ['chinese'], 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese cuising
+{}
+[]
+{'cuisine': ['chinese'], 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese cuisine
+{}
+[]
+{'cuisine': ['chinese'], 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese cuisine table
+{}
+[]
+{'cuisine': ['chinese'], 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese cuisine table for 2
+{'for 2': 25}
+[]
+{'coverSuggestions': ['1', '3'], 'cuisine': ['chinese'], 'covers': '2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese cuisine table for 2 127.0.0.1 - - [30/Mar/2017 15:20:37] "GET /tokens?q=chinese%20cuisine%20table%20for%202%20in%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:20:39] "GET /tokens?q=chinese%20cuisine%20table%20for%202%20in%20glasgow%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:20:44] "GET /tokens?q=chinese%20cuisine%20table%20for%202%20%20in%20glasgow%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:20:46] "GET /tokens?q=chinese%20cuisine%20table%20for%202%20in%20glasgow%202%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:20:48] "GET /tokens?q=chinese%20cuisine%20table%20for%202%20in%20glasgow%202%20glasgow%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:20:49] "GET /tokens?q=chinese%20cuisine%20table%20for%202%20in%20glasgow%202%20glasgow%20%20 HTTP/1.1" 200 -
+in
+{'for 2': 25}
+[('', 9223372036854775807)]
+('', 9223372036854775807)
+
+{'coverSuggestions': ['1', '3'], 'cuisine': ['chinese'], 'locationName': '', 'covers': '2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese cuisine table for 2 in glasgow
+{'for 2': 25}
+[('glasgow', 6204.519830449194)]
+('glasgow', 6204.519830449194)
+glasgow
+{'cuisine': ['chinese'], 'covers': '2', 'coverSuggestions': ['1', '3'], 'location': '(55.856656, -4.2435816)', 'locationName': 'glasgow', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese cuisine table for 2  in glasgow
+{'for 2': 25}
+[('glasgow', 6204.519830449194)]
+('glasgow', 6204.519830449194)
+glasgow
+{'cuisine': ['chinese'], 'covers': '2', 'coverSuggestions': ['1', '3'], 'location': '(55.856656, -4.2435816)', 'locationName': 'glasgow', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese cuisine table for 2 in glasgow 2
+{'for 2': 25, '2': 0}
+[('glasgow 2', 6200.582510395681)]
+('glasgow 2', 6200.582510395681)
+glasgow 2
+{'cuisine': ['chinese'], 'covers': '2', 'coverSuggestions': ['1', '3'], 'location': '(55.8164191, -4.3359452)', 'locationName': 'glasgow 2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese cuisine table for 2 in glasgow 2 glasgow
+{'for 2': 25, '2': 0}
+[('glasgow 2', 6200.582510395681)]
+('glasgow 2', 6200.582510395681)
+glasgow 2
+{'cuisine': ['chinese'], 'covers': '2', 'coverSuggestions': ['1', '3'], 'location': '(55.8164191, -4.3359452)', 'locationName': 'glasgow 2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese cuisine table for 2 in glasgow 2 glasgow
+{'for 2': 25, '2': 0}
+[('glasgow 2', 6200.582510395681)]
+('glasgow 2', 6200.582510395681)
+glasgow 2
+{'cuisine': ['chinese'], 'covers': '2', 'coverSuggestions': ['1', '3'], 'location': '(55.8164191, -4.3359452)', 'locationName': 'glasgow 2', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english', 'french', 'greek', 'indian', 'irish', 'italian', 'japanese', 'kurdish', 'lebanese', 'mediterranean', 'mexican', 'middle eastern', 'mongolian', 'nordic', 'oriental', 'persian', 'portuguese', 'south american', 'spanish', 'thai', 'turkish']}
+Time is testing:
+chinese cuisine table for 2 in glasgow 2glasgow 2 avdsvj
+{'for 2': 25, '2': 0}
+[('glasgow', 6204.519830449194)]
+('glasgow', 6204.519830449194)
+glasgow
+{'cuisine': ['chinese'], 'covers': '2', 'coverSuggestions': ['1', '3'], 'location': '(55.856656, -4.2435816)', 'locationName': 'glasgow', 'cuisineSuggestions': ['african', 'american', 'arabic', 'british', 'caribbean', 'european', 'english127.0.0.1 - - [30/Mar/2017 15:20:49] "GET /tokens?q=chinese%20cuisine%20table%20for%202%20in%20glasgow%202glasgow%202%20avdsvj%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:20:50] "GET /tokens?q=chinese%20cuisine%20table%20for%202%20in%20glasgow%202glasgow%202%20avdsvj%20jads%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:20:51] "GET /tokens?q=chinese%20cuisine%20table%20for%202%20in%20glasgow%202glasgow%202%20avdsvj%20jads%20glasgow%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:20:52] "GET /tokens?q=chinese%20cuisine%20table%20for%202%20in%20glasgow%202glasgow%202%20avdsvj%20jads%20glasgow%20in%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:20:53] "GET /tokens?q=chinese%20cuisine%20table%20for%202%20in%20glasgow%202glasgow%202%20avdsvj%20jads%20glasgow%20in%20glasgow%20 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Mar/2017 15:21:05] "GET /tokens?q=chinese%20 HTTP/1.1" 200 -
