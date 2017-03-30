@@ -13,7 +13,15 @@ def dateProbability(s):
 	while (i<len(s)):
 		#Check for today/tomorrow/monday
 		if (s[i] in Tokens.Dates_common) or (s[i] in Tokens.Dates_days) :
-			returnDict.update( {s[i]:100} )
+			token = s[i]
+			if i > 0:
+				if s[i-1] == "next" or s[i-1] == "this":
+					token = s[i-1] + " " + s[i]
+				elif i > 2:
+					if (s[i-2] + " " + s[i-1] == "weeks on") and str.isDigit(s[i-3]):
+						token = s[i-3] + " " + "weeks on " + token
+				 
+			returnDict.update( {token:100} )
 
 		#Else check if the first digit is a number (possible date)
 		elif (str.isdigit(s[i][0])):
