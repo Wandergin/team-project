@@ -24,19 +24,19 @@ def partyProbability(s):
 			result = result + str(s[i])
 		        probability += 50
 			if i + 1 < len(s):
-				i+=1
-			if s[i] == "people":
-				result = result + " " + "people"
-				probability = 100
+				if s[i+1] == "people":
+					result = result + " " + "people"
+					probability = 100
+					i  += 1
 
 		elif s[i] in Tokens.People_approx_actual:
 			result = result + " " + s[i]
 			probability += 25
 			if i + 1 < len(s):
-				i+=1
-			if s[i] in Tokens.People_approx_suffix:
-				result = result + " " + s[i]
-				probability = 100
+				if s[i+1] in Tokens.People_approx_suffix:
+					result = result + " " + s[i+1]
+					probability = 100
+					i+=1
 		if result != "":
 			returnDict[result] = probability
 		i +=1
