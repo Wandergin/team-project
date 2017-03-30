@@ -39,6 +39,6 @@ def partyProbability(s):
 					i+=1
 		if result != "":
 		    result = result.strip()
-			returnDict[result] = probability
+		    returnDict[result] = probability
 		i +=1
 	return returnDict
