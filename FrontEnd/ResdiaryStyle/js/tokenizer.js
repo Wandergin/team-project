@@ -269,8 +269,7 @@ function crawlAndCollect(items) {
 
 /**
  * Creates listeners for user input: space - update the query, 
- * backspace - delete a character, delete - do nothing, 
- * click on search button - update and send the query to ResDiary API.
+ * press enter or click on search button - update and send the query to ResDiary API.
  */
 function createListeners() {
     // Listener for keyboard input
@@ -279,6 +278,10 @@ function createListeners() {
             var inputQuery = crawlAndCollect($(".items"));
             grabDisplayTokens(inputQuery);
             forcePlaceholderRemoval();
+        }
+        if (e.which == 13){
+            var inputQuery = crawlAndCollect($(".items"));
+            grabSearchTokens(inputQuery);
         }
     });
     $(document).on('click', 'button', function() {
