@@ -2,7 +2,7 @@ image: python:2.7
 
 before_script:
      - echo "starting before script"
-     - cd new
+     - cd BackendNew
      - chmod +x install.sh
      - ./install.sh 
     # Initialize any necessary dependencies before the scripts are
