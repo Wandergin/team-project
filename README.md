@@ -6,28 +6,28 @@ Aqb is a search bar that allows ResDiary users to look up restaurants using natu
 
 ## Code Example
 
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
+Use run.sh to start the system, server is run on "localhost:8082/"
 
-Aqb takes in user input and sends it out to our api to tokenize the input and fetch back suggestions for the individual tokens.
-
-
-Upon receiving the tokens the front end client will visually create the tags within the user input.
-
-
+Aqb takes in user input from the search bar, it is then sent through the flask server (new/flask_server.py) and to the main parser (new/mainParser.py). The main parser will the distribbute the query to
+several probability functions (new/*Probability.py) which can detect tokens of a certain type and the probability of the tokens being of that type. 
+All the probability data is then gathered and the most probable data is assigned first, with real values being generated for each token using the matching functions (new/*Match.py).
+After the tokens have been matched, suggestions are made based on the user input and this is conjoined to the actual search tokens.
+This data structure is sent back to the frontend which displayes the query in the seach bar, and finally queries resDiary.com who can display restaurant listings using the values provided.
 After the input has been visually tokenized, the users will be able to edit the tags - i.e. remove the given tag, or change the value of the tag to a selected suggestion.
 
 
 ## Installation
 
-Provide code examples and explanations of how to get the project.
+System can be installed by running new/install.sh which will install all the required packages.
 
 ## API Reference
 
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
+API refrencing can be found in the wiki page here:  130.209.251.76/resDiary/aqb/wikis/python-packages
 
 ## Tests
 
-Describe and show how to run the tests with code examples.
+Tests are automatically run during after each commit, manual testing can be done by navigating to new/ and running the required test script, test files take the format [nameOfFunction]Tests.py,
+the full list of tests can be found here: 130.209.251.76/resDiary/aqb/wikis/continuous-integration-tests
 
 ## License
 
