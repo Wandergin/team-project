@@ -1,0 +1,8 @@
+127.0.0.1 - - [31/Mar/2017 14:29:34] "GET /FrontEnd/TokenizedQuery/ HTTP/1.1" 200 -
+127.0.0.1 - - [31/Mar/2017 14:29:35] "GET /FrontEnd/TokenizedQuery/js/jqueryui.js HTTP/1.1" 200 -
+127.0.0.1 - - [31/Mar/2017 14:29:35] "GET /FrontEnd/TokenizedQuery/js/selectize.js HTTP/1.1" 200 -
+127.0.0.1 - - [31/Mar/2017 14:29:35] "GET /FrontEnd/TokenizedQuery/js/index.js HTTP/1.1" 200 -
+127.0.0.1 - - [31/Mar/2017 14:29:35] "GET /FrontEnd/TokenizedQuery/css/normalize.css HTTP/1.1" 200 -
+127.0.0.1 - - [31/Mar/2017 14:29:35] "GET /FrontEnd/TokenizedQuery/css/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [31/Mar/2017 14:29:35] "GET /FrontEnd/TokenizedQuery/bg.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [31/Mar/2017 14:29:36] "GET /FrontEnd/TokenizedQuery/dist/css/selectize.default.css HTTP/1.1" 200 -

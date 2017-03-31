@@ -16,6 +16,7 @@ After the tokens have been matched, suggestions are made based on the user input
 This data structure is sent back to the frontend which displayes the query in the seach bar, and finally queries resDiary.com who can display restaurant listings using the values provided.
 After the input has been visually tokenized, the users will be able to edit the tags - i.e. remove the given tag, or change the value of the tag to a selected suggestion.
 
+Bonus - use runOld.sh to start the system with Visible Tokenisation, the prototype used in previous iteration, server is run on "http://localhost:8081/FrontEnd/TokenizedQuery/"
 
 ## Installation
 
