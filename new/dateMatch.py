@@ -36,12 +36,17 @@ def addDays(n):
                 today[1] = 1
                 today[2] = today[2] + 1
 
+    if today[1] < 10:
+	    today[1] = "0" + str(today[1])
+
     # Change to string and return date
     today = map(str, today)
     return (today[0] + "/" + today[1] + "/" + today[2])
 
 
 def dateMatch(s):
+    if s == "":
+	    return 0
     s = s.lower()
     s = s.split(" ")
     i = 0

@@ -8,7 +8,7 @@ def locationProbability(s, userLocation):
 
 	#Try and find locations with words after "in" "near" "at"
 	while i < len(s):
-		if s[i] in ["in", "near", "around", "beside"]:
+		if s[i] in ["in", "near", "around", "beside", "at"]:
 			if len(s) -  i -1 >= 3  :
 				j = 3
 			else:

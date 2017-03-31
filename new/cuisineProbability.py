@@ -13,19 +13,22 @@ def cuisineProbability(s):
 		for token in Tokens.Cuisines_ethnic:
 			token = token.split(" ")
 			if compare(s, i, token):
-				returnArray += token
+			    token = unsplit(token)
+			    returnArray += [token]
 	
 		#Search all dietary cuisines
 		for token in Tokens.Cuisines_dietary:
 			token = token.split(" ")
 			if compare(s, i, token):
-				returnArray += token
+			    token = unsplit(token)
+			    returnArray += [token]
 
 		#Search all belief cuisines
 		for token in Tokens.Cuisines_belief:
 			token = token.split(" ")
 			if compare(s, i, token):
-				returnArray += token
+			    token = unsplit(token)
+			    returnArray += [token]
 		
 		i = i +1
 	
@@ -33,6 +36,16 @@ def cuisineProbability(s):
 	if returnArray == []:
 		return []
 	return returnArray
+	
+def unsplit(s):
+	if type(s) is str:
+		return s
+	else:
+		res = ""
+		for w in s:
+			res = res + w + " "
+		res = res[:-1]
+		return res
 
 
 #Compares a possible token and cuisine tokens

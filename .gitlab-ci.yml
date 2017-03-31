@@ -79,7 +79,7 @@ location_tests:
 
 mainParser_tests:									#Tests mainParser functions
     script:
-    - echo "testing empty string"
+    - echo "testing mainParser"
     - python mainParserTests.py
                           
 

@@ -14,7 +14,7 @@ import Tokens
 tokenDict = {}
 
 def mainParser(s, userLocation, searchType):
-		#Format String
+	#Format String
 	s = formatString(s)
 
 	#Get different tokens
@@ -113,10 +113,7 @@ def mainParser(s, userLocation, searchType):
 						setLocation(tempLocation[1], userLocation)
 						s = removeToken(s, tempLocation[1])
 
-	print locationTokens
 	if len(locationTokens) > 0:
-		print locationTokens[0]
-		print locationTokens[0][0]
 		if len(locationTokens[0]) > 0:
 			tokenDict['locationName'] = locationTokens[0][0]
 
@@ -166,12 +163,6 @@ def formatDict(inDict, searchType):
 
 	if 'locationName' in inDict.keys():
 		output['locationName'] = inDict['locationName']
-
-	#TODO: remove Glasgow from location when location search is fixed
-	#output['location'] = "Glasgow"
-	#output['locationSuggestions'] = ["Queen Street Station", "West End"
-
-	print output
 
 	return output
 
@@ -228,8 +219,6 @@ def getDate(s):
 
 #Sets date tokens
 def setDate(date):
-	print "SEt date"
-	print date
 	date = dateMatch.dateMatch(date)
 	tokenDict.update({"date":date})
 
@@ -269,8 +258,6 @@ def getTime(s):
 
 #Sets time tokens
 def setTime(time):
-	print "Matching time"
-	print time
 	time = timeMatch.timeMatch(time)
 	tokenDict.update({"time":time})
 

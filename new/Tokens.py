@@ -15,7 +15,7 @@ Cuisines_ethnic = 	["african", "american", "arabic", "british", "caribbean", "ch
 
 Cuisines_dietary =	["gluten free", "healthy",  "low cal", "low calorie", "soy free"]
 
-Cuisines_belief =	["kosher", "halal", "organic", "vegen", "vegetarian"]
+Cuisines_belief =	["kosher", "halal", "organic", "vegan", "vegetarian"]
 
 
 ##############################
